@@ -10,14 +10,7 @@ function Signup() {
   const handle = () => {
     SetShow(show + 1);
   };
-  let signup = () => {
-    document.getElementById("t1").style.top = "0";
-    document.getElementById("img1").style.transform="rotate(359deg)"
-  };
-  let signin = () => {
-    document.getElementById("t1").style.top = "-304px";
-    document.getElementById("img1").style.transform="rotate(0deg)"
-  };
+
   useEffect(() => {
     AOS.init();
   }, []);

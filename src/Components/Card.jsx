@@ -1,9 +1,39 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-function Card({ image, text }) {
+function Card({ image, text, id }) {
+  // useState(() => {
+  //   AOS.init();
+  // }, []);
+  // const boxVariant = {
+  //   visible: {
+  //     opacity: 1,
+  //     scale: 1,
+  //     height: "100%",
+  //     transition: { duration: 0.6, },
+  //   },
+  //   hidden: { opacity: 0, scale: 0.75, height: "0" },
+  // };
+  // const control = useAnimation();
+  // const [ref, inView] = useInView();
+
+  // useEffect(() => {
+  //   if (inView) {
+  //     control.start("visible");
+  //   } else {
+  //     control.start("hidden");
+  //   }
+  // }, [control, inView]);
+
   return (
-    <div className="w-full max-w-xl flex flex-col p-3 bg-gray-800 rounded-lg border border-gray-600">
-      <div className="w-full border-b-[1px] border-gray-500 flex justify-between">
+    <motion.div
+      // ref={ref}
+      className="w-full max-w-xl flex flex-col p-3 bg-gray-800 rounded-lg border border-gray-600"
+    >
+      <motion.div
+        layout="position"
+        className="w-full border-b-[1px] border-gray-500 flex justify-between"
+      >
         <div className="flex mb-3 items-center text-gray-300 ">
           <div className="rounded-full h-10 w-10 border-[1px] border-white bg-gray-500"></div>
           <div className="ml-3 flex flex-col">
@@ -19,25 +49,34 @@ function Card({ image, text }) {
             more_horiz
           </span>
         </div>
-      </div>
-      <div className="relative w-full py-3 max-h-[15em] flex">
-        {image ? (
-          <>
-            <div className="relative w-1/2 px-3 h-full border-r-[1px] border-gray-500">
-              <div className="h-full w-full rounded overflow-hidden">
-                <img className="object-cover" src={image} />
+      </motion.div>
+      {
+        <motion.div
+          // ref={ref}
+          // variants={boxVariant}
+          // initial="hidden"
+          // animate={control}
+          className="relative w-full py-3 max-h-[15em] flex"
+        >
+          {image ? (
+            <>
+              <div className="relative w-1/2 px-3 h-full border-r-[1px] border-gray-500">
+                <div className="h-full w-full rounded overflow-hidden">
+                  <img className="object-cover" src={image} />
+                </div>
               </div>
-            </div>
-            <div className="relative px-2 w-1/2 h-full text-gray-200 overflow-y-auto">
+              <div className="relative px-2 w-1/2 h-full text-gray-200 overflow-y-auto">
+                {text}
+              </div>
+            </>
+          ) : (
+            <div className="relative w-full h-full text-gray-200 overflow-y-auto">
               {text}
             </div>
-          </>
-        ) : (
-          <div className="relative w-full h-full text-gray-200 overflow-y-auto">
-            {text}
-          </div>
-        )}
-      </div>
+          )}
+        </motion.div>
+      }
+
       <div className="flex items-center px-2 justify-between">
         <div className="flex">
           <span className="material-symbols-outlined text-lg mr-6 cursor-pointer hover:scale-110 hover:text-red-600 transition-[text-color,scale] duration-500 text-gray-300 ">
@@ -70,7 +109,7 @@ function Card({ image, text }) {
           </svg>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
