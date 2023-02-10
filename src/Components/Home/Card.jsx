@@ -56,24 +56,20 @@ function Card({ image, text, id }) {
           // variants={boxVariant}
           // initial="hidden"
           // animate={control}
-          className="relative w-full py-3 max-h-[15em] flex"
+          className="relative w-full py-3 flex"
         >
-          {image ? (
-            <>
-              <div className="relative w-1/2 px-3 h-full border-r-[1px] border-gray-500">
+              <div className="relative w-full px-3 max-h-[15em] border-r-[1px] border-gray-500">
                 <div className="h-full w-full rounded overflow-hidden">
-                  <img className="object-cover" src={image} />
+                  <img className="object-cover" src={image} alt="images"/>
                 </div>
               </div>
-              <div className="relative px-2 w-1/2 h-full text-gray-200 overflow-y-auto">
-                {text}
+              <div className="relative px-2 w-[20rem] max-h-[15em] text-gray-200 text-ellipsis overflow-hidden">
+                <div className="text-2xl py-2">
+                  Heading
+                </div>
+                <div className="text-md ">{text}</div>
               </div>
-            </>
-          ) : (
-            <div className="relative w-full h-full text-gray-200 overflow-y-auto">
-              {text}
-            </div>
-          )}
+          
         </motion.div>
       }
 

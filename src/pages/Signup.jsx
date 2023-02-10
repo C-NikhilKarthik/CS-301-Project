@@ -1,132 +1,100 @@
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Card from "../Components/Home/Card";
+import Footer from "../Components/Signup/Footer";
+import Teammates from "../Components/Signup/Teammates";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import AppDrop from "../Components/AppDrop";
-import { useEffect } from "react";
 function Signup() {
-  const [show, SetShow] = useState(0);
-  const handle = () => {
-    SetShow(show + 1);
-  };
-
-  useEffect(() => {
+  useState(() => {
     AOS.init();
   }, []);
-  const change = (event) => {
-    if (event !== 0) {
-      return "relative h-full sm:hidden w-full px-4 bg-gray-700 shadow-lg divide-gray-600 rounded z-10 transition-[left] top-2 left-0";
-    } else {
-      return "relative h-full sm:hidden w-full px-4 bg-gray-700 shadow-lg divide-gray-600 z-10 rounded transition-[left] top-2 left-[120%]";
-    }
-  };
-  return (
-    <div className="w-screen h-screen bg-bg1 bg-cover bg-center  ">
-      <div className="flex flex-col w-full h-full sm:px-20 px-4 overflow-x-hidden">
-        <nav
-          data-aos="zoom-out-down"
-          data-aos-offset="0"
-          className="w-full bg-black/30 backdrop-filter mt-6 h-auto backdrop-blur-sm rounded px-4 sm:px-6 md:px-10 flex justify-between py-3"
-        >
-          <a href="/" className="flex flex-nowrap">
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              alt="Main logo"
-            />
-            <p className="ms:font-base text-xl flex flex-nowrap items-center justify-center px-4 text-gray-300">
-              Moderators
-            </p>
-          </a>
-          <div className="sm:flex hidden items-center">
-            <ul className="flex justify-between items-center gap-6">
-              <Link to="/">
-                <li className="text-gray-300 hover:text-white after:transition-[width] after:rounded after:block after:w-0 after:h-1 after:bg-white hover:after:w-full">
-                  Home
-                </li>
-              </Link>
-              <Link to="/">
-                <li className="text-gray-300 hover:text-white after:transition-[width] after:rounded after:block after:w-0 after:h-1 after:bg-white hover:after:w-full">
-                  About
-                </li>
-              </Link>
-              <Link to="/">
-                <li className="text-gray-300 hover:text-white after:transition-[width] after:rounded after:block after:w-0 after:h-1 after:bg-white hover:after:w-full">
-                  Contact
-                </li>
-              </Link>
-            </ul>
-          </div>
-          <div className="hidden sm:flex sm:items-center">
-            <Link to="/login">
-              <button className="rounded-lg bg-black/30 hover:bg-black/40 mx-2 border-gray-300 border text-gray-200 px-5 py-2">
-                Sign In
-              </button>
-            </Link>
-            <Link to="/login">
-              <button
-                type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
-              >
-                Sign Up
-                <svg
-                  aria-hidden="true"
-                  class="w-5 h-5 ml-2 -mr-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </Link>
-          </div>
 
-          <button
-            className="sm:hidden flex border-2 bg-black/30 backdrop-filter backdrop-blur-md rounded border-gray-400 p-2"
-            onClick={handle}
-          >
-            <span className="material-symbols-outlined text-gray-300 ">
-              menu
-            </span>
-          </button>
-        </nav>
-        <AppDrop class={change(show % 2)} />
-        <div
-          data-aos="fade-right"
-          data-aos-delay="600"
-          data-aos-duration="500"
-          className="sm:top-0 -top-32 relative mt-10 flex fle-col justify-center items-center"
-        >
-          <div
-            className=" text-4xl font-bold bg-black/30 w-fit px-6 py-4 rounded-md backdrop-blur-md text-gray-100 flex flex-col items-center justify-center"
-          >
-            <p>Share.</p>
-            <p>Explore.</p>
-            <p>Connect.</p>
-            <div className="text-gray-200 text-[1rem] font-normal">
-              Connect with various users and explore your interests.
-            </div>
-            <div className="flex w-fit">
-              <Link to="/login">
-                <button className="text-white text-base bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-md px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
-                  Get Started
-                </button>
-              </Link>
-              <Link to="/">
-                <button className="border-2 border-white text-base px-5 py-2 rounded-lg ml-4 hover:bg-gray-400/50 backdrop-blur-sm backdrop-filter">
-                  Explore
-                </button>
-              </Link>
-            </div>
+  //this is for the animation constraints
+  const variant1 = {
+    initial: {
+      opacity: 0,
+      y: 10,
+    },
+    final: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, delay: 2 },
+    },
+  };
+  const variant2 = {
+    initial1: {
+      opacity: 0,
+      y: -100,
+      scale: 0.75,
+    },
+    final1: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.7, delay: 2 },
+    },
+  };
+
+  return (
+    <div className="w-full flex flex-col bg-slate-900 ">
+      {/* navbar */}
+      <motion.nav
+        variants={variant2}
+        animate="final1"
+        initial="initial1"
+        className="absolute z-10 top-0 backdrop-filter backdrop-blur-md flex py-6 px-6 w-full items-center justify-between"
+      >
+        <div className="text-slate-200 text-2xl">The BlogPenn</div>
+        <div className="sm:flex hidden">
+          <ul className="flex justify-between items-center gap-6 px-4">
+            <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              About
+            </li>
+            <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              Contact Us
+            </li>
+            <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              Sign In
+            </li>
+          </ul>
+          <div className="flex border-l-[1px] border-slate-200 px-2">
+            <i className="fa text-blue-500 cursor-pointer fa-moon-o text-2xl px-2"></i>
+            <i className="fa fa-github text-2xl hover:text-white cursor-pointer text-slate-200 px-2"></i>
           </div>
         </div>
-        
+      </motion.nav>
+      {/* Text in the middle fo the page */}
+      <div className="relative border-b-[1px] border-slate-600 top-0 bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] h-[80vh] flex-col w-full bg-cover bg-center flex items-center justify-center">
+        <div className="absolute inset-0 h-full w-full gridblock"></div>
+        <div className="text-2xl sm:text-5xl z-[1] font-semibold text-slate-200 py-2 grid place-items-center ">
+          <p className="typed">Unleash your inner creativity.</p>
+        </div>
+        <motion.div
+          className="flex items-center flex-col"
+          variants={variant1}
+          initial="initial"
+          animate="final"
+        >
+          <p className="sm:text-2xl z-[1] text-slate-200 py-2">
+            Design and publish your blog with ease!
+          </p>
+          <button className="z-[1] cursor-pointer mt-2 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
+            Get Started
+          </button>
+        </motion.div>
       </div>
+      {/* The Card explaintation  */}
+      <div data-aos="zoom-in-up" data-aos-delay="2000" data-aos-duration="600" className="relative -top-10 sm:px-20">
+        <Card
+          image={"images/bg.jpg"}
+          text={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, ipsum nec eleifend consequat, elit sem fringilla elit, at vulputate erat erat eu tellus. Integer posuere ex dictum ex euismod, sit amet rhoncus turpis condimentum. Vivamus finibus bibendum sem. Etiam eget rhoncus libero, eget condimentum ex. Fusce porta, quam vitae convallis mattis, ligula nulla facilisis risus, eget pharetra justo eros non erat. Mauris convallis tincidunt viverra. Nunc efficitur porta volutpat.Nullam rhoncus maximus magna et bibendum. Nam viverra leo quis ante ultricies, et viverra urna tempor. Praesent interdum tellus a lobortis vehicula. Ut quis lectus eget urna ornare varius. Curabitur sagittis dapibus dui, in tempor ante ultrices nec. Vestibulum magna massa, ultrices eget ultrices vitae, varius id mauris. Fusce et tortor id felis pretium pulvinar. Quisque pretium dui id eros pellentesque, nec malesuada lectus vulputate. Nullam est dolor, mollis sed sodales sed, posuere molestie ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat tincidunt justo, sed condimentum lorem porta maximus. Nullam vitae eleifend velit. Nulla mi lorem, porttitor sit amet lobortis eget, consequat ut dui."
+          }
+        />
+      </div>
+      <Teammates/>
+      <Footer/>
     </div>
   );
 }
