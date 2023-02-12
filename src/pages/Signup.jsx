@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Card from "../Components/Home/Card";
 import Footer from "../Components/Signup/Footer";
 import Teammates from "../Components/Signup/Teammates";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 function Signup() {
@@ -45,7 +46,7 @@ function Signup() {
         initial="initial1"
         className="absolute z-10 top-0 backdrop-filter backdrop-blur-md flex py-6 px-6 w-full items-center justify-between"
       >
-        <div className="text-slate-200 text-2xl">The BlogPenn</div>
+        <div className="text-slate-200 text-2xl font-semibold">The BlogPenn</div>
         <div className="sm:flex hidden">
           <ul className="flex justify-between items-center gap-6 px-4">
             <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
@@ -79,13 +80,20 @@ function Signup() {
           <p className="sm:text-2xl z-[1] text-slate-200 py-2">
             Design and publish your blog with ease!
           </p>
-          <button className="z-[1] cursor-pointer mt-2 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
-            Get Started
-          </button>
+          <Link className="z-[2]"to="/login">
+            <button className="z-[1] cursor-pointer mt-2 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
+              Get Started
+            </button>
+          </Link>
         </motion.div>
       </div>
       {/* The Card explaintation  */}
-      <div data-aos="zoom-in-up" data-aos-delay="2000" data-aos-duration="600" className="relative -top-10 sm:px-20">
+      <div
+        data-aos="zoom-in-up"
+        data-aos-delay="2000"
+        data-aos-duration="600"
+        className="relative -top-10 sm:px-20"
+      >
         <Card
           image={"images/bg.jpg"}
           text={
@@ -93,8 +101,8 @@ function Signup() {
           }
         />
       </div>
-      <Teammates/>
-      <Footer/>
+      <Teammates />
+      <Footer />
     </div>
   );
 }

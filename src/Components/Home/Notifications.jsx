@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function Notifications() {
   return (
-    <div className='w-full h-full bg-black/30'></div>
-  )
+    <div className="w-full py-4 border-l-[1px] flex flex-col px-3 border-slate-600 h-full bg-slate-800/50">
+
+    </div>
+  );
 }
 
-export default Notifications
+export default Notifications;

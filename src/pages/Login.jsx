@@ -1,106 +1,184 @@
-import React from "react";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 function Login() {
-  let submit=()=>{
-    document.getElementById("main").style.top="-100vh";
-  }
-  let signup = () => {
-    document.getElementById("t1").style.top = "0";
-    document.getElementById("img1").style.transform="rotate(359deg)"
+  const [login, setlogin] = useState(true);
+  const variant1 = {
+    initial: {
+      opacity: 0,
+      x: -10,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.3 },
+    },
+    exit: {
+      opacity: 0,
+      x: 10,
+    },
   };
-  let signin = () => {
-    document.getElementById("t1").style.top = "-304px";
-    document.getElementById("img1").style.transform="rotate(0deg)"
-  };
-  return (
-    <div id="login" className="bg-bg2 bg-cover bg-center relative flex justify-center items-center w-full h-screen">
-      <div className=" backdrop-blur-md border-white items-center justify-center border-[1px] flex flex-col rounded h-[25rem] bg-[#ffffff03] w-[20rem] p-[0.3rem] shadow-xl overflow-hidden ">
-        <div
-          id="t1"
-          className="transition-[top] duration-300 absolute flex flex-col justify-start items-center w-full -top-[304px]"
-        >
-          <div className="relative flex h-[19rem] flex-col w-full gap-5 items-center justify-end pb-6 px-3 ">
-            <div className="relative w-full flex flex-nowrap items-center">
-              <input
-                className="peer w-full focus:shadow-md focus:outline-none rounded bg-black/40 px-8 py-1 text-[#d5d5d5]"
-                placeholder="Username"
-              />
-              <span className="pointer-events-none peer-focus:text-white text-[#989e98] absolute left-1 material-symbols-outlined">
-                person
-              </span>
-            </div>
-            <div className="relative w-full flex flex-nowrap items-center">
-              <input
-                type="password"
-                className="peer w-full focus:shadow-md focus:outline-none rounded bg-[#00000070] pl-8 pr-2 py-1 text-[#d5d5d5]"
-                placeholder="Password"
-              />
-              <span className="pointer-events-none peer-focus:text-white text-[#989e98] absolute left-1 material-symbols-outlined">
-                lock
-              </span>
-            </div>
-            <div className="relative w-full flex flex-nowrap items-center">
-              <input
-                type="password"
-                className="peer w-full focus:shadow-md focus:outline-none rounded bg-[#00000070] pl-8 pr-2 py-1 text-[#d5d5d5]"
-                placeholder="Re-Enter Password"
-              />
-              <span className="pointer-events-none peer-focus:text-white text-[#989e98] absolute left-1 material-symbols-outlined">
-                lock
-              </span>
-            </div>
-            <button
-              className="px-8 py-2 border text-[#d5d5d5] rounded mt-3"
-              onClick={signin}
-            >
-              Create Account
-            </button>
-          </div>
-          <img
-          id="img1"
-            className="h-16 my-4 rotate-0 transition-all duration-700 "
-            src="https://flowbite.com/docs/images/logo.svg"
-            alt="Main logo"
-          />
-          <div className="relative flex h-[19rem] flex-col w-full gap-5 items-center justify-start pt-4 px-3 ">
-            <div className="relative w-full flex flex-nowrap items-center">
-              <input
-                className="peer w-full focus:shadow-md focus:outline-none rounded bg-[#00000070] px-8 py-1 text-[#d5d5d5]"
-                placeholder="Username"
-              />
-              <span className="pointer-events-none peer-focus:text-white text-[#989e98] absolute left-1 material-symbols-outlined">
-                person
-              </span>
-            </div>
-            <div className="relative w-full flex flex-nowrap items-center">
-              <input
-                type="password"
-                className="peer w-full focus:shadow-md focus:outline-none rounded bg-[#00000070] pl-8 pr-2 py-1 text-[#d5d5d5]"
-                placeholder="Password"
-              />
-              <span className="pointer-events-none peer-focus:text-white text-[#989e98] absolute left-1 material-symbols-outlined">
-                lock
-              </span>
-            </div>
-            <Link to='/home'>
-            <button
-                type="submit"
-                className=" hover:border-white hover:shadow-lg hover:bg-[#c3c3c333] backdrop-filter backdrop-blur-sm transition-[border,background] duration-400 px-8 py-2 border-[#a6a6a6] border text-[#d5d5d5] mt-4 rounded"
-                onClick={submit}
-              >
-                Log In
-              </button></Link>
 
-            <div className="relative flex px-6 justify-between items-center w-full text-[#d5d5d5]">
-              <a href="/login" className="cursor-default">Don't have an account?</a>
-              <button className=" cursor-pointer px-2 py-1 hover:scale-105 transition-[transform]" onClick={signup}>
-                Sign Up
-              </button>
-            </div>
+  const variant2 = {
+    initial1: {
+      opacity: 0,
+      scale:0.75,
+      y:0
+    },
+    animate1: {
+      opacity: 1,
+      transition: { duration: 0.7 },
+      y:0,
+      scale:1
+    },
+    exit1:{
+      opacity:0,
+      scale:0.75,
+      y:-100
+    }
+
+  };
+
+  return (
+    <AnimatePresence>
+      <div className='flex w-screen h-screen bg-[url("https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg")] bg-cover items-center justify-center'>
+        <div className="absolute inset-0 gridblock"></div>
+        <motion.div
+          layout
+          transition={{ layout: { duration: 1, type: "spring" } }}
+          variants={variant2}
+          initial='initial1'
+          animate='animate1'
+          exit='exit1'
+          className="relative w-[20rem] backdrop-filter backdrop-blur-md rounded bg-slate-800 p-8"
+        >
+          <div className="flex flex-col gap-4">
+            <motion.div
+              layour="position"
+              className="flex pb-5 w-full text-slate-200 text-2xl justify-center font-semibold"
+            >
+              The BlogPenn
+            </motion.div>
+            {!login && (
+              <motion.div
+                variants={variant1}
+                initial="initial"
+                animate="animate"
+                class="group flex items-center relative rounded-md dark:bg-slate-700 dark:highlight-white/10 dark:focus-within:bg-transparent"
+              >
+                <span className="absolute left-2 cursor-pointer peer-focus:text-white text-gray-400 material-symbols-outlined">
+                  Mail
+                </span>
+                <input
+                  type="text"
+                  aria-label="Filter projects"
+                  placeholder="Email Id"
+                  class="appearance-none w-full text-sm leading-6 bg-transparent text-slate-900 placeholder:text-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100 dark:placeholder:text-slate-500 dark:ring-0 dark:focus:ring-2"
+                />
+              </motion.div>
+            )}
+            <motion.div class="group flex items-center relative rounded-md dark:bg-slate-700 dark:highlight-white/10 dark:focus-within:bg-transparent">
+              <span className="absolute left-2 cursor-pointer peer-focus:text-white text-gray-400 material-symbols-outlined">
+                Person
+              </span>
+              <input
+                type="text"
+                aria-label="Filter projects"
+                placeholder="Username"
+                class="appearance-none w-full text-sm leading-6 bg-transparent text-slate-900 placeholder:text-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100 dark:placeholder:text-slate-500 dark:ring-0 dark:focus:ring-2"
+              />
+            </motion.div>
+            <motion.div class="group flex items-center relative rounded-md dark:bg-slate-700 dark:highlight-white/10 dark:focus-within:bg-transparent">
+              <span className="absolute left-2 cursor-pointer peer-focus:text-white text-gray-400 material-symbols-outlined">
+                Lock
+              </span>
+              <input
+                type="password"
+                aria-label="Filter projects"
+                placeholder="Password"
+                class="appearance-none w-full text-sm leading-6 bg-transparent text-slate-900 placeholder:text-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100 dark:placeholder:text-slate-500 dark:ring-0 dark:focus:ring-2"
+              />
+            </motion.div>
+            {!login && (
+              <motion.div
+                variants={variant1}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                class="group flex items-center relative rounded-md dark:bg-slate-700 dark:highlight-white/10 dark:focus-within:bg-transparent"
+              >
+                <span className="absolute left-2 cursor-pointer peer-focus:text-white text-gray-400 material-symbols-outlined">
+                  Lock
+                </span>
+                <input
+                  type="text"
+                  aria-label="Filter projects"
+                  placeholder="Re-Enter Password"
+                  class="appearance-none w-full text-sm leading-6 bg-transparent text-slate-900 placeholder:text-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100 dark:placeholder:text-slate-500 dark:ring-0 dark:focus:ring-2"
+                />
+              </motion.div>
+            )}
+            {!login && (
+              <motion.button
+                variants={variant1}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                onClick={() => {
+                  setlogin(true);
+                }}
+                className="bg-blue-600 mt-5 py-2 rounded text-slate-200 hover:bg-blue-700"
+              >
+                Create Account
+              </motion.button>
+            )}
+            {login && (
+              <Link className='w-full' to='/home'>
+              <motion.button
+                variants={variant1}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="bg-blue-600 w-full mt-5 py-2 rounded text-slate-200 hover:bg-blue-700"
+              >
+                Log in
+              </motion.button>
+              </Link>
+            )}
+            {login && (
+              <div className="border-t-[1px] border-slate-600 py-4">
+                <div className="flex text-sm justify-between">
+                  <p className="text-slate-300">Don't have an account?</p>
+                  <a
+                    onClick={() => {
+                      setlogin(!login);
+                    }}
+                    className="cursor-pointer hover:underline text-blue-600"
+                  >
+                    Sign Up
+                  </a>
+                </div>
+              </div>
+            )}
+            {!login && (
+              <div className="border-t-[1px] border-slate-600 py-4">
+                <div className="flex text-sm justify-between">
+                  <p className="text-slate-300">Already have an account?</p>
+                  <a
+                    onClick={() => {
+                      setlogin(!login);
+                    }}
+                    className="cursor-pointer hover:underline text-blue-600"
+                  >
+                    Log In
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }
 
