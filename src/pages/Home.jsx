@@ -1,8 +1,10 @@
-import { motion } from "framer-motion";
+import { motion,AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import Topbar from "../Components/Home/Topbar";
 import Card from "../Components/Home/Card";
 import Notifications from "../Components/Home/Notifications";
+import SidebarComponent from "../Components/Home/SidebarComponent";
+import Bottombar from "../Components/Home/Bottombar";
 function Home() {
   const [op, Setop] = useState(true);
   function open() {
@@ -18,35 +20,37 @@ function Home() {
           <div className="z-[1] absolute inset-0 gridblock"></div>
           <div
             id="sidebar"
-            className="z-[3] border-r-[1px] border-slate-600 transition-[width] justify-end pr-3 duration-500 relative h-full w-[300px] bg-slate-900 flex py-4"
+            className="z-[3] hidden border-r-[1px] border-slate-600 transition-[width] px-3 duration-500 relative h-full w-[300px] bg-slate-900 lg:flex flex-col items-center py-4"
           >
             {!op && (
-              <button
-                onClick={() => {
-                  open();
-                  Setop(true);
-                }}
-                data-collapse-toggle="navbar-hamburger"
-                type="button"
-                class="h-8 inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-hamburger"
-                aria-expanded="false"
-              >
-                <span class="sr-only">Open main menu</span>
-                <svg
-                  class="w-6 h-6"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+              <div className="flex w-full justify-end">
+                <button
+                  onClick={() => {
+                    open();
+                    Setop(true);
+                  }}
+                  data-collapse-toggle="navbar-hamburger"
+                  type="button"
+                  class="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  aria-controls="navbar-hamburger"
+                  aria-expanded="false"
                 >
-                  <path
-                    fill-rule="evenodd"
-                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
+                  <span class="sr-only">Open main menu</span>
+                  <svg
+                    class="w-6 h-6"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             )}
             {op && (
               <div className="flex w-full justify-end">
@@ -57,7 +61,7 @@ function Home() {
                   }}
                   data-collapse-toggle="navbar-hamburger"
                   type="button"
-                  class="h-8 inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  class="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                   aria-controls="navbar-hamburger"
                   aria-expanded="false"
                 >
@@ -78,10 +82,34 @@ function Home() {
                 </button>
               </div>
             )}
+            <SidebarComponent op={op} image={"Home"} text={"Home"} />
+            <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
+            <SidebarComponent op={op} image={"Chat"} text={"Messages"} />
+            <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
+            <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
+            <div className="flex px-1 w-full">
+              <motion.button className="bg-blue-600 gap-2 w-full flex items-center hover:bg-blue-500 text-slate-200 rounded-full border-none focus:outline-none">
+                <span className="cursor-pointer p-1 peer-focus:text-white text-gray-400 material-symbols-outlined">
+                  Add
+                </span>
+                <AnimatePresence>
+                  {op && (
+                    <motion.p
+                      animate={{ opacity: 1, duration: 1 }}
+                      initial={{ opacity: 0 }}
+                      layout
+                      className="whitespace-nowrap w-full flex"
+                    >
+                      Create Blog
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            </div>
           </div>
           <div className="relative z-[6] text-slate-200 w-full ">
             <Topbar />
-            <div className="relative w-full h-full overflow-y-auto flex flex-col gap-8 items-center py-16">
+            <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center py-16">
               <Card
                 image={"images/bg.jpg"}
                 text={
@@ -113,9 +141,10 @@ function Home() {
                 }
               />
             </div>
+            <Bottombar />
           </div>
         </div>
-        <Notifications/>
+        <Notifications />
       </div>
     </div>
   );

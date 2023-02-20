@@ -23,13 +23,26 @@ body{
   user-select : all;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 100,
+  'GRAD' 200,
+  'opsz' 20
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
 
 .typed {
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
   width: 0;
-  animation: typing 1.8s steps(30, end) 1s 1 normal both, blinking 1s infinite;
+  animation: typing 1.4s steps(30, end) 1s 1 normal both, blinking 1s infinite;
 }
   
 @keyframes typing {
