@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InputField from "../Components/InputField";
+import { easeInOut, motion } from "framer-motion";
 
 function Login() {
   const [login, setLogin] = useState(true);
   return (
-    <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
-      <div className="absolute inset-0 h-full w-full gridblock"></div>
-      <div className="z-[2] relative p-3 rounded-md flex justify-start sm:justify-center items-center overflow-hidden">
+    // <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
+    <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-slate-900">
+      {/* <div className="absolute inset-0 h-full w-full gridblock"></div> */}
+      <motion.div
+        animate={{ x: 0, transition: { duration: 0.9,ease:"easeInOut"} ,opacity:1}}
+        initial={{x:-100,opacity:0}}
+        className="z-[2] relative p-3 sm:h-[70vh] h-[75vh] sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
+      >
         <img
-          className="absolute z-[1] w-full h-full object-cover"
+          className="absolute z-[1] left-0 w-full h-full "
           src="/images/login_cleanup.jpg"
         />
-        <div className="relative sm:w-[40rem] z-[4] flex">
+        <div className="relative h-full sm:w-[40rem] z-[4] flex">
           <div className="flex flex-col sm:w-3/5 p-7 gap-4">
             <div className="text-slate-200 font-semibold">
               <p className="whitespace-nowrap">The BlogPenn</p>
@@ -28,7 +34,14 @@ function Login() {
                   </div>
                   <div className="flex text-xs gap-2">
                     <p>Not a member yet?</p>
-                    <p onClick={()=>{setLogin(!login)}} className="cursor-pointer text-blue-500">Sign up</p>
+                    <p
+                      onClick={() => {
+                        setLogin(!login);
+                      }}
+                      className="cursor-pointer text-blue-500"
+                    >
+                      Sign up
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 sm:pr-10">
@@ -45,12 +58,12 @@ function Login() {
                     icon={"lock"}
                   />
                   <Link to="/home">
-                  <button
-                    type="button"
-                    className="w-full bg-blue-600 mt-3 px-3 py-2 text-sm rounded-md text-slate-300 hover:bg-blue-700"
-                  >
-                    Log In
-                  </button>
+                    <button
+                      type="button"
+                      className="w-full bg-blue-600 mt-3 px-3 py-2 text-sm rounded-md text-slate-300 hover:bg-blue-700"
+                    >
+                      Log In
+                    </button>
                   </Link>
                   <div className="flex text-xs gap-2">
                     <p className="text-slate-400 hover:text-blue-500 cursor-pointer">
@@ -71,7 +84,14 @@ function Login() {
                   </div>
                   <div className="flex text-xs gap-2">
                     <p>Already a member?</p>
-                    <p onClick={()=>{setLogin(!login)}}className="cursor-pointer text-blue-500">Log In</p>
+                    <p
+                      onClick={() => {
+                        setLogin(!login);
+                      }}
+                      className="cursor-pointer text-blue-500"
+                    >
+                      Log In
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 sm:pr-10">
@@ -112,7 +132,7 @@ function Login() {
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

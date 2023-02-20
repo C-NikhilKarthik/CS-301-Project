@@ -38,7 +38,7 @@ function Signup() {
   };
 
   return (
-    <div className="w-full flex flex-col bg-slate-900 ">
+    <div className="w-full flex flex-col bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover bg-center bg-fixed ">
       {/* navbar */}
       <motion.nav
         variants={variant2}
@@ -70,7 +70,7 @@ function Signup() {
         </div>
       </motion.nav>
       {/* Text in the middle fo the page */}
-      <div className="relative border-b-[1px] border-slate-600 top-0 bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] h-[80vh] flex-col w-full bg-cover bg-center flex items-center justify-center">
+      <div className="relative border-b-[1px] border-slate-600 top-0  h-[80vh] flex-col w-full bg-cover bg-fixed bg-center flex items-center justify-center">
         <div className="absolute inset-0 h-full w-full gridblock"></div>
         <div className="text-2xl sm:text-5xl z-[1] font-semibold text-slate-200 py-2 grid place-items-center ">
           <p className="typed">Unleash your inner creativity.</p>
@@ -92,19 +92,39 @@ function Signup() {
         </motion.div>
       </div>
       {/* The Card explaintation  */}
-      <div
-        data-aos="zoom-in-up"
-        data-aos-delay="2000"
-        data-aos-duration="600"
-        className="relative -top-10 sm:px-20"
-      >
-        <Card
-          image={"images/bg.jpg"}
-          text={
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, ipsum nec eleifend consequat, elit sem fringilla elit, at vulputate erat erat eu tellus. Integer posuere ex dictum ex euismod, sit amet rhoncus turpis condimentum. Vivamus finibus bibendum sem. Etiam eget rhoncus libero, eget condimentum ex. Fusce porta, quam vitae convallis mattis, ligula nulla facilisis risus, eget pharetra justo eros non erat. Mauris convallis tincidunt viverra. Nunc efficitur porta volutpat.Nullam rhoncus maximus magna et bibendum. Nam viverra leo quis ante ultricies, et viverra urna tempor. Praesent interdum tellus a lobortis vehicula. Ut quis lectus eget urna ornare varius. Curabitur sagittis dapibus dui, in tempor ante ultrices nec. Vestibulum magna massa, ultrices eget ultrices vitae, varius id mauris. Fusce et tortor id felis pretium pulvinar. Quisque pretium dui id eros pellentesque, nec malesuada lectus vulputate. Nullam est dolor, mollis sed sodales sed, posuere molestie ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat tincidunt justo, sed condimentum lorem porta maximus. Nullam vitae eleifend velit. Nulla mi lorem, porttitor sit amet lobortis eget, consequat ut dui."
-          }
-        />
+      <div className="bg-slate-900 sm:px-20 pb-4 flex justify-between items-center">
+        <div
+          data-aos="zoom-in-up"
+          data-aos-delay="2000"
+          data-aos-duration="600"
+          className="relative -top-10"
+        >
+          <Card
+            image={"images/bg.jpg"}
+            text={
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, ipsum nec eleifend consequat, elit sem fringilla elit, at vulputate erat erat eu tellus. Integer posuere ex dictum ex euismod, sit amet rhoncus turpis condimentum. Vivamus finibus bibendum sem. Etiam eget rhoncus libero, eget condimentum ex. Fusce porta, quam vitae convallis mattis, ligula nulla facilisis risus, eget pharetra justo eros non erat. Mauris convallis tincidunt viverra. Nunc efficitur porta volutpat.Nullam rhoncus maximus magna et bibendum. Nam viverra leo quis ante ultricies, et viverra urna tempor. Praesent interdum tellus a lobortis vehicula. Ut quis lectus eget urna ornare varius. Curabitur sagittis dapibus dui, in tempor ante ultrices nec. Vestibulum magna massa, ultrices eget ultrices vitae, varius id mauris. Fusce et tortor id felis pretium pulvinar. Quisque pretium dui id eros pellentesque, nec malesuada lectus vulputate. Nullam est dolor, mollis sed sodales sed, posuere molestie ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat tincidunt justo, sed condimentum lorem porta maximus. Nullam vitae eleifend velit. Nulla mi lorem, porttitor sit amet lobortis eget, consequat ut dui."
+            }
+          />
+        </div>
+        <div
+          data-aos="zoom-in-left"
+          data-aos-duration="300"
+          data-aos-delay="2500"
+          data-aos-offset="0"
+          className="text-slate-200 text-xl mt-4 gap-4 flex flex-col"
+        >
+          <div className="whitespace-nowrap text-3xl font-semibold">
+            Robust and Clean Design
+          </div>
+          <div className="flex-wrap sm:max-w-md ">
+            <p>
+              Provides a brief description of the blog and along with the stats
+              of the blog
+            </p>
+          </div>
+        </div>
       </div>
+
       <Teammates />
       <Footer />
     </div>
