@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import CreateBlog from "./pages/CreateBlog";
+import Demo from "./pages/Demo";
 function App() {
   return (
     <Router>
@@ -21,6 +23,22 @@ function App() {
           element={
             <>
               <Home />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/createblog"
+          element={
+            <>
+              <CreateBlog />
+            </>
+          }
+        ></Route>
+                <Route
+          path="/demo"
+          element={
+            <>
+              <Demo />
             </>
           }
         ></Route>

@@ -5,6 +5,7 @@ import Card from "../Components/Home/Card";
 import Notifications from "../Components/Home/Notifications";
 import SidebarComponent from "../Components/Home/SidebarComponent";
 import Bottombar from "../Components/Home/Bottombar";
+import { Link } from "react-router-dom";
 function Home() {
   const [op, Setop] = useState(true);
   function open() {
@@ -88,6 +89,7 @@ function Home() {
             <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
             <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
             <div className="flex px-1 w-full">
+              <Link to="/createblog" className="w-full">
               <motion.button className="bg-blue-600 gap-2 w-full flex items-center hover:bg-blue-500 text-slate-200 rounded-full border-none focus:outline-none">
                 <span className="cursor-pointer p-1 peer-focus:text-white text-gray-400 material-symbols-outlined">
                   Add
@@ -105,11 +107,12 @@ function Home() {
                   )}
                 </AnimatePresence>
               </motion.button>
+              </Link>
             </div>
           </div>
           <div className="relative z-[6] text-slate-200 w-full ">
             <Topbar />
-            <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center py-16">
+            <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center pt-28 pb-12">
               <Card
                 image={"images/bg.jpg"}
                 text={

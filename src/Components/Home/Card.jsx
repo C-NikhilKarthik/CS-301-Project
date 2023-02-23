@@ -37,7 +37,7 @@ function Card({ image, text, id }) {
         <div className="flex mb-3 items-center text-gray-300 ">
           <div className="rounded-full h-10 w-10 border-[1px] border-white bg-gray-500"></div>
           <div className="ml-3 flex flex-col">
-            <p className="text-xl">TheNetherAxe</p>
+            <p className="sm:text-xl text-normal">TheNetherAxe</p>
             <p className="text-sm -top-1 relative">#2917</p>
           </div>
         </div>
@@ -58,7 +58,7 @@ function Card({ image, text, id }) {
           // animate={control}
           className="relative w-full py-3 flex"
         >
-              <div className="relative w-full px-3 max-h-[15em] border-r-[1px] border-gray-500">
+              <div className="sm:flex hidden relative w-full px-3 max-h-[15em] border-r-[1px] border-gray-500">
                 <div className="h-full w-full rounded overflow-hidden">
                   <img className="object-cover" src={image} alt="images"/>
                 </div>
@@ -75,19 +75,19 @@ function Card({ image, text, id }) {
 
       <div className="flex items-center px-2 justify-between">
         <div className="flex">
-          <span className="material-symbols-outlined text-lg mr-6 cursor-pointer hover:scale-110 hover:text-red-600 transition-[text-color,scale] duration-500 text-gray-300 ">
+          <span className="material-symbols-outlined text-sm sm:text-lg mr-6 cursor-pointer hover:scale-110 hover:text-red-600 transition-[text-color,scale] duration-500 text-gray-300 ">
             favorite
           </span>
-          <span className="material-symbols-outlined text-lg mr-6 cursor-pointer hover:text-blue-400 text-gray-300 ">
+          <span className="material-symbols-outlined text-sm mr-6 cursor-pointer hover:text-blue-400 text-gray-300 ">
             share
           </span>
-          <span className="material-symbols-outlined text-lg mr-6 cursor-pointer hover:text-gray-100 text-gray-300 ">
+          <span className="material-symbols-outlined text-sm mr-6 cursor-pointer hover:text-gray-100 text-gray-300 ">
             comment
           </span>
         </div>
         <button
           type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-xs sm:text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
         >
           Continue Reading
           <svg

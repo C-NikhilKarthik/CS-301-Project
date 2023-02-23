@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InputField from "../Components/InputField";
-import { easeInOut, motion } from "framer-motion";
+import { AnimatePresence, easeInOut, motion } from "framer-motion";
 
 function Login() {
   const [login, setLogin] = useState(true);
   return (
-    // <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
-    <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-slate-900">
-      {/* <div className="absolute inset-0 h-full w-full gridblock"></div> */}
+    <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
+    {/* // <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-slate-900"> */}
+      <div className="absolute inset-0 h-full w-full gridblock"></div>
       <motion.div
         animate={{ x: 0, transition: { duration: 0.9,ease:"easeInOut"} ,opacity:1}}
         initial={{x:-100,opacity:0}}
         className="z-[2] relative p-3 sm:h-[70vh] h-[75vh] sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
       >
         <img
-          className="absolute z-[1] left-0 w-full h-full "
+          className="absolute z-[1] left-0 w-full h-full object-cover"
           src="/images/login_cleanup.jpg"
         />
         <div className="relative h-full sm:w-[40rem] z-[4] flex">
@@ -23,8 +23,9 @@ function Login() {
             <div className="text-slate-200 font-semibold">
               <p className="whitespace-nowrap">The BlogPenn</p>
             </div>
+            <AnimatePresence initial="false">
             {login ? (
-              <div className="py-12 gap-4 flex flex-col px-3">
+              <motion.div initial={{x:-100,scale:0.75,transition:{duration:0.9,delay:0.5,ease:"easeInOut"}}} exit={{x:100,scale:0.75}} animate={{x:0,scale:1}} className="py-12 gap-4 flex flex-col px-3">
                 <div className="flex text-slate-400 flex-col gap-3">
                   <div className="flex gap-1">
                     <p className="text-2xl font-semibold text-slate-300 whitespace-nowrap">
@@ -71,7 +72,7 @@ function Login() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ) : (
               <div className="py-12 gap-4 flex flex-col px-3">
                 <div className="flex text-slate-400 flex-col gap-3">
@@ -111,13 +112,13 @@ function Login() {
                   </div>
                   <InputField
                     type={"email"}
-                    name={"email"}
+                    name={"Email"}
                     label={"Email Address"}
                     icon={"mail"}
                   />
                   <InputField
                     type={"password"}
-                    name={"password"}
+                    name={"Password"}
                     label={"Password"}
                     icon={"lock"}
                   />
@@ -130,6 +131,7 @@ function Login() {
                 </div>
               </div>
             )}
+            </AnimatePresence>
           </div>
         </div>
       </motion.div>
