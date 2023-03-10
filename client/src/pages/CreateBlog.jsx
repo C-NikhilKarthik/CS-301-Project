@@ -85,7 +85,7 @@ function CreateBlog() {
                 draggable="true"
                 onDragStart={initial}
                 onDrag={resize}
-                className="resizer absolute w-1.5 h-8 bg-slate-500/60 rounded-full mr-2 -right-5 cursor-col-resize"
+                className="resizer absolute w-1.5 h-8 bg-slate-500/60 rounded-full mr-2 -right-5 cursor-ew-resize"
               ></div>
               <iframe className="w-full h-full rounded-md" src="/demo"></iframe>
             </div>
