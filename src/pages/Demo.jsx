@@ -2,8 +2,8 @@ import React from "react";
 
 function Demo() {
   return (
-    <div className="w-screen h-screen bg-slate-800 flex flex-col rounded-md overflow-hidden">
-      <div className="w-full flex-col flex bg-slate-700">
+    <div className="w-screen h-screen bg-slate-800 flex flex-col rounded-md overflow-hidden pb-4">
+      <div className="w-full flex-col flex bg-slate-700 shadow-md">
         <div className="p-2 flex items-start relative justify-center">
           <div class="flex h-full items-center absolute left-4 top-0">
             <div class="w-2.5 h-2.5 rounded-full bg-[#EC6A5F]"></div>
@@ -38,7 +38,7 @@ function Demo() {
               ></path>
             </svg>
           </div>
-          <div class="rounded-md transition-[width] duration-700 font-medium text-xs leading-6 py-1 flex items-center justify-center ring-1 ring-inset ring-slate-900/5 px-14 md:px-24 lg:w-2/3 dark:bg-slate-800 dark:text-slate-500">
+          <div class="rounded-md transition-[width] duration-700 font-medium text-xs leading-6 py-1 flex items-center justify-center ring-1 ring-inset ring-slate-900/5 sm:px-14 px-6 md:px-24 lg:w-2/3 dark:bg-slate-800 dark:text-slate-500">
             <svg
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -50,7 +50,7 @@ function Demo() {
                 clip-rule="evenodd"
               ></path>
             </svg>
-            workcation.com
+            TheBlogPenn.com
           </div>
           <div class="flex justify-end absolute right-4 h-full top-0 items-center">
             <svg
@@ -67,6 +67,41 @@ function Demo() {
               ></path>
             </svg>
           </div>
+        </div>
+      </div>
+      {/* Main content */}
+      <div className="w-full text-slate-200 flex flex-col p-5 gap-8 overflow-auto">
+        <p className="text-xl font-semibold">Heading</p>
+        <div className="flex w-full justify-evenly">
+          <img
+            className=" object-contain w-auto sm:max-w-[600px] rounded"
+            src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmxvZ3xlbnwwfHwwfHw%3D&w=1000&q=80"
+          />
+        </div>
+        <div className="w-full flex flex-col gap-4 text-sm">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+            sit amet ornare orci. Maecenas ultrices ante elit. Duis tempus et
+            nunc vel euismod. Nunc rutrum nibh sed libero interdum efficitur.
+            Donec vestibulum, arcu gravida condimentum dignissim, sem turpis
+            cursus ligula, quis rutrum dui enim sollicitudin velit.
+          </p>
+          <p>
+            Phasellus viverra ipsum ac turpis sollicitudin eleifend. Aliquam
+            porta, diam ut euismod egestas, sem mi gravida sem, ut mattis ipsum
+            arcu at velit. Fusce condimentum, quam ut pharetra consectetur, quam
+            erat sollicitudin ligula, a fermentum mauris elit in velit.
+          </p>
+          <p>
+            Nam ullamcorper nunc sit amet lectus gravida, vitae tempus enim
+            malesuada. Aenean pharetra blandit pharetra. Donec in tincidunt
+            elit. Sed posuere velit eget nisl posuere fermentum. Morbi vel ipsum
+            ornare, convallis dolor et, eleifend lacus. Morbi sit amet sapien at
+            dui luctus eleifend ut sed sem. Sed fermentum leo ac leo gravida,
+            sed luctus urna consectetur. Maecenas at purus feugiat, aliquam nunc
+            eget, pellentesque neque. Duis quis mauris at mauris convallis
+            ullamcorper ac a nisi. Phasellus non fermentum nibh.
+          </p>
         </div>
       </div>
     </div>
