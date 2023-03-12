@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 function Login() {
   const [login, setlogin] = useState(true);
+  const [username,setusername]=useState('');
+  const [password,setpassword]=useState('');
+
   const variant1 = {
     initial: {
       opacity: 0,
@@ -39,6 +43,23 @@ function Login() {
 
   };
 
+  const handlesubmit =(e)=>{
+    e.preventDefault();
+    
+    const user={username,password};
+
+    fetch('/login',{
+      method:'POST',
+      header:{"Content-Type":"application/json"},
+      body:JSON.stringify(user)
+    }).then(()=>{
+      console.log("user data sent")
+    })
+
+  }
+
+  
+
   return (
     <AnimatePresence>
       <div className='flex w-screen h-screen bg-[url("https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg")] bg-cover items-center justify-center'>
@@ -51,7 +72,7 @@ function Login() {
           animate='animate1'
           exit='exit1'
           className="relative w-[20rem] backdrop-filter backdrop-blur-md rounded bg-slate-800 p-8"
-        >
+        ><form onSubmit={handlesubmit}>
           <div className="flex flex-col gap-4">
             <motion.div
               layour="position"
@@ -71,6 +92,8 @@ function Login() {
                 </span>
                 <input
                   type="text"
+                  onChange={(e)=>setusername(e.target.value)}
+                  value={username}
                   aria-label="Filter projects"
                   placeholder="Email Id"
                   class="appearance-none w-full text-sm leading-6 bg-transparent text-slate-900 placeholder:text-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100 dark:placeholder:text-slate-500 dark:ring-0 dark:focus:ring-2"
@@ -93,7 +116,10 @@ function Login() {
                 Lock
               </span>
               <input
+                name="passworduser"
                 type="password"
+                onChange={(e)=>setpassword(e.target.value)}
+                value={password}
                 aria-label="Filter projects"
                 placeholder="Password"
                 class="appearance-none w-full text-sm leading-6 bg-transparent text-slate-900 placeholder:text-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100 dark:placeholder:text-slate-500 dark:ring-0 dark:focus:ring-2"
@@ -133,8 +159,9 @@ function Login() {
               </motion.button>
             )}
             {login && (
-              <Link className='w-full' to='/home'>
+
               <motion.button
+                type="submit"
                 variants={variant1}
                 initial="initial"
                 animate="animate"
@@ -143,7 +170,7 @@ function Login() {
               >
                 Log in
               </motion.button>
-              </Link>
+              
             )}
             {login && (
               <div className="border-t-[1px] border-slate-600 py-4">
@@ -176,6 +203,7 @@ function Login() {
               </div>
             )}
           </div>
+        </form>
         </motion.div>
       </div>
     </AnimatePresence>
