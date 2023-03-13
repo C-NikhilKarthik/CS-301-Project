@@ -6,7 +6,8 @@ import Notifications from "../Components/Home/Notifications";
 import SidebarComponent from "../Components/Home/SidebarComponent";
 import Bottombar from "../Components/Home/Bottombar";
 import { Link } from "react-router-dom";
-function Home() {
+
+function Explore() {
   const [op, Setop] = useState(true);
   function open() {
     document.getElementById("sidebar").style.width = "300px";
@@ -83,15 +84,15 @@ function Home() {
                 </button>
               </div>
             )}
+            <Link className="w-full" to="/home">
+              <SidebarComponent op={op} image={"Home"} text={"Home"} />
+            </Link>
             <SidebarComponent
               op={op}
               select={true}
-              image={"Home"}
-              text={"Home"}
+              image={"Explore"}
+              text={"Explore"}
             />
-            <Link className="w-full" to="/explore">
-              <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
-            </Link>
             <SidebarComponent op={op} image={"Chat"} text={"Messages"} />
             <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
             <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
@@ -160,4 +161,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Explore;
