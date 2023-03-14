@@ -1,4 +1,4 @@
-import { motion,AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import Topbar from "../Components/Home/Topbar";
 import Card from "../Components/Home/Card";
@@ -113,30 +113,37 @@ function Home() {
                 </button>
               </div>
             )}
-            <SidebarComponent op={op} image={"Home"} text={"Home"} />
-            <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
+            <SidebarComponent
+              op={op}
+              select={true}
+              image={"Home"}
+              text={"Home"}
+            />
+            <Link className="w-full" to="/explore">
+              <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
+            </Link>
             <SidebarComponent op={op} image={"Chat"} text={"Messages"} />
             <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
             <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
             <div className="flex px-1 w-full">
               <Link to="/createblog" className="w-full">
-              <motion.button className="bg-blue-600 gap-2 w-full flex items-center hover:bg-blue-500 text-slate-200 rounded-full border-none focus:outline-none">
-                <span className="cursor-pointer p-1 peer-focus:text-white text-gray-400 material-symbols-outlined">
-                  Add
-                </span>
-                <AnimatePresence>
-                  {op && (
-                    <motion.p
-                      animate={{ opacity: 1, duration: 1 }}
-                      initial={{ opacity: 0 }}
-                      layout
-                      className="whitespace-nowrap w-full flex"
-                    >
-                      Create Blog
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                <motion.button className="bg-blue-600 gap-2 w-full flex items-center hover:bg-blue-500 text-slate-200 rounded-full border-none focus:outline-none">
+                  <span className="cursor-pointer p-1 peer-focus:text-white text-gray-400 material-symbols-outlined">
+                    Add
+                  </span>
+                  <AnimatePresence>
+                    {op && (
+                      <motion.p
+                        animate={{ opacity: 1, duration: 1 }}
+                        initial={{ opacity: 0 }}
+                        layout
+                        className="whitespace-nowrap w-full flex"
+                      >
+                        Create Blog
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
               </Link>
             </div>
           </div>

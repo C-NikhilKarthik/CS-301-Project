@@ -58,7 +58,7 @@ function Login() {
       <motion.div
         animate={{ x: 0, transition: { duration: 0.9,ease:"easeInOut"} ,opacity:1}}
         initial={{x:-100,opacity:0}}
-        className="z-[2] relative p-3 sm:h-[70vh] h-[75vh] sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
+        className="z-[2] relative p-3 h-fit sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
       >
         <img
           className="absolute z-[1] left-0 w-full h-full object-cover"
