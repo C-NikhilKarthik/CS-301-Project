@@ -1,0 +1,23 @@
+{
+  "name": "project_sem4",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "client": "cd../client && npm start",
+    "start": "nodemon server.js",
+    "dev": "concurrently -n server,client -c red,green \"nodemon server.js\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "express": "^4.18.2",
+    "mongodb": "^5.0.1"
+  },
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

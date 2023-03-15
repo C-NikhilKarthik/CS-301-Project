@@ -9,6 +9,11 @@ import { Link } from "react-router-dom";
 
 function Explore() {
   const [op, Setop] = useState(true);
+
+  function go_home()
+  {
+    window.location.replace('/home')
+  }
   function open() {
     document.getElementById("sidebar").style.width = "300px";
   }
@@ -84,9 +89,9 @@ function Explore() {
                 </button>
               </div>
             )}
-            <Link className="w-full" to="/home">
+            <button className="w-full" onClick={go_home}>
               <SidebarComponent op={op} image={"Home"} text={"Home"} />
-            </Link>
+            </button>
             <SidebarComponent
               op={op}
               select={true}

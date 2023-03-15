@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-function Card({ image, text, id }) {
+function Card({ image, text,Heading,Owner,id }) {
   // useState(() => {
   //   AOS.init();
   // }, []);
@@ -37,8 +37,8 @@ function Card({ image, text, id }) {
         <div className="flex mb-3 items-center text-gray-300 ">
           <div className="rounded-full h-10 w-10 border-[1px] border-white bg-gray-500"></div>
           <div className="ml-3 flex flex-col">
-            <p className="sm:text-xl text-normal">TheNetherAxe</p>
-            <p className="text-sm -top-1 relative">#2917</p>
+            <p className="sm:text-xl text-normal">{Owner}</p>
+            <p className="text-sm -top-1 relative">#{id}</p>
           </div>
         </div>
         <div className="flex items-start py-2 h-full">
@@ -65,7 +65,7 @@ function Card({ image, text, id }) {
               </div>
               <div className="relative px-2 w-[20rem] max-h-[15em] text-gray-200 text-ellipsis overflow-hidden">
                 <div className="text-2xl py-2">
-                  Heading
+                  {Heading}
                 </div>
                 <div className="text-md ">{text}</div>
               </div>
