@@ -1,7 +1,6 @@
-import React, {useEffect,useState} from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
 import InputField from "../Components/InputField";
-import { AnimatePresence, easeInOut, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Login() {
   
@@ -61,6 +60,7 @@ function Login() {
         className="z-[2] relative p-3 h-fit sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
       >
         <img
+          alt="logo"
           className="absolute z-[1] left-0 w-full h-full object-cover"
           src="/images/login_cleanup.jpg"
         />

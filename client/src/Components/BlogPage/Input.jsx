@@ -2,7 +2,7 @@ import React from 'react'
 
 function Input({type,name,label,icon}) {
     return (
-        <div class="relative z-0 w-full flex items-center group">
+        <div className="relative z-0 w-full flex items-center group">
         <input
           type={type}
           name={name}
@@ -12,7 +12,7 @@ function Input({type,name,label,icon}) {
         />
         <label
           for={name}
-          class="pointer-events-none z-[1] pl-2 peer-focus:font-medium absolute text-sm text-slate-500 dark:text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5"
+          className="pointer-events-none z-[1] pl-2 peer-focus:font-medium absolute text-sm text-slate-500 dark:text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5"
         >
           {label}
         </label>
