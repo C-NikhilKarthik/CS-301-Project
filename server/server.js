@@ -92,18 +92,12 @@ app.get('/home',(req,res)=>{
         //console.log("found user")
 
         const blogs=[]
-        db.collection('Blog_Posts').find({Owner:{$in:user_details[0].Friends},Topic:{$in:user_details[0].Interests}}).forEach(blog=>blogs.push(blog))
+        db.collection('Blog_Posts').find({Owner:{$in:user_details[0].Friends}}).forEach(blog=>blogs.push(blog))
         .then(()=>{
             
             //console.log("found posts")
-
-            const needed_blogs=[]
-            for(let i=0;i<blogs.length;i++)
-            {
-                needed_blogs.push(blogs[i])
-            }
-            //console.log(needed_blogs)
-            res.json({all_blogs:needed_blogs})
+            //console.log("hello")
+            res.json({all_blogs:blogs})
         })
 
     })
@@ -111,19 +105,19 @@ app.get('/home',(req,res)=>{
 })
 
 
-app.post('/getowner',(req,res)=>{
-    //console.log(req.body)
-    const ownerid=new ObjectId(req.body.blog_owner)
+// app.post('/getowner',(req,res)=>{
+//     //console.log(req.body)
+//     const ownerid=new ObjectId(req.body.blog_owner)
     
-    const owner=[]
-    db.collection('user_details').find({_id:ownerid}).forEach(user=>owner.push(user))
-        .then(()=>{
-            //console.log("hello")
-            //console.log(owner[0].EmailId)
-            res.json({owner_name:owner[0].EmailId})
-        })
+//     const owner=[]
+//     db.collection('user_details').find({_id:ownerid}).forEach(user=>owner.push(user))
+//         .then(()=>{
+//             //console.log("hello")
+//             //console.log(owner[0].EmailId)
+//             res.json({owner_name:owner[0].EmailId})
+//         })
 
-})
+// })
 
 app.post('/test',(req,res)=>{
     console.log("testing")
@@ -131,70 +125,23 @@ app.post('/test',(req,res)=>{
 })
 
 
-// app.get('/explore',(req,res)=>{
-
-//     //req.params.id will be a string
-//     var id=new ObjectId(present_user_id)
-
-//     let user=[]
-//     db.collection('user_details').find({_id:id}).forEach(person=>user.push(person))
-//     .then(()=>{
-
-//         let user_interests=new Set()
-//         for(let i=0;i<user[0].Interests.length;i++)
-//         {
-//             user_interests.add(user[0].Interests[i])
-//         }
+app.get('/explore',(req,res)=>{
+    let user_details=[]
+    db.collection('user_details').find({_id:present_user_id}).forEach(user=>user_details.push(user))
+    .then(()=>{
+        const blogs=[]
         
-//         let all_posts=[]
-//     db.collection('Blog_Posts').find({Owner:{$nin:[id]}}).forEach(post=>all_posts.push(post))
-//     .then(()=>{
+        db.collection('Blog_Posts').find({Owner:{$ne:present_user_id},Topic:{$in:user_details[0].Interests}}).forEach(blog=>blogs.push(blog))
+            .then(()=>{
+                //:need to shuffle the blogs 
+                res.json({all_blogs:blogs})
+                
+            })
+    })
 
-//         possible_posts=[]
-//         for(let j=0;j<all_posts.length;j++)
-//         {
-//             if(user_interests.has(all_posts[j].Topic)===true)
-//             {
-//                 possible_posts.push(all_posts[j])
-//             }
-//         }
 
-//         let seen_ran=new Set()
-//         let count=0
-//         let show_posts=[]
 
-//         //keeping minimum number of posts to be shown as 2
-//         if(possible_posts.length>=2)
-//         {
-//             //generating 2 random posts
-//             while(true)
-//             {
-//                 //generating random integer from [0,all_length-1]
-//                 let ran=Math.floor(Math.random()*all_posts.length)
-//                 if(count===2)
-//                 {
-//                     break
-//                 }
-//                 else if(ran<all_posts.length && seen_ran.has(ran)===false && user_interests.has(all_posts[ran].Topic)==true)
-//                 {
-//                     show_posts.push(all_posts[ran])
-//                     seen_ran.add(ran)
-//                     count++
-//                 }
-
-//             }
-//         }
-//         else{
-//             show_posts=possible_posts
-//         }
-
-//         res.json(show_posts)
-         
-//     })
-
-//     })
-
-// })
+})
 
 
 // app.post('/create_blog',(req,res)=>{
