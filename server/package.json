@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "ins": "npm install && cd ../client && npm install && exit 1",
+    "ins": "npm install && cd ../client && npm install && exit 0",
     "client": "cd ../client && npm start",
     "start": "nodemon server.js",
     "dev": "concurrently -n server,client -c red,green \"nodemon server.js\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "author": "",
   "license": "ISC",
