@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Topbar from "../Components/Home/Topbar";
 import Card from "../Components/Home/Card";
 import Notifications from "../Components/Home/Notifications";
@@ -11,25 +11,24 @@ function Home() {
   const [op, Setop] = useState(true);
 
   const [list,Setlist]=useState([]);
-  const [owner_name,SetOwner_name]=useState('')
+  // const [owner_name,SetOwner_name]=useState('')
 
-  const find_blog_owner=async(owner)=>{
+  // const find_blog_owner=async(owner)=>{
 
-    const response=await fetch('/getowner',{
-      method:'POST',
-      body: JSON.stringify({blog_owner:owner}),
-      headers:{
-         'Content-Type': 'application/json' },
-    })
+  //   const response=await fetch('/getowner',{
+  //     method:'POST',
+  //     body: JSON.stringify({blog_owner:owner}),
+  //     headers:{
+  //        'Content-Type': 'application/json' },
+  //   })
 
-    const json=await response.json()
-    SetOwner_name(json.owner_name)
+  //   const json=await response.json()
+  //   SetOwner_name(json.owner_name)
 
-  }
+  // }
 
   const generate_blogs=async(e)=>
   {
-
     const temp_list=[]
 
     const response=await fetch('/home',{
@@ -40,16 +39,14 @@ function Home() {
 
     for(let i=0;i<json.all_blogs.length;i++)
     {
-      
-      find_blog_owner(json.all_blogs[i].Owner)
       temp_list.push(<Card
         image={"images/bg.jpg"}
         text={
           json.all_blogs[i].Post_text
         }
         Heading={json.all_blogs[i].Title}
-        Owner={owner_name}
-        id={String(json.all_blogs[i]._id)}
+        Owner={String(json.all_blogs[i]._id)}
+        
       />)
     }
 
@@ -57,8 +54,10 @@ function Home() {
     
   }
 
-  generate_blogs() 
-  
+  useEffect(()=>{
+    generate_blogs()
+  })
+ 
 
   function open() {
     document.getElementById("sidebar").style.width = "300px";
