@@ -11,7 +11,7 @@ Project taken up by students of IIIT Dharwad to understand and implement React.j
 Clone the project
 
 ```bash
-  https://github.com/C-NikhilKarthik/CS-301-Project.git
+  git clone https://github.com/C-NikhilKarthik/CS-301-Project.git
 ```
 
 Go to the project directory
