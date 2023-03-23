@@ -11,44 +11,77 @@ function Login() {
   const [lname,setLname]=useState('')
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
+  const [message,setMessage]=useState('')
+  const [signupMessage,setsignupMessage]=useState('')
 
   //for login:
   const [email_login,setEmail_login]=useState('')
   const [password_login,setPassword_login]=useState('')
 
   const handleSubmit=async(e)=>{
-
-    e.preventDefault()
-
-    let user_details={fname,lname,email,password,email_login,password_login}
-    
-    const response=await fetch('/authentication',{
-      method:'POST',
-      body: JSON.stringify(user_details),
-      headers:{
-         'Content-Type': 'application/json' },
-    })
-
-    const json=await response.json()
-  
-    if(json.mssg==='valid')
-    {
-      window.location.replace("/home");
-    }
-    else if(json.mssg==='invalid')
-    {
-      alert("invalid username or password")
-    }
-    else if(json.mssg==='new_account')
-    {
-      window.location.replace("/login");
-    }
-    else if(json.mssg==='new_account_fail')
-    {
-      alert("ERROR:Account already exists")
-    }
-    
+    e.preventDefault();
+    const response=await createAccount(fname,lname,email,password);
+    if(response.status==='FAILED')
+  {
+    setsignupMessage(response.message)
   }
+}
+
+const createAccount=async(fname,lname,email,password)=>{
+  // console.log(email,password);
+  try{
+    const response=await fetch('/signup',{
+      method:'POST',
+      body:JSON.stringify({
+        fname:fname,
+        lname:lname,
+        email:email,
+        password:password
+      }),
+      headers:{'Content-type':'application/json'},
+    });
+    const json2=response.json();
+    return json2;
+  }catch(error){
+    console.log(error);
+}
+}
+
+const handleSubmitLogin=async (e)=>{
+  e.preventDefault();
+  const response=await loginhandle(email_login,password_login); 
+  
+  if(response.status==='FAILED')
+  {
+    // alert('Enter email/password');
+    setMessage(response.message)
+  }
+  else if(response.status==='SUCCESS')
+  {
+    var url=new URL('http://localhost:3000/home')
+    url.searchParams.set('email',`${email_login}`)
+    window.location.replace(url);
+  }
+}
+const loginhandle=async(email_l,password_l)=>{
+  console.log(email_l,password_l);
+  try{
+    const response=await fetch('/signin',{
+      method:'POST',
+      body:JSON.stringify({
+        email_login:email_l,
+        password_login:password_l
+      }),
+      headers:{'Content-type':'application/json'},
+    });
+    const json=response.json();
+    return json;
+  }catch(error){
+    console.log(error);
+  }
+
+}
+
   return (
     
     <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
@@ -60,7 +93,6 @@ function Login() {
         className="z-[2] relative p-3 h-fit sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
       >
         <img
-          alt="logo"
           className="absolute z-[1] left-0 w-full h-full object-cover"
           src="/images/login_cleanup.jpg"
         />
@@ -111,10 +143,12 @@ function Login() {
                     onChange={(e)=>setPassword_login(e.target.value)}
                     
                   />
-                  
+                  {message &&(
+                    <p className="text-red-500 text-xs">{message}</p>
+                  )}
                     <button
                       type="button"
-                      onClick={handleSubmit}
+                      onClick={handleSubmitLogin}
                       className="w-full bg-blue-600 mt-3 px-3 py-2 text-sm rounded-md text-slate-300 hover:bg-blue-700"
                     >
                       Log In
@@ -191,7 +225,9 @@ function Login() {
                     onChange={(e)=>setPassword(e.target.value)}
                    
                   />
-                  
+                   {signupMessage &&(
+                    <p className="text-red-500 text-xs">{signupMessage}</p>
+                  )}
                   <button
                     type="button"
                     onClick={handleSubmit}
