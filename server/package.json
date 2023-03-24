@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "cd../client && npm start",
+    "client": "cd ../client && npm start",
     "start": "nodemon server.js",
     "dev": "concurrently -n server,client -c red,green \"nodemon server.js\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "compression": "^1.7.4",
     "concurrently": "^7.6.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "mongodb": "^5.0.1",
