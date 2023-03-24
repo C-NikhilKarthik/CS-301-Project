@@ -1,4 +1,5 @@
-# A social media platform that allows users to create profiles, share posts, connect with friends and more!
+# A content management system (CMS) for a blog or news website that utilizes MongoDB for data storage, Express.js for the back-end, AngularJS for the
+front-end, and Node.js for server-side JavaScript execution.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
