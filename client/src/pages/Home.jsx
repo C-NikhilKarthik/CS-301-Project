@@ -11,6 +11,7 @@ function Home() {
   const [op, Setop] = useState(true);
 
   const [list,Setlist]=useState([]);
+  const [explore_url,setExplore_url]=useState([])
   // const [owner_name,SetOwner_name]=useState('')
 
   // const find_blog_owner=async(owner)=>{
@@ -30,9 +31,16 @@ function Home() {
   const generate_blogs=async(e)=>
   {
     const temp_list=[]
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const email=urlParams.get('email')
 
     const response=await fetch('/home',{
-      method:'GET',
+      method:'POST',
+      body:JSON.stringify({
+        email_login:email,
+      }),
+      headers:{'Content-type':'application/json'}
     })
 
     const json=await response.json()
@@ -49,6 +57,10 @@ function Home() {
         
       />)
     }
+
+    var url=new URL('http://localhost:3000/explore')
+    url.searchParams.set('email',`${email}`)
+    setExplore_url(url)
 
     Setlist(temp_list)
     
@@ -140,7 +152,7 @@ function Home() {
               image={"Home"}
               text={"Home"}
             />
-            <Link className="w-full" to="/explore">
+            <Link className="w-full" to={explore_url}>
               <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
             </Link>
             <SidebarComponent op={op} image={"Chat"} text={"Messages"} />

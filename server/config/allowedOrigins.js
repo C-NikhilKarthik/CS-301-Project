@@ -1,7 +1,7 @@
-const allowedOrigins = [
+const allowedOrigins=[
     'http://localhost:3000',
-    'https://www.TheBlogPenn.com',
-    'https://TheBlogPenn.com'
+    
 ]
+//'http://localhost:3000'->where react app is running
 
-module.exports = allowedOrigins
+module.exports=allowedOrigins

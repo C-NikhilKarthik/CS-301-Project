@@ -31,9 +31,17 @@ function Explore() {
   {
 
     const temp_list=[]
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const email=urlParams.get('email')
 
     const response=await fetch('/explore',{
-      method:'GET',
+      method:'POST',
+      body:JSON.stringify({
+        email_login:email,
+      }),
+      headers:{'Content-type':'application/json'}
+      
     })
 
     const json=await response.json()
