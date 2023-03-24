@@ -1,13 +1,14 @@
 {
-  "name": "project_sem4",
+  "name": "server",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "client": "cd../client && npm start",
-    "start": "nodemon server.js",
-    "dev": "concurrently -n server,client -c red,green \"nodemon server.js\" \"npm run client\"",
+    "start": "node server",
+    "dev": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -22,8 +23,6 @@
     "mongoose": "^7.0.2",
     "uuid": "^9.0.0"
   },
-  "keywords": [],
-  "description": "",
   "devDependencies": {
     "nodemon": "^2.0.21"
   }

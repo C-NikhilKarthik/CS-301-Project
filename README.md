@@ -11,7 +11,7 @@ Project taken up by students of IIIT Dharwad to understand and implement React.j
 Clone the project
 
 ```bash
-  git clone https://github.com/C-NikhilKarthik/CS301-Project.git
+  git clone https://github.com/C-NikhilKarthik/CS-301-Project.git
 ```
 
 Go to the project directory
@@ -19,20 +19,20 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  npm install
+  npm run install
 ```
 
 Start the server
 
 ```bash
-  npm start
+  npm run start
 ```
 
 ## Contributing
 
 Contributions are always welcome!
 
-See `CONTRIBUTING.md` for ways to get started - [here](https://github.com/C-NikhilKarthik/CS301-Project/blob/main/CONTRIBUTING.md)
+See `CONTRIBUTING.md` for ways to get started - [here](https://github.com/C-NikhilKarthik/CS-301-Project/blob/main/CONTRIBUTING.md)
 
 ## Tech Stack
 
