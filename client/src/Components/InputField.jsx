@@ -7,7 +7,7 @@ function InputField({type,name,label,icon,onChange}) {
       type={type}
       name={name}
       onChange={onChange}
-      className="pr-8 block px-2 backdrop-filter backdrop-blur-sm py-2.5 w-full text-sm text-gray-900 bg-slate-900/40 rounded-md appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+      className="pr-8 block px-2 backdrop-filter backdrop-blur-sm py-2.5 w-full text-sm text-gray-900 dark:bg-slate-900/40 rounded-md appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
       placeholder=" "
       required
     />
@@ -17,7 +17,7 @@ function InputField({type,name,label,icon,onChange}) {
     >
       {label}
     </label>
-    <span className="text-slate-500 peer-focus:text-slate-200 transition-[color] absolute right-1 pointer-events-none material-symbols-outlined">
+    <span className="text-slate-500 peer-focus:text-blue-500 dark:peer-focus:text-slate-200 transition-[color] absolute right-1 pointer-events-none material-symbols-outlined">
       {icon}
     </span>
   </div>  )

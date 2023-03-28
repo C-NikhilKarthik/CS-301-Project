@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useState ,useEffect} from "react";
 import Topbar from "../Components/Home/Topbar";
 import Card from "../Components/Home/Card";
-import Notifications from "../Components/Home/Notifications";
 import SidebarComponent from "../Components/Home/SidebarComponent";
 import Bottombar from "../Components/Home/Bottombar";
 import { Link } from "react-router-dom";
@@ -81,7 +80,7 @@ function Explore() {
   }
   return (
     <div className='w-screen h-screen bg-[url("https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg")] bg-cover bg-bottom'>
-      <div className="z-[2] w-full h-full lg:grid lg:grid-cols-[1fr_300px]">
+      <div className="z-[2] w-full h-full overflow-hidden">
         <div className="relative flex  w-full h-full overflow-hidden">
           <div className="z-[1] absolute inset-0 gridblock"></div>
           <div
@@ -190,7 +189,6 @@ function Explore() {
             <Bottombar />
           </div>
         </div>
-        <Notifications />
       </div>
     </div>
   );
