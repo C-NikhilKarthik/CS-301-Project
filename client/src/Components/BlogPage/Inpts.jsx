@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Demo from "../../pages/Demo";
 import InputField from "../InputField"; 
 
 
@@ -88,6 +89,7 @@ function Inpts() {
 
   return (
     <div className="w-full px-28 mt-10">
+      <Demo interest={interest} title={title} pic={pic} desc={desc} url={url} message={message}/>
       <form onSubmit={formHandler}>
         <div className="w-full p-4 rounded-md bg-slate-700 shadow-md flex gap-4 flex-col">
           <p className="text-slate-200 font-semibold text-xl underline">

@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../Components/Signup/Footer";
-function Demo() {
+function Demo(props) {
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
   var time = today.toUTCString();
@@ -76,7 +76,7 @@ function Demo() {
       {/* Main content */}
       <div className="w-full text-slate-200 flex flex-col pt-5 gap-8 overflow-auto">
         <div className="px-5 w-full gap-8 flex flex-col">
-          <p className="text-xl font-semibold">Heading</p>
+          <p className="text-xl font-semibold">{props.title}</p>
           <div className="w-full flex justify-end gap-4">
             <p className="text-xs">TheNetherAxe</p>
             <p className="text-xs whitespace-nowrap">{time}</p>
@@ -85,34 +85,14 @@ function Demo() {
             <img
               alt="main"
               className=" object-contain w-auto sm:max-w-[600px] rounded"
-              src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmxvZ3xlbnwwfHwwfHw%3D&w=1000&q=80"
+              src={props.pic}
             />
           </div>
           <div className="w-full flex flex-col gap-4 text-sm">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              sit amet ornare orci. Maecenas ultrices ante elit. Duis tempus et
-              nunc vel euismod. Nunc rutrum nibh sed libero interdum efficitur.
-              Donec vestibulum, arcu gravida condimentum dignissim, sem turpis
-              cursus ligula, quis rutrum dui enim sollicitudin velit.
+              {props.desc}
             </p>
-            <p>
-              Phasellus viverra ipsum ac turpis sollicitudin eleifend. Aliquam
-              porta, diam ut euismod egestas, sem mi gravida sem, ut mattis
-              ipsum arcu at velit. Fusce condimentum, quam ut pharetra
-              consectetur, quam erat sollicitudin ligula, a fermentum mauris
-              elit in velit.
-            </p>
-            <p>
-              Nam ullamcorper nunc sit amet lectus gravida, vitae tempus enim
-              malesuada. Aenean pharetra blandit pharetra. Donec in tincidunt
-              elit. Sed posuere velit eget nisl posuere fermentum. Morbi vel
-              ipsum ornare, convallis dolor et, eleifend lacus. Morbi sit amet
-              sapien at dui luctus eleifend ut sed sem. Sed fermentum leo ac leo
-              gravida, sed luctus urna consectetur. Maecenas at purus feugiat,
-              aliquam nunc eget, pellentesque neque. Duis quis mauris at mauris
-              convallis ullamcorper ac a nisi. Phasellus non fermentum nibh.
-            </p>
+            
           </div>
         </div>
         <Footer />

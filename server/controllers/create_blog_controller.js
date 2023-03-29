@@ -4,22 +4,23 @@ const cors = require('cors');
 
 const Blog = require('../models/BlogModel');
 const compression = require('compression');
+const {userId} = require('../data/UserId')
 
 
 const create_blog=async (req, res) => {
     const fileStr = req.body;
     // console.log(req.body);
     
+    console.log(userId);
     try {
         const newData = new Blog({
-            Owner: null,
+            Owner: userId[0],
             Topic: fileStr.interest,
             Title: fileStr.title,
             Image_link: fileStr.url,
             Description: fileStr.desc
             
         })
-
         const result = await newData.save() 
             if (!result) {
                 console.log(err,"database");
