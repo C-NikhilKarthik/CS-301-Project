@@ -8,6 +8,7 @@ import Demo from "./pages/Demo";
 import Explore from "./pages/Explore";
 import Interests from "./Components/SignUp/Interests";
 import SignUp from "./pages/SignUp";
+import Friends from "./pages/Friends" 
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/demo" element={<Demo />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
         <Route path="/interests" element={<Interests />}></Route>
+        <Route path="/friends" element={<Friends />}></Route>
       </Routes>
     </Router>
   );
