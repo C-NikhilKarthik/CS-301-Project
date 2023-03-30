@@ -3,8 +3,6 @@ import Interests from "../Components/SignUp/Interests";
 import ProgressBar from "../Components/SignUp/ProgressBar";
 import Regsiter from "../Components/SignUp/Regsiter";
 import Success from "../Components/SignUp/Success";
-// import { Transition } from "@headlessui/react";
-// import axios from "axios";
 
 const steps = [
   {

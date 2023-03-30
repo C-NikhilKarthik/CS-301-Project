@@ -8,6 +8,7 @@ import Demo from "./pages/Demo";
 import Explore from "./pages/Explore";
 import Interests from "./Components/SignUp/Interests";
 import SignUp from "./pages/SignUp";
+import Test from "./pages/Test";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/createblog" element={<CreateBlog />}></Route>
         <Route path="/demo" element={<Demo />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
+        <Route path="/test" element={<Test />}></Route>
         <Route path="/interests" element={<Interests />}></Route>
       </Routes>
     </Router>

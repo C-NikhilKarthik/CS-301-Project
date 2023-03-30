@@ -67,7 +67,7 @@ function Home() {
 
   useEffect(()=>{
     generate_blogs()
-  })
+  },[])
  
 
   function open() {
