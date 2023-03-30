@@ -32,15 +32,23 @@ connectDb()
 app.use(express.static(path.join(__dirname,'build')))
 app.use('/',require('./routes/root'))
 
-
+//SingIn
 app.use('/signin',require('./routes/SignIn'))
+
+//SignUp
 app.use('/signup',require('./routes/SignUp'))
 
-app.use('/postBlog',require('./routes/CreateBlog'))
-
+//Home
 app.use('/home',require('./routes/Home'))
 
+//PostBlog
+app.use('/postBlog',require('./routes/CreateBlog'))
+
+//Explore Page
 app.use('/explore',require('./routes/Explore'))
+
+//Friends
+app.use('/friends',require('./routes/Friends_list'))
 
 app.all('*', (req, res) => {
     res.status(404)
@@ -53,6 +61,8 @@ app.all('*', (req, res) => {
     }
 })
 
+
+//Listening on port 5000
 app.listen(5000,()=>{
             console.log(process.env.NODE_ENV)
             app.use(errorHandler)
