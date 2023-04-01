@@ -64,10 +64,10 @@ const signup=(req,res)=>{
                     const saltRounds=10;
                     bcrypt.hash(password,saltRounds).then(hashedPassword=>{
                         const newUser=new User({
-                            fname,
-                            lname,
-                            email,
-                            password:hashedPassword
+                            Fname:fname,
+                            Lname:lname,
+                            EmailId:email,
+                            Password:hashedPassword
 
                         });
                         newUser.save().then(result => {
