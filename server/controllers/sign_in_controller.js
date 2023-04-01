@@ -10,10 +10,10 @@ const bodyParser=require('body-parser');
 // signin
 const login=(req,res)=>{
     const fileStr=req.body;
-    email=fileStr.email_login.trim();
-    password=fileStr.password_login.trim();
+    EmailId=fileStr.email_login.trim();
+    Password=fileStr.password_login.trim();
 
-    if(email==""||password==""){
+    if(EmailId==""||Password==""){
         res.json({
             status: "FAILED",
             message:"Empty credentials !"
@@ -22,12 +22,12 @@ const login=(req,res)=>{
     else{
         //check if user exist
         
-        User.find({email})
+        User.find({EmailId})
         .then((data) => {
             if(data){
                 //user exists
-                const hashedPassword= data[0].password;
-                bcrypt.compare(password, hashedPassword)
+                const hashedPassword= data[0].Password;
+                bcrypt.compare(Password, hashedPassword)
                 .then((result) => {
                     if(result){
                         //Password match
