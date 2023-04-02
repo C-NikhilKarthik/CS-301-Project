@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import InputField from "../Components/InputField";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Login() {
   
@@ -84,7 +85,7 @@ const loginhandle=async(email_l,password_l)=>{
 
   return (
     
-    <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
+    <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg')] dark:bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
     {/* // <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-slate-900"> */}
       <div className="absolute inset-0 h-full w-full gridblock"></div>
       <motion.div
@@ -93,6 +94,7 @@ const loginhandle=async(email_l,password_l)=>{
         className="z-[2] relative p-3 h-fit sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
       >
         <img
+          alt="login_image"
           className="absolute z-[1] left-0 w-full h-full object-cover"
           src="/images/login_cleanup.jpg"
         />
@@ -114,14 +116,13 @@ const loginhandle=async(email_l,password_l)=>{
                   </div>
                   <div className="flex text-xs gap-2">
                     <p>Not a member yet?</p>
+                    <Link to="/signup">
                     <p
-                      onClick={() => {
-                        setLogin(!login);
-                      }}
                       className="cursor-pointer text-blue-500"
                     >
                       Sign up
                     </p>
+                    </Link>
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 sm:pr-10">

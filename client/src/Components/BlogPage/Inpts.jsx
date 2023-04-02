@@ -89,8 +89,8 @@ function Inpts() {
   return (
     <div className="w-full px-28 mt-10">
       <form onSubmit={formHandler}>
-        <div className="w-full p-4 rounded-md bg-slate-700 shadow-md flex gap-4 flex-col">
-          <p className="text-slate-200 font-semibold text-xl underline">
+        <div className="w-full p-4 rounded-md bg-slate-300 dark:bg-slate-700 shadow-md flex gap-4 flex-col">
+          <p className="dark:text-slate-200 font-semibold text-xl underline">
             Create Blog
           </p>
           <div className="flex flex-col border-t-[1px] py-8 gap-4 px-5 border-slate-500">

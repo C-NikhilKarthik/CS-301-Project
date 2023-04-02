@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import Card from "../Components/Home/Card";
-import Footer from "../Components/Signup/Footer";
-import Teammates from "../Components/Signup/Teammates";
+import Footer from "../Components/Main/Footer";
+import Teammates from "../Components/Main/Teammates";
 import { Link } from "react-router-dom";
 import AOS from "aos";
+import Switcher from "../Components/Switcher";
 import "aos/dist/aos.css";
-function Signup() {
+function Main() {
   useState(() => {
     AOS.init();
   }, []);
@@ -38,7 +39,7 @@ function Signup() {
   };
 
   return (
-    <div className="w-full flex flex-col bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover bg-center bg-fixed ">
+    <div className="w-full flex flex-col bg-[url('https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg')] dark:bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover bg-center bg-fixed ">
       {/* navbar */}
       <motion.nav
         variants={variant2}
@@ -46,25 +47,25 @@ function Signup() {
         initial="initial1"
         className="absolute z-10 top-0 backdrop-filter backdrop-blur-md flex py-6 px-6 w-full items-center justify-between"
       >
-        <div className="text-slate-200 text-2xl font-semibold">
+        <div className="dark:text-slate-200 text-2xl font-semibold">
           The BlogPenn
         </div>
         <div className="sm:flex hidden">
           <ul className="flex justify-between items-center gap-6 px-4">
-            <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+            <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
               About
             </li>
-            <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+            <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
               Contact Us
             </li>
             <Link to="/login">
-              <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
                 Sign In
               </li>
             </Link>
           </ul>
-          <div className="flex border-l-[1px] border-slate-200 px-2">
-            <i className="fa text-blue-500 cursor-pointer fa-moon-o text-2xl px-2"></i>
+          <div className="flex border-l-[1px] border-slate-200 items-center px-4 gap-2">
+            <Switcher />
             <i className="fa fa-github text-2xl hover:text-white cursor-pointer text-slate-200 px-2"></i>
           </div>
         </div>
@@ -72,7 +73,7 @@ function Signup() {
       {/* Text in the middle fo the page */}
       <div className="relative border-b-[1px] border-slate-600 top-0  h-[80vh] flex-col w-full bg-cover bg-fixed bg-center flex items-center justify-center">
         <div className="absolute inset-0 h-full w-full gridblock"></div>
-        <div className="text-2xl sm:text-5xl z-[1] font-semibold text-slate-200 py-2 grid place-items-center ">
+        <div className="text-2xl sm:text-5xl z-[1] font-semibold dark:text-slate-200 py-2 grid place-items-center ">
           <p className="typed">Unleash your inner creativity.</p>
         </div>
         <motion.div
@@ -81,7 +82,7 @@ function Signup() {
           initial="initial"
           animate="final"
         >
-          <p className="sm:text-2xl z-[1] text-slate-200 py-2">
+          <p className="sm:text-2xl z-[1] dark:text-slate-200 py-2">
             Design and publish your blog with ease!
           </p>
           <Link className="z-[2]" to="/login">
@@ -92,7 +93,7 @@ function Signup() {
         </motion.div>
       </div>
       {/* The Card explaintation  */}
-      <div className="bg-slate-900 sm:px-20 pb-4 flex justify-between items-center">
+      <div className="bg-slate-100 dark:bg-slate-900 sm:px-20 pb-4 flex justify-between items-center">
         <div
           data-aos="zoom-in-up"
           data-aos-delay="2000"
@@ -111,7 +112,7 @@ function Signup() {
           data-aos-duration="300"
           data-aos-delay="2500"
           data-aos-offset="0"
-          className="text-slate-200 text-xl mt-4 gap-4 flex flex-col"
+          className="dark:text-slate-200 text-xl mt-4 gap-4 flex flex-col"
         >
           <div className="whitespace-nowrap text-3xl font-semibold">
             Robust and Clean Design
@@ -124,11 +125,10 @@ function Signup() {
           </div>
         </div>
       </div>
-
       <Teammates />
       <Footer />
     </div>
   );
 }
 
-export default Signup;
+export default Main;

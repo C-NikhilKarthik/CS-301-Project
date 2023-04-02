@@ -1,7 +1,8 @@
 import React from "react";
-import Footer from "../Components/Signup/Footer";
+import Footer from "../Components/Main/Footer";
 import DemoWidthComp from "../Components/BlogPage/DemoWidthComp";
 import Inpts from "../Components/BlogPage/Inpts";
+import Switcher from "../Components/Switcher";
 
 // function makeResizableDiv() {
 //   const element = document.getElementById("main");
@@ -42,27 +43,27 @@ function CreateBlog() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-slate-200 dark:bg-slate-900">
       <div className="w-full p-3">
-        <nav className="w-full backdrop-filter backdrop-blur-md flex py-4 px-6 items-center justify-between bg-slate-700 rounded">
-          <div className="text-lg font-semibold text-slate-200">
+        <nav className="w-full backdrop-filter backdrop-blur-md flex py-4 px-6 items-center justify-between dark:bg-slate-700 rounded">
+          <div className="text-lg font-semibold dark:text-slate-200">
             The BlogPenn
           </div>
           <div className="sm:flex hidden">
             <ul className="flex justify-between text-sm items-center gap-6 px-4">
-              <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
                 Home
               </li>
-              <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
                 Friends
               </li>
-              <li className="text-gray-300 hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
                 Explore
               </li>
             </ul>
-            <div className="flex border-l-[1px] border-slate-200 px-2">
-              <i className="fa text-blue-500 cursor-pointer fa-moon-o text-2xl px-2"></i>
-              <i className="fa fa-github text-2xl hover:text-white cursor-pointer text-slate-200 px-2"></i>
+            <div className="flex border-l-[1px] items-center border-slate-200 px-2">
+              <Switcher />
+              <i className="fa fa-github text-2xl dark:hover:text-white cursor-pointer dark:text-slate-200 px-2"></i>
             </div>
           </div>
         </nav>
@@ -74,20 +75,24 @@ function CreateBlog() {
           <div className="relative h-8 w-full my-5 border-b-[1px] border-slate-600">
             <DemoWidthComp />
           </div>
-          <div className="sm:px-20 w-full h-[70vh] relative bg-[url('https://tailwindcss.com/_next/static/media/0-dark@tinypng.74768a0b.png')] bg-cover bg-center">
+          <div className="sm:px-20 w-full h-[70vh] relative bg-[url('https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg')] dark:bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover bg-center">
             <div className="absolute inset-0 h-full w-full gridblock inv"></div>
             <div
               id="main"
-              className="relative shadow-lg md:min-w-[400px] w-full md:w-[400px] lg:max-w-full h-full -top-6 flex justify-center items-center flex-col"
+              className="relative ring-[1px] rounded-md ring-slate-800 dark:ring-none shadow-lg md:min-w-[400px] w-full md:w-[400px] lg:max-w-full h-full -top-6 flex justify-center items-center flex-col"
             >
               <div
                 id="hold"
                 draggable="true"
                 onDragStart={initial}
                 onDrag={resize}
-                className="resizer absolute w-1.5 h-8 bg-slate-500/60 rounded-full mr-2 -right-5 cursor-ew-resize"
+                className="resizer absolute w-1.5 h-8 bg-slate-500 dark:bg-slate-500/60 rounded-full mr-2 -right-5 cursor-ew-resize"
               ></div>
-              <iframe title="Demo" className="w-full h-full rounded-md" src="/demo"></iframe>
+              <iframe
+                title="Demo"
+                className="w-full h-full rounded-md"
+                src="/demo"
+              ></iframe>
             </div>
           </div>
         </div>

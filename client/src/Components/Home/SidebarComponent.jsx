@@ -5,7 +5,7 @@ function SidebarComponent({ op, select, image, text }) {
   return select ? (
     <motion.div
       layout
-      className="text-slate-100 cursor-pointer my-2 w-full relative p-2 bg-slate-800 rounded flex gap-3"
+      className="dark:text-slate-100 cursor-pointer my-2 w-full relative p-2 bg-slate-400 dark:bg-slate-800 rounded flex gap-3"
     >
       <span className="material-symbols-outlined">{image}</span>
       <AnimatePresence>
@@ -24,7 +24,7 @@ function SidebarComponent({ op, select, image, text }) {
   ) : (
     <motion.div
       layout
-      className="text-slate-100 cursor-pointer my-2 w-full relative p-2 hover:bg-slate-800 transition-[background-color] duration-[400] rounded flex gap-3"
+      className="dark:text-slate-100 cursor-pointer my-2 w-full relative p-2 hover:bg-slate-400 dark:hover:bg-slate-800 transition-[background-color] duration-[400] rounded flex gap-3"
     >
       <span className="material-symbols-outlined">{image}</span>
       <AnimatePresence>

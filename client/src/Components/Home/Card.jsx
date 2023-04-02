@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-function Card({ image, text,Heading,Owner}) {
+function Card({ image, text, Heading, Owner }) {
   // useState(() => {
   //   AOS.init();
   // }, []);
@@ -28,24 +28,24 @@ function Card({ image, text,Heading,Owner}) {
   return (
     <motion.div
       // ref={ref}
-      className="w-full max-w-xl flex flex-col p-3 bg-gray-800 rounded-lg border border-gray-600"
+      className="w-full max-w-xl flex flex-col p-3 bg-slate-200 dark:bg-gray-800 rounded-lg border border-gray-600"
     >
       <motion.div
         layout="position"
         className="w-full border-b-[1px] border-gray-500 flex justify-between"
       >
-        <div className="flex mb-3 items-center text-gray-300 ">
-          <div className="rounded-full h-10 w-10 border-[1px] border-white bg-gray-500"></div>
+        <div className="flex mb-3 items-center text-slate-800 dark:text-gray-300 ">
+          <div className="rounded-full h-10 w-10 border-[1px] dark:border-white bg-gray-500"></div>
           <div className="ml-3 flex flex-col">
             <p className="sm:text-xl text-normal">{Owner}</p>
             <p className="text-sm -top-1 relative"></p>
           </div>
         </div>
         <div className="flex items-start py-2 h-full">
-          <p className="h-full flex text-xs items-end text-gray-300 mr-3">
+          <p className="h-full flex text-xs items-end text-slate-800 dark:text-gray-300 mr-3">
             9:53 6th Feb,2023
           </p>
-          <span className="material-symbols-outlined text-2xl text-gray-300 ">
+          <span className="material-symbols-outlined text-2xl text-slate-800 dark:text-gray-300 ">
             more_horiz
           </span>
         </div>
@@ -58,30 +58,27 @@ function Card({ image, text,Heading,Owner}) {
           // animate={control}
           className="relative w-full py-3 flex"
         >
-              <div className="sm:flex hidden relative w-full px-3 max-h-[15em] border-r-[1px] border-gray-500">
-                <div className="h-full w-full rounded overflow-hidden">
-                  <img className="object-cover" src={image} alt="images"/>
-                </div>
-              </div>
-              <div className="relative px-2 w-[20rem] max-h-[15em] text-gray-200 text-ellipsis overflow-hidden">
-                <div className="text-2xl py-2">
-                  {Heading}
-                </div>
-                <div className="text-md ">{text}</div>
-              </div>
-          
+          <div className="sm:flex hidden relative w-full px-3 max-h-[15em] border-r-[1px] border-black dark:border-gray-500">
+            <div className="h-full w-full rounded overflow-hidden">
+              <img className="object-cover" src={image} alt="images" />
+            </div>
+          </div>
+          <div className="relative px-2 w-[20rem] max-h-[15em] text-slate-800 dark:text-gray-200 text-ellipsis overflow-hidden">
+            <div className="text-2xl py-2">{Heading}</div>
+            <div className="text-md ">{text}</div>
+          </div>
         </motion.div>
       }
 
       <div className="flex items-center px-2 justify-between">
-        <div className="flex">
-          <span className="material-symbols-outlined text-sm sm:text-lg mr-6 cursor-pointer hover:scale-110 hover:text-red-600 transition-[text-color,scale] duration-500 text-gray-300 ">
+        <div className="flex items-center">
+          <span className="material-symbols-outlined text-sm sm:text-lg mr-6 cursor-pointer hover:scale-110 hover:text-red-600 transition-[text-color,scale] text-slate-500 duration-500 dark:text-gray-300 ">
             favorite
           </span>
-          <span className="material-symbols-outlined text-sm mr-6 cursor-pointer hover:text-blue-400 text-gray-300 ">
+          <span className="material-symbols-outlined text-sm mr-6 cursor-pointer text-slate-500 hover:text-blue-400 dark:text-gray-300 ">
             share
           </span>
-          <span className="material-symbols-outlined text-sm mr-6 cursor-pointer hover:text-gray-100 text-gray-300 ">
+          <span className="material-symbols-outlined text-sm mr-6 cursor-pointer text-slate-500 hover:text-slate-500 dark:hover:text-gray-100 dark:text-gray-300 ">
             comment
           </span>
         </div>

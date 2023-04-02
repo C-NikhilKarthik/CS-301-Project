@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../Components/Signup/Footer";
+import Footer from "../Components/Main/Footer";
 function Demo() {
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);

@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect} from "react";
 import Topbar from "../Components/Home/Topbar";
 import Card from "../Components/Home/Card";
-import Notifications from "../Components/Home/Notifications";
 import SidebarComponent from "../Components/Home/SidebarComponent";
 import Bottombar from "../Components/Home/Bottombar";
 import { Link } from "react-router-dom";
@@ -78,13 +77,13 @@ function Home() {
     document.getElementById("sidebar").style.width = "4rem";
   }
   return (
-    <div className='w-screen h-screen bg-[url("https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg")] bg-cover bg-bottom'>
-      <div className="z-[2] w-full h-full lg:grid lg:grid-cols-[1fr_300px]">
+    <div className="w-screen h-screen bg-[url('https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg')] dark:bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover bg-bottom">
+      <div className="z-[2] w-full h-full overflow-hidden">
         <div className="relative flex  w-full h-full overflow-hidden">
           <div className="z-[1] absolute inset-0 gridblock"></div>
           <div
             id="sidebar"
-            className="z-[3] hidden border-r-[1px] border-slate-600 transition-[width] px-3 duration-500 relative h-full w-[300px] bg-slate-900 lg:flex flex-col items-center py-4"
+            className="z-[3] hidden border-r-[1px] border-slate-600 transition-[width] px-3 duration-500 relative h-full w-[300px] bg-slate-200 dark:bg-slate-900 lg:flex flex-col items-center py-4"
           >
             {!op && (
               <div className="flex w-full justify-end">
@@ -125,7 +124,7 @@ function Home() {
                   }}
                   data-collapse-toggle="navbar-hamburger"
                   type="button"
-                  className="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  className="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 hover:text-gray-300 rounded-lg hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                   aria-controls="navbar-hamburger"
                   aria-expanded="false"
                 >
@@ -188,7 +187,7 @@ function Home() {
             <Bottombar />
           </div>
         </div>
-        <Notifications />
+        {/* <Notifications /> */}
       </div>
     </div>
   );
