@@ -17,6 +17,7 @@ const User=require('./models/UserModel');
 const Blog = require('./models/BlogModel');
 
 app.use(logger)
+app.use(cors());
 // app.use(cors)
 // app.use(cors(corsOptions))
 app.use(express.urlencoded({extended:false}))//to be able to read data from the url or form which we send

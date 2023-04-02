@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Interests from "../Components/SignUp/Interests";
 import ProgressBar from "../Components/SignUp/ProgressBar";
 import Regsiter from "../Components/SignUp/Regsiter";

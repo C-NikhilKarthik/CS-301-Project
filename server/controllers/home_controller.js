@@ -6,25 +6,27 @@ const Blog = require('../models/BlogModel');
 const home=(req,res)=>{
 
     const present_user_email=req.body.email_login
-    //console.log("entered home")
+    
+    const blogs = [];
 
-    let user_details=[]
-    User.collection.find({email:present_user_email}).forEach(user=>user_details.push(user))
-    .then(()=>{
-
-        //console.log("found user")
-
-        const blogs=[]
-        Blog.collection.find({Owner:{$in:user_details[0].Friends}}).forEach(blog=>blogs.push(blog))
-        .then(()=>{
-            
-            //console.log("found posts")
-            //console.log("hello")
-            res.json({all_blogs:blogs})
+    let user_details=[];
+    User.find({EmailId:present_user_email})
+        .then(users => {
+            user_details = users[0].Friends;
+            console.log(user_details);
+            return Blog.find({Owner: {$in: user_details}});
         })
-
-    })
-
+        .then(posts => {
+            posts.forEach(post => {
+                blogs.push(post);
+            });
+            res.json({all_blogs:blogs});
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
 }
+
 
 module.exports={home}

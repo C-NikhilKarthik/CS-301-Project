@@ -2,13 +2,14 @@ const express = require('express');
 const User = require('../models/UserModel');
 const Blog = require('../models/BlogModel');
 const { ObjectId } = require('mongodb');
+const cookieParser = require('cookie-parser');
 
 
 
 const Friends = async (req, res) => {
     const friendName=[];
-    // const userId='64185726524c33b449f6a579';
-    const myObjectIdString = '64185726524c33b449f6a579';
+    const myObjectIdString='64185726524c33b449f6a579';
+    // const myObjectIdString =req.cookies;
 const userId = ObjectId.createFromHexString(myObjectIdString);
 console.log(userId);
   try {

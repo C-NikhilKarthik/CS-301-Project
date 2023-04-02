@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Card from "../Components/Home/Card";
 import Footer from "../Components/Main/Footer";
