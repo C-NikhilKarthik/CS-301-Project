@@ -48,7 +48,7 @@ app.use('/postBlog',require('./routes/CreateBlog'))
 app.use('/explore',require('./routes/Explore'))
 
 //Friends
-app.use('/friends',require('./routes/Friends_list'))
+//app.use('/friends',require('./routes/Friends_list'))
 
 app.all('*', (req, res) => {
     res.status(404)

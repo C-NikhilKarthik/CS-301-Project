@@ -7,7 +7,7 @@ const explore=(req,res)=>{
 
         let present_user_email=req.body.email_login
         let user_details=[]
-        User.collection.find({email:present_user_email}).forEach(user=>user_details.push(user))
+        User.collection.find({EmailId:present_user_email}).forEach(user=>user_details.push(user))
         .then(()=>{
             const blogs=[]
             
