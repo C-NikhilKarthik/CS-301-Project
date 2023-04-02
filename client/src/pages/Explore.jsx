@@ -11,21 +11,21 @@ function Explore() {
   const [list,Setlist]=useState([]);
 const [home_url,Sethome_url]=useState('')
 
-  function shuffle(blogs)
-{
-    const seen=new Set()
-    const arr=[]
-    for(let i=0;i<blogs.length;i++)
-    {
-        let index=Math.floor(Math.random()*blogs.length)
-        if(!seen.has())
-        {
-            arr.push(blogs[index])
+//   function shuffle(blogs)
+// {
+//     const seen=new Set()
+//     const arr=[]
+//     for(let i=0;i<blogs.length;i++)
+//     {
+//         let index=Math.floor(Math.random()*blogs.length)
+//         if(!seen.has())
+//         {
+//             arr.push(blogs[index])
 
-        }
-    }
-    return arr
-}
+//         }
+//     }
+//     return arr
+// }
 
   const generate_blogs=async(state)=>
   {
@@ -72,10 +72,11 @@ const [home_url,Sethome_url]=useState('')
     generate_blogs()
   },[])
 
-  function go_home()
-  {
-    window.location.replace('/home')
-  }
+  // function go_home()
+  // {
+  //   window.location.replace('/home')
+  // }
+  
   function open() {
     document.getElementById("sidebar").style.width = "300px";
   }

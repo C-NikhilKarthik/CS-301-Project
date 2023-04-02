@@ -9,6 +9,7 @@ const home=(req,res)=>{
     
     
     let user_details=[]
+    
     User.collection.find({EmailId:present_user_email}).forEach(user=>user_details.push(user))
     .then(()=>{
 
@@ -30,8 +31,11 @@ const home=(req,res)=>{
             res.json({all_blogs:blogs})
         }
 
+    }).catch((error)=>{
+        console.log(error);
     })
 
 }
+
 
 module.exports={home}

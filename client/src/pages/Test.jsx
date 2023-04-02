@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Switcher from "../Components/Switcher";
 import Footer from "../Components/Main/Footer";
-import OptionButton from "../Components/TextEditor/OptionButton";
+// import OptionButton from "../Components/TextEditor/OptionButton";
 import { Editor } from "react-draft-wysiwyg";
 import "../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
@@ -9,33 +9,33 @@ import "../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 //   document.execCommand("italic", false, null);
 // }
 
-const icons = [
-  {
-    id: 1,
-    icon: "format_bold",
-  },
-  {
-    id: 2,
-    icon: "format_italic",
-    // func: f2(),
-  },
-  {
-    id: 3,
-    icon: "format_underlined",
-  },
-  {
-    id: 4,
-    icon: "strikethrough_s",
-  },
-  {
-    id: 5,
-    icon: "superscript",
-  },
-  {
-    id: 6,
-    icon: "subscript",
-  },
-];
+// const icons = [
+//   {
+//     id: 1,
+//     icon: "format_bold",
+//   },
+//   {
+//     id: 2,
+//     icon: "format_italic",
+//     // func: f2(),
+//   },
+//   {
+//     id: 3,
+//     icon: "format_underlined",
+//   },
+//   {
+//     id: 4,
+//     icon: "strikethrough_s",
+//   },
+//   {
+//     id: 5,
+//     icon: "superscript",
+//   },
+//   {
+//     id: 6,
+//     icon: "subscript",
+//   },
+// ];
 function Test() {
   return (
     <div className="w-full min-h-[100vh] bg-slate-200 dark:bg-slate-900">

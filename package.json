@@ -2,10 +2,10 @@
   "name": "cs-301-project",
   "version": "1.0.0",
   "description": "front-end, and Node.js for server-side JavaScript execution.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "install": "cd server && npm install && cd ../client && npm install && exit 0",
-    "start": "cd server && npm run dev",
+    "start": "cd server && npm run dev ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
