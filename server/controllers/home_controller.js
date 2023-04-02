@@ -7,25 +7,34 @@ const home=(req,res)=>{
 
     const present_user_email=req.body.email_login
     
-    const blogs = [];
+    
+    let user_details=[]
+    
+    User.collection.find({EmailId:present_user_email}).forEach(user=>user_details.push(user))
+    .then(()=>{
 
-    let user_details=[];
-    User.find({EmailId:present_user_email})
-        .then(users => {
-            user_details = users[0].Friends;
-            console.log(user_details);
-            return Blog.find({Owner: {$in: user_details}});
-        })
-        .then(posts => {
-            posts.forEach(post => {
-                blogs.push(post);
-            });
-            res.json({all_blogs:blogs});
-        })
-        .catch(error => {
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        });
+       
+        const blogs=[]
+        
+
+        if(typeof user_details[0].Friends!=='undefined')
+        {
+            
+            Blog.collection.find({Owner:{$in:user_details[0].Friends}}).forEach(blog=>blogs.push(blog))
+            .then(()=>{
+                
+                res.json({all_blogs:blogs})
+            })
+        }
+        else{
+            
+            res.json({all_blogs:blogs})
+        }
+
+    }).catch((error)=>{
+        console.log(error);
+    })
+
 }
 
 

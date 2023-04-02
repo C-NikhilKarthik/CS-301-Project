@@ -39,6 +39,9 @@ app.use('/signin',require('./routes/SignIn'))
 //SignUp
 app.use('/signup',require('./routes/SignUp'))
 
+//Friends
+app.use('/friends',require('./routes/Friends_list'))
+
 //Home
 app.use('/home',require('./routes/Home'))
 
@@ -48,8 +51,6 @@ app.use('/postBlog',require('./routes/CreateBlog'))
 //Explore Page
 app.use('/explore',require('./routes/Explore'))
 
-//Friends
-app.use('/friends',require('./routes/Friends_list'))
 
 app.all('*', (req, res) => {
     res.status(404)

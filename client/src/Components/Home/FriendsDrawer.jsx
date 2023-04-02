@@ -11,12 +11,10 @@ function FriendsDrawer() {
   const [data, setData] = useState([]);
 
   const getData = async () => {
-    console.log("hi");
     const response = await fetch("/friends", {
       method: "POST",
     });
     const json = await response.json();
-    console.log(json);
     setData(json);
   };
 

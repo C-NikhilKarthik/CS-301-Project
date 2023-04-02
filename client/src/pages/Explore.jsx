@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 function Explore() {
   const [op, Setop] = useState(true);
   const [list,Setlist]=useState([]);
+const [home_url,Sethome_url]=useState('')
 
 //   function shuffle(blogs)
 // {
@@ -60,6 +61,9 @@ function Explore() {
       />)
     }
 
+    var url=new URL('http://localhost:3000/home')
+    url.searchParams.set('email',`${email}`)
+    Sethome_url(url)
     Setlist(temp_list)
     
   }
@@ -148,7 +152,7 @@ function Explore() {
                 </button>
               </div>
             )}
-            <Link to="/home" className="w-full">
+            <Link to={home_url} className="w-full">
               <SidebarComponent op={op} image={"Home"} text={"Home"} />
             </Link>
             <SidebarComponent
