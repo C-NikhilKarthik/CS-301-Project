@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router();
 
-const home_controller=require('../controllers/home_controller')
+const explore_controller=require('../controllers/explore_controller')
 
 // signin
 router.route('/')
-    .post(home_controller.home)
+    .post(explore_controller.explore)
     
 module.exports=router;

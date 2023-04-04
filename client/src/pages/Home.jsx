@@ -41,18 +41,24 @@ function Home() {
     const json = await response.json();
 
     for (let i = 0; i < json.all_blogs.length; i++) {
+      var blog_url = new URL("http://localhost:3000/slug");
+      blog_url.searchParams.set("email", `${email}`);
+      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+
       temp_list.push(
         <Card
           image={"images/bg.jpg"}
           text={json.all_blogs[i].Post_text}
           Heading={json.all_blogs[i].Title}
-          Owner={String(json.all_blogs[i]._id)}
+          Owner={String(json.all_blogs[i].Owner)}
+          location={blog_url}
         />
       );
     }
 
     var url = new URL("http://localhost:3000/explore");
     url.searchParams.set("email", `${email}`);
+    //console.log({explore_url:url})
     setExplore_url(url);
     Setlist(temp_list);
   };
@@ -142,7 +148,7 @@ function Home() {
               image={"Home"}
               text={"Home"}
             />
-            <Link className="w-full" to={explore_url}>
+            <Link to={explore_url} className="w-full" >
               <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
             </Link>
             <SidebarComponent op={op} image={"Chat"} text={"Messages"} />

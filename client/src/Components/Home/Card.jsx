@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-function Card({ image, text, Heading, Owner }) {
+function Card({ image, text, Heading, Owner , location }) {
   // useState(() => {
   //   AOS.init();
   // }, []);
@@ -82,8 +82,9 @@ function Card({ image, text, Heading, Owner }) {
             comment
           </span>
         </div>
-        <button
+        <a
           type="button"
+          href={location}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-xs sm:text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
         >
           Continue Reading
@@ -100,7 +101,8 @@ function Card({ image, text, Heading, Owner }) {
               clipRule="evenodd"
             ></path>
           </svg>
-        </button>
+          </a>
+        
       </div>
     </motion.div>
   );
