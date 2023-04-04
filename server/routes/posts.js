@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { getPosts, getPostById } = require("../controllers/posts");
+const posts_controller = require("../controllers/posts");
 
 // GET all posts
-router.get("/post", getPosts);
-
-// GET a post by ID
-router.get("/post/:id", getPostById);
+router.route('/').post(posts_controller.readmore);
 
 module.exports = router;

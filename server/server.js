@@ -51,6 +51,9 @@ app.use('/postBlog',require('./routes/CreateBlog'))
 //Explore Page
 app.use('/explore',require('./routes/Explore'))
 
+//read more on blog
+app.use('/readmore',require('./routes/posts'))
+
 
 app.all('*', (req, res) => {
     res.status(404)
