@@ -54,6 +54,14 @@ app.use('/explore',require('./routes/Explore'))
 //read more on blog
 app.use('/readmore',require('./routes/posts'))
 
+//Password Reset
+
+app.use('/sendpasswordlink',require('./routes/resetPass'))
+
+app.use('/forgotpassword/:id/:token',require('./routes/verifyUser'))
+
+app.use('/:id/:token',require('./routes/changePassword'))
+
 
 app.all('*', (req, res) => {
     res.status(404)
