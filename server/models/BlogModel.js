@@ -6,8 +6,8 @@ const BlogSchema=new Schema({
     Topic:String,
     Title:String,
     Image_link:String,
-    Description:String
-
+    Description:String,
+    Content:String,
 
 },{collection:'Blog_Posts'});
 

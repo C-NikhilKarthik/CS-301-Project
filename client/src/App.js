@@ -9,7 +9,8 @@ import Explore from "./pages/Explore";
 import Interests from "./Components/SignUp/Interests";
 import SignUp from "./pages/SignUp";
 import Test from "./pages/Test";
-import Friends from "./pages/Friends" 
+import Friends from "./pages/Friends";
+import BlogSlug from "./pages/BlogSlug";
 
 function App() {
   return (
@@ -19,12 +20,13 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/home" element={<Home />}></Route>
-        <Route path="/createblog" element={<CreateBlog />}></Route>
+        <Route path="/createblog" element={<Test />}></Route>
         <Route path="/demo" element={<Demo />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
         <Route path="/test" element={<Test />}></Route>
         <Route path="/interests" element={<Interests />}></Route>
         <Route path="/friends" element={<Friends />}></Route>
+        <Route path="/slug" element={<BlogSlug />}></Route>
       </Routes>
     </Router>
   );

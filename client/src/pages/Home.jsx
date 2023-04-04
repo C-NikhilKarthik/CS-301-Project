@@ -1,16 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Topbar from "../Components/Home/Topbar";
 import Card from "../Components/Home/Card";
 import SidebarComponent from "../Components/Home/SidebarComponent";
 import Bottombar from "../Components/Home/Bottombar";
 import { Link } from "react-router-dom";
 function Home() {
-
   const [op, Setop] = useState(true);
-
-  const [list,Setlist]=useState([]);
-  const [explore_url,setExplore_url]=useState([])
+  const [list, Setlist] = useState([]);
+  const [explore_url, setExplore_url] = useState([]);
   // const [owner_name,SetOwner_name]=useState('')
 
   // const find_blog_owner=async(owner)=>{
@@ -27,48 +25,41 @@ function Home() {
 
   // }
 
-  const generate_blogs=async(e)=>
-  {
-    const temp_list=[]
+  const generate_blogs = async (e) => {
+    const temp_list = [];
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const email=urlParams.get('email')
-
-    const response=await fetch('/home',{
-      method:'POST',
-      body:JSON.stringify({
-        email_login:email,
+    const email = urlParams.get("email");
+    const response = await fetch("/home", {
+      method: "POST",
+      body: JSON.stringify({
+        email_login: email,
       }),
-      headers:{'Content-type':'application/json'}
-    })
+      headers: { "Content-type": "application/json" },
+    });
 
-    const json=await response.json()
+    const json = await response.json();
 
-    for(let i=0;i<json.all_blogs.length;i++)
-    {
-      temp_list.push(<Card
-        image={"images/bg.jpg"}
-        text={
-          json.all_blogs[i].Post_text
-        }
-        Heading={json.all_blogs[i].Title}
-        Owner={String(json.all_blogs[i]._id)}
-        
-      />)
+    for (let i = 0; i < json.all_blogs.length; i++) {
+      temp_list.push(
+        <Card
+          image={"images/bg.jpg"}
+          text={json.all_blogs[i].Post_text}
+          Heading={json.all_blogs[i].Title}
+          Owner={String(json.all_blogs[i]._id)}
+        />
+      );
     }
 
-    var url=new URL('http://localhost:3000/explore')
-    url.searchParams.set('email',`${email}`)
-    setExplore_url(url)
+    var url = new URL("http://localhost:3000/explore");
+    url.searchParams.set("email", `${email}`);
+    setExplore_url(url);
+    Setlist(temp_list);
+  };
 
-    Setlist(temp_list)
-    
-  }
-
-  useEffect(()=>{
-    generate_blogs()
-  },[])
- 
+  useEffect(() => {
+    generate_blogs();
+  }, []);
 
   function open() {
     document.getElementById("sidebar").style.width = "300px";
@@ -181,8 +172,9 @@ function Home() {
           </div>
           <div className="relative z-[6] text-slate-200 w-full ">
             <Topbar />
+
             <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center pt-28 pb-12">
-             {list}
+              {list}
             </div>
             <Bottombar />
           </div>

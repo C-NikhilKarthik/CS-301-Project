@@ -1,15 +1,13 @@
-const express = require('express');
-const User = require('../models/UserModel');
-const Blog = require('../models/BlogModel');
-const { ObjectId } = require('mongodb');
-const cookieParser = require('cookie-parser');
-
-
+const express = require("express");
+const User = require("../models/UserModel");
+const Blog = require("../models/BlogModel");
+const { ObjectId } = require("mongodb");
+const cookieParser = require("cookie-parser");
 
 const Friends = async (req, res) => {
   const friendName = [];
   // const myObjectIdString = '6427cb7e3bec49434e2c8b68';
-  const userId =req.cookies;
+  const userId = req.cookies;
   console.log(userId);
   // const userId = ObjectId.createFromHexString(myObjectIdString);
   try {
@@ -19,7 +17,7 @@ const Friends = async (req, res) => {
 
     for (let i = 0; i < friends.length; i++) {
       let user_name = await User.findById(friends[i]);
-      friendName.push(user_name.Fname)
+      friendName.push(user_name.Fname);
       // console.log(user_name.Fname)
     }
 
@@ -28,7 +26,7 @@ const Friends = async (req, res) => {
     console.log("Friends list sent");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
