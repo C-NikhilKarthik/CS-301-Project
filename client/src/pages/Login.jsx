@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import InputField from "../Components/InputField";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Login() {
   
@@ -159,6 +160,11 @@ const loginhandle=async(email_l,password_l)=>{
                     <p className="text-slate-400 hover:text-blue-500 cursor-pointer">
                       Forgot your password?
                     </p>
+                    <NavLink to="/password-reset">
+                    <p className="cursor-pointer text-blue-500">
+                      Click here
+                    </p>
+                    </NavLink>
                   </div>
                 </div>
               </motion.div>
