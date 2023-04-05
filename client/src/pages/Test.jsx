@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Switcher from "../Components/Switcher";
 import Footer from "../Components/Main/Footer";
 import ReactQuill from "react-quill";
@@ -9,12 +10,65 @@ import EditorToolbar, {
 } from "../Components/TextEditor/EditorToolbar";
 import Demo from "../pages/Demo";
 
+const API_KEY = "8937380685439ac2333494366b96ed7c90cf1468";
+const URL = "https://api-ssl.bitly.com/v4/shorten";
+
 function Test() {
-  const [state, setState] = React.useState({ value: null });
+  const [state, setState] = useState({ value: null });
+  const [send, setSend] = useState({ value: null });
   const handleChange = (value) => {
     setState({ value });
+    // console.log(state.value);
   };
-  console.log(state.value);
+
+  const replaceImage = async () => {
+    const imageIndex = state.value.indexOf("<img src=");
+    // console.log(imageIndex);
+    if (imageIndex !== -1) {
+      const startIndex = state.value.lastIndexOf("<p>", imageIndex);
+      const endIndex = state.value.indexOf("</p>", imageIndex) + 4;
+      const imageTag = state.value.slice(startIndex, endIndex);
+      const srcIndex = imageTag.indexOf("src=") + 5;
+      const srcEndIndex = imageTag.indexOf('"', srcIndex);
+      const baseUrlImage = imageTag.slice(srcIndex, srcEndIndex);
+      console.log(baseUrlImage);
+      const url = await shortenUrl(baseUrlImage);
+      console.log(url);
+    }
+  };
+
+  const shortenUrl = async (longUrl) => {
+    const response = await axios.post(
+      URL,
+      {
+        long_url: longUrl,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({long_url:longUrl}),
+      }
+    );
+  
+    return response.data.link;
+  };
+
+  const submitBlog = async (e) => {
+    e.preventDefault();
+    replaceImage();
+    const response = await fetch("/htmlBlog", {
+      method: "POST",
+      body: JSON.stringify({
+        state: send,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+    const json2 = response.json();
+    console.log(json2);
+  };
+
   return (
     <div className="w-full min-h-[100vh] bg-slate-200 dark:bg-slate-900">
       <div className="w-full p-3">
@@ -44,19 +98,24 @@ function Test() {
       {/* Demo of the blog  */}
       <div className="w-full p-6 flex justify-center">
         <div className="w-full dark:text-slate-300 md:w-2/3 lg:w-3/5 flex flex-col p-3 gap-4 rounded">
-          <h1 className="text-slate-800 dark:bg-slate-300 text-xl font-semibold">Preview</h1>
+          <h1 className="text-slate-800 dark:bg-slate-300 text-xl font-semibold">
+            Preview
+          </h1>
           <div className="w-full flex h-[30rem]">
             <Demo Data={state.value} />
           </div>
-          <EditorToolbar />
-          <ReactQuill
-            theme="snow"
-            value={state.value}
-            onChange={handleChange}
-            placeholder={"Write something awesome..."}
-            modules={modules}
-            formats={formats}
-          />
+          <form onSubmit={submitBlog}>
+            <EditorToolbar />
+            <ReactQuill
+              theme="snow"
+              value={state.value}
+              onChange={handleChange}
+              placeholder={"Write something awesome..."}
+              modules={modules}
+              formats={formats}
+            />
+            <button type="submit"> Create Blog</button>
+          </form>
         </div>
       </div>
       <Footer />
