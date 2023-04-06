@@ -2,7 +2,7 @@ import React from "react";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 function Demo({ Data }) {
-  console.log(Data)
+  // console.log(Data)
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
   var time = today.toUTCString();

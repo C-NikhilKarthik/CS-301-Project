@@ -48,6 +48,9 @@ app.use('/home',require('./routes/Home'))
 //PostBlog
 app.use('/postBlog',require('./routes/CreateBlog'))
 
+//PostBlogHTML
+app.use('/htmlBlog',require('./routes/CreateBlogHtml'))
+
 //Explore Page
 app.use('/explore',require('./routes/Explore'))
 
