@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Switcher from "../Components/Switcher";
 import Footer from "../Components/Main/Footer";
 import ReactQuill from "react-quill";
@@ -10,49 +10,63 @@ import EditorToolbar, {
 } from "../Components/TextEditor/EditorToolbar";
 import Demo from "../pages/Demo";
 
-const API_KEY = "8937380685439ac2333494366b96ed7c90cf1468";
-const URL = "https://api-ssl.bitly.com/v4/shorten";
+// const API_KEY = "8937380685439ac2333494366b96ed7c90cf1468";
+// const URL = "https://api-ssl.bitly.com/v4/shorten";
 
 function Test() {
   const [state, setState] = useState({ value: null });
-  const [send, setSend] = useState({ value: null });
+  const [message,setMessage]=useState('')
   const handleChange = (value) => {
     setState({ value });
     // console.log(state.value);
   };
 
   const replaceImage = async () => {
-    const imageIndex = state.value.indexOf("<img src=");
-    // console.log(imageIndex);
-    if (imageIndex !== -1) {
-      const startIndex = state.value.lastIndexOf("<p>", imageIndex);
-      const endIndex = state.value.indexOf("</p>", imageIndex) + 4;
-      const imageTag = state.value.slice(startIndex, endIndex);
-      const srcIndex = imageTag.indexOf("src=") + 5;
-      const srcEndIndex = imageTag.indexOf('"', srcIndex);
-      const baseUrlImage = imageTag.slice(srcIndex, srcEndIndex);
-      console.log(baseUrlImage);
-      const url = await shortenUrl(baseUrlImage);
-      console.log(url);
-    }
-  };
-
-  const shortenUrl = async (longUrl) => {
-    const response = await axios.post(
-      URL,
-      {
-        long_url: longUrl,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body:JSON.stringify({long_url:longUrl}),
+    let count = 0;
+    let modified = false; // Flag to indicate if any replacement was made
+    do {
+      console.log('hiii from client')
+      modified = false;
+      const imageIndex = state.value.indexOf("<img src=", count);
+      if (imageIndex !== -1) {
+        modified = true;
+        const startIndex = state.value.lastIndexOf("<p>", imageIndex);
+        const endIndex = state.value.indexOf("</p>", imageIndex) + 4;
+        const imageTag = state.value.slice(startIndex, endIndex);
+        const srcIndex = imageTag.indexOf("src=") + 5;
+        const srcEndIndex = imageTag.indexOf('"', srcIndex);
+        const baseUrlImage = imageTag.slice(srcIndex, srcEndIndex);
+        const cloudinaryUrl = await uploadOnCloudinary(baseUrlImage);
+        const replacedImageTag = imageTag.replace(baseUrlImage, cloudinaryUrl);
+        state.value = state.value.slice(0, startIndex) +
+          replacedImageTag +
+          state.value.slice(endIndex);
       }
-    );
+      count = imageIndex + 1; // Update count to the next character after the image tag
+    } while (modified && count < state.value.length);
+    console.log(state.value);
+  };
   
-    return response.data.link;
+  
+
+  const uploadOnCloudinary = async (pic) => {
+    const data = new FormData();
+    data.append("file", pic);
+    data.append("upload_preset", "tkjwrmag");
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/da7gxivyc/image/upload",
+        {
+          method: "post",
+          body: data,
+        }
+      );
+      const responseData = await response.json();
+      return responseData.secure_url;
+    } catch (error) {
+      console.log("Not uploaded in cloudinary");
+    }
   };
 
   const submitBlog = async (e) => {
@@ -61,12 +75,18 @@ function Test() {
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({
-        state: send,
+        state,
       }),
       headers: { "Content-type": "application/json" },
     });
     const json2 = response.json();
-    console.log(json2);
+    if (json2.err === "FAILED") {
+      setMessage(json2.msg);
+    }
+    else{
+      // var hrefUrl=new URL('http://localhost:3000/home')
+      // window.location.replace(hrefUrl)
+    }
   };
 
   return (
@@ -114,6 +134,9 @@ function Test() {
               modules={modules}
               formats={formats}
             />
+            {message &&(
+                    <p className="text-red-500 text-xs">{message}</p>
+                  )}
             <button type="submit"> Create Blog</button>
           </form>
         </div>
