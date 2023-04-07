@@ -5,6 +5,7 @@ import FriendsDrawer from "./FriendsDrawer";
 import ProfileDrawer from "./ProfileDrawer";
 
 function Topbar() {
+
   return (
     <div className="absolute top-0 sm:gap-0 gap-4 z-10 w-full bg-slate-200/50 dark:bg-slate-900/75 justify-between backdrop-blur-md backdrop-filter py-3 border-b-[1px] items-center px-4 border-slate-600 flex sm:flex-row flex-col ">
       <p className="text-slate-700 dark:text-slate-200 sm:w-auto w-full text-start text-lg whitespace-nowrap sm:text-2xl font-semibold">
