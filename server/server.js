@@ -65,6 +65,14 @@ app.use('/forgotpassword/:id/:token',require('./routes/verifyUser'))
 
 app.use('/:id/:token',require('./routes/changePassword'))
 
+//search friends
+app.use('/searchFriends',require('./routes/searchFriends'));
+
+//add Friends
+app.use('/addFriends',require('./routes/AddFriend'));
+
+//remove Friends
+app.use('/removeFriends',require('./routes/RemoveFriends'));
 
 app.all('*', (req, res) => {
     res.status(404)
