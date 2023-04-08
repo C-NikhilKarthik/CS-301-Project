@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import Main from "./pages/Main";
 import LoginPage from "./pages/Login";
 // import CreateBlog from "./pages/CreateBlog";
@@ -14,6 +14,7 @@ import BlogSlug from "./pages/BlogSlug";
 import PasswordReset from "./pages/PasswordReset";
 import ForgotPassword from "./pages/ForgotPassword";
 import SearchFriend from "./pages/SearchFriend";
+import HOME from "./pages/HOME";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Route exact path="/" element={<Main />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/home" element={<HOME />}></Route>
         <Route path="/createblog" element={<Test />}></Route>
         <Route path="/demo" element={<Demo />}></Route>
         <Route path="/explore" element={<Explore />}></Route>

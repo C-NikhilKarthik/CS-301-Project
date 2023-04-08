@@ -9,6 +9,8 @@ function Home() {
   const [op, Setop] = useState(true);
   const [list, Setlist] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
+
+
   // const [owner_name,SetOwner_name]=useState('')
 
   // const find_blog_owner=async(owner)=>{
@@ -178,7 +180,6 @@ function Home() {
           </div>
           <div className="relative z-[6] text-slate-200 w-full ">
             <Topbar />
-
             <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center pt-28 pb-12">
               {list}
             </div>
