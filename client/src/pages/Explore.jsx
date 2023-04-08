@@ -152,9 +152,9 @@ const [home_url,Sethome_url]=useState('')
                 </button>
               </div>
             )}
-            <Link to={home_url} className="w-full">
+            <a href={home_url} className="w-full">
               <SidebarComponent op={op} image={"Home"} text={"Home"} />
-            </Link>
+            </a>
             <SidebarComponent
               op={op}
               select={true}

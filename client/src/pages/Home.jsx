@@ -50,7 +50,7 @@ function Home() {
           image={"images/bg.jpg"}
           text={json.all_blogs[i].Post_text}
           Heading={json.all_blogs[i].Title}
-          Owner={String(json.all_blogs[i].Owner)}
+          Owner={String(json.all_owners[i])}
           location={blog_url}
         />
       );
@@ -65,7 +65,7 @@ function Home() {
 
   useEffect(() => {
     generate_blogs();
-  }, []);
+  },[]);
 
   function open() {
     document.getElementById("sidebar").style.width = "300px";
@@ -148,9 +148,9 @@ function Home() {
               image={"Home"}
               text={"Home"}
             />
-            <Link to={explore_url} className="w-full" >
+            <a href={explore_url} className="w-full" >
               <SidebarComponent op={op} image={"Explore"} text={"Explore"} />
-            </Link>
+            </a>
             <SidebarComponent op={op} image={"Chat"} text={"Messages"} />
             <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
             <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
