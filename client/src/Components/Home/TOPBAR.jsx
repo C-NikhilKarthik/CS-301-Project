@@ -33,7 +33,7 @@ function TOPBAR() {
     <div
       className={`sticky ${
         scrollDirection === "down" ? "-translate-y-[100%]" : "translate-y-0"
-      } top-0 z-20 bg-slate-800/60 rounded-md backdrop-blur-md transition-all w-full duration-500`}
+      } top-0 z-20 bg-slate-300/60 dark:bg-slate-800/60 rounded-md backdrop-blur-md transition-all w-full duration-500`}
     >
       <nav className="w-full py-2 px-6 sm:px-12 flex justify-between">
         <form class="flex items-center">

@@ -2,7 +2,7 @@ import React from "react";
 
 function Loading() {
   return (
-    <div className="w-screen h-screen flex justify-center flex-col items-center bg-slate-900">
+    <div className="w-screen h-screen items-center justify-center overflow-hidden flex flex-col bg-bg2 bg-cover bg-center bg-fixed ">
       <div className="center">
         <div className="wave"></div>
         <div className="wave"></div>

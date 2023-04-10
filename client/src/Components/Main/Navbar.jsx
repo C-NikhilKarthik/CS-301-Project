@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Logo from "../../assets/Logo.png";
 import { TbGridDots } from "react-icons/tb";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { HiHome } from "react-icons/hi";
+import { MdExplore } from "react-icons/md";
 import Switcher from "../Switcher";
 import Modal from "../Home/Modal";
 
-function Navbar({ logo }) {
+function Navbar({ logo, explore_url, home_url }) {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
@@ -16,6 +18,40 @@ function Navbar({ logo }) {
         TheBlogPenn
       </p>
       <div className="flex gap-4 text-3xl items-center">
+        {home_url ? (
+          <a
+            href={home_url}
+            className="cursor-pointer flex py-2 px-3 z-10 rounded-full border-2 border-slate-300  gap-4 text-base items-center"
+          >
+            <HiHome />
+            <div>Home</div>
+          </a>
+        ) : (
+          <a
+            href={home_url}
+            className="cursor-pointer flex py-2 px-3 z-10 rounded-full border-2 border-blue-500 bg-blue-400/40 gap-4 text-base items-center"
+          >
+            <HiHome />
+            <div>Home</div>
+          </a>
+        )}
+        {explore_url ? (
+          <a
+            href={explore_url}
+            className="cursor-pointer flex py-2 px-3 z-10 rounded-full border-2 border-slate-300  gap-4 text-base items-center"
+          >
+            <MdExplore />
+            <div>Explore</div>
+          </a>
+        ) : (
+          <a
+            href={explore_url}
+            className="cursor-pointer flex py-2 px-3 z-10 rounded-full border-2 border-blue-500 bg-blue-400/40 gap-4 text-base items-center"
+          >
+            <MdExplore />
+            <div>Explore</div>
+          </a>
+        )}
         <Switcher />
         <button
           onClick={() => setIsOpen(true)}

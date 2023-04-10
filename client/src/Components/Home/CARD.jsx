@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { IoIosShare,IoIosChatbubbles } from "react-icons/io";
 function CARD({ image, text, Heading, Owner, location }) {
   return (
-    <div className="w-full rounded p-4 bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
+    <div className="w-full rounded p-4 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
       <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-12 aspect-square rounded-full" />
       <div className="flex flex-col w-full">
         <div className="flex justify-between items-center">

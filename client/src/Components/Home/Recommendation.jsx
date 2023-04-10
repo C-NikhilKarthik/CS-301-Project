@@ -2,7 +2,7 @@ import React from "react";
 
 function Recommendation() {
   return (
-    <div className="bg-slate-400 text-slate-800 dark:text-slate-200 dark:bg-slate-800 rounded-md gap-4 w-full p-6 flex flex-col">
+    <div className="bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-sm text-slate-800 dark:text-slate-200 rounded-md gap-4 w-full p-6 flex flex-col">
       <p>Recommended</p>
       <div className="flex gap-4 justify-between items-center">
         <div className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 h-14 aspect-square rounded-full" />
