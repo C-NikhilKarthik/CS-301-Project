@@ -40,7 +40,7 @@ function Navbar({ logo }) {
         </div>
         <TbGridDots />
         <Modal isOpen={isOpen} handleClose={handleClose}>
-          <p className="text-lg text-black">Modal content goes here.</p>
+          <p className="text-lg">Modal content goes here.</p>
         </Modal>
       </div>
     </nav>

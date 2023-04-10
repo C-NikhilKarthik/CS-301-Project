@@ -31,9 +31,9 @@ function TOPBAR() {
 
   return (
     <div
-      className={`absolute ${
+      className={`sticky ${
         scrollDirection === "down" ? "-translate-y-[100%]" : "translate-y-0"
-      } top-0 bg-slate-800/60 rounded-md backdrop-blur-md transition-all w-full duration-500`}
+      } top-0 z-20 bg-slate-800/60 rounded-md backdrop-blur-md transition-all w-full duration-500`}
     >
       <nav className="w-full py-2 px-6 sm:px-12 flex justify-between">
         <form class="flex items-center">
@@ -59,7 +59,7 @@ function TOPBAR() {
             <input
               type="text"
               id="voice-search"
-              class="bg-gray-50 text-gray-900 outline-none text-sm rounded-lg  block w-full pl-10 p-2.5  dark:bg-gray-700 "
+              class="bg-gray-50 text-gray-900 dark:text-slate-200 outline-none text-sm rounded-lg  block w-full pl-10 p-2.5  dark:bg-gray-700 "
               placeholder="Search Blogs..."
               required
             />

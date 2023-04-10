@@ -2,7 +2,7 @@ import React from "react";
 
 function ProfileCard() {
   return (
-    <div className="w-full flex flex-col items-center rounded-md overflow-hidden bg-slate-800">
+    <div className="w-full flex flex-col items-center rounded-md overflow-hidden bg-slate-400 dark:bg-slate-800">
       <div className='relative mb-12 flex justify-center w-full h-20 bg-[url("https://e1.pxfuel.com/desktop-wallpaper/151/445/desktop-wallpaper-flex-banner-backgrounds-design-scrapheap-challenge-com-brilliant-banner-backgrounds.jpg")]'>
         <div className="absolute bottom-0 h-16 w-16 bg-gradient-to-r translate-y-[50%] from-pink-500 via-red-500 to-yellow-500 rounded-full"></div>
       </div>
@@ -19,7 +19,7 @@ function ProfileCard() {
             <p className="text-sm text-slate-500">Followers</p>
         </div>
       </div>
-      <button className="py-8 text-sm font-semibold transition-[background-color] text-blue-500 hover:bg-slate-700 w-full">
+      <button className="py-8 text-sm font-semibold transition-[background-color] text-blue-700 dark:text-blue-500 hover:bg-slate-500/40 dark:hover:bg-slate-700 w-full">
         My Profile
       </button>
     </div>

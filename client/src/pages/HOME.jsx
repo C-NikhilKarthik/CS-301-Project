@@ -51,19 +51,19 @@ function HOME() {
   }, []);
   return (
     <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://tailwindcss.com/_next/static/media/0.2a25f0af.jpg')] dark:bg-[url('https://tailwindcss.com/_next/static/media/8-dark@tinypng.7abc66a1.png')] bg-cover bg-center bg-fixed ">
-            <div className="absolute inset-0 h-full w-full gridblock"></div>
+      <div className="absolute inset-0 h-full w-full gridblock"></div>
 
       <Navbar />
       <div className="flex h-full px-8 gap-8 z-[5]">
-        <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-100 text-lg">
+        <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
           <ProfileCard />
           <Recommendation />
         </div>
-        <div className="relative py-16 rounded-md mb-8 flex flex-col items-center  gap-6 w-full overflow-y-scroll">
+        <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center  gap-6 w-full overflow-y-scroll">
           <TOPBAR />
           {list}
         </div>
-        <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md text-slate-100 bg-slate-800 p-4">
+        <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md text-slate-100 bg-slate-400 dark:bg-slate-800 p-4">
           <p>Notifications</p>
         </div>
       </div>

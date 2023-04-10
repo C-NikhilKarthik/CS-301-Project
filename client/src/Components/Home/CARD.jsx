@@ -4,17 +4,17 @@ import { FaHeart } from "react-icons/fa";
 import { IoIosShare,IoIosChatbubbles } from "react-icons/io";
 function CARD({ image, text, Heading, Owner, location }) {
   return (
-    <div className="w-full rounded p-4 bg-slate-800/40 backdrop-blur-md text-slate-200 flex gap-3">
+    <div className="w-full rounded p-4 bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
       <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-12 aspect-square rounded-full" />
       <div className="flex flex-col w-full">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
             <p className="text-xl font-semibold">{Owner}</p>
-            <p className="text-sm text-slate-500">@elonmusk</p>
+            <p className="text-sm text-slate-700 dark:text-slate-500">@elonmusk</p>
           </div>
           <FiMoreHorizontal className="text-2xl" />
         </div>
-        <div className="text-slate-500 text-sm">8th April, 2023</div>
+        <div className="text-slate-700 dark:text-slate-500 text-sm">8th April, 2023</div>
 
         <div className="grid grid-cols-[2fr_3fr] mt-5 gap-3">
           <img
@@ -30,15 +30,15 @@ function CARD({ image, text, Heading, Owner, location }) {
         </div>
         <div className="flex items-center pt-4 justify-between">
           <div className="flex items-center gap-4">
-            <div className="bg-slate-700 rounded-md p-3 flex items-center gap-3">
+            <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <FaHeart />
               Like
             </div>
-            <div className="bg-slate-700 rounded-md p-3 flex items-center gap-3">
+            <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosShare />
               Share
             </div>
-            <div className="bg-slate-700 rounded-md p-3 flex items-center gap-3">
+            <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosChatbubbles />
               Comment
             </div>
