@@ -1,202 +1,202 @@
-import { motion, AnimatePresence } from "framer-motion";
-import React, { useState ,useEffect} from "react";
-import Topbar from "../Components/Home/Topbar";
-import Card from "../Components/Home/Card";
-import SidebarComponent from "../Components/Home/SidebarComponent";
-import Bottombar from "../Components/Home/Bottombar";
-import { Link } from "react-router-dom";
+// import { motion, AnimatePresence } from "framer-motion";
+// import React, { useState ,useEffect} from "react";
+// // import Topbar from "../Components/Home/Topbar";
+// // import Card from "../Components/Home/Card";
+// import SidebarComponent from "../Components/Home/SidebarComponent";
+// import Bottombar from "../Components/Home/Bottombar";
+// import { Link } from "react-router-dom";
 
-function Explore() {
-  const [op, Setop] = useState(true);
-  const [list,Setlist]=useState([]);
-const [home_url,Sethome_url]=useState('')
+// function Explore() {
+//   const [op, Setop] = useState(true);
+//   const [list,Setlist]=useState([]);
+// const [home_url,Sethome_url]=useState('')
 
-//   function shuffle(blogs)
-// {
-//     const seen=new Set()
-//     const arr=[]
-//     for(let i=0;i<blogs.length;i++)
+// //   function shuffle(blogs)
+// // {
+// //     const seen=new Set()
+// //     const arr=[]
+// //     for(let i=0;i<blogs.length;i++)
+// //     {
+// //         let index=Math.floor(Math.random()*blogs.length)
+// //         if(!seen.has())
+// //         {
+// //             arr.push(blogs[index])
+
+// //         }
+// //     }
+// //     return arr
+// // }
+
+//   const generate_blogs=async(state)=>
+//   {
+
+//     const temp_list=[]
+//     const queryString = window.location.search;
+//     const urlParams = new URLSearchParams(queryString);
+//     const email=urlParams.get('email')
+
+//     const response=await fetch('/explore',{
+//       method:'POST',
+//       body:JSON.stringify({
+//         email_login:email,
+//       }),
+//       headers:{'Content-type':'application/json'}
+      
+//     })
+
+//     const json=await response.json()
+
+//     const shuffled_blogs=json.all_blogs
+
+//     for(let i=0;i<shuffled_blogs.length;i++)
 //     {
-//         let index=Math.floor(Math.random()*blogs.length)
-//         if(!seen.has())
-//         {
-//             arr.push(blogs[index])
-
+//       temp_list.push(<Card
+//         image={"images/bg.jpg"}
+//         text={
+//           shuffled_blogs[i].Post_text
 //         }
+//         Heading={shuffled_blogs[i].Title}
+//         Owner={String(shuffled_blogs[i]._id)}
+        
+//       />)
 //     }
-//     return arr
+
+//     var url=new URL('http://localhost:3000/home')
+//     url.searchParams.set('email',`${email}`)
+//     Sethome_url(url)
+//     Setlist(temp_list)
+    
+//   }
+
+//   useEffect(()=>{
+//     generate_blogs()
+//   },[])
+
+//   // function go_home()
+//   // {
+//   //   window.location.replace('/home')
+//   // }
+  
+//   function open() {
+//     document.getElementById("sidebar").style.width = "300px";
+//   }
+//   function close() {
+//     document.getElementById("sidebar").style.width = "4rem";
+//   }
+//   return (
+//     <div className='w-screen h-screen bg-[url("https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg")] bg-cover bg-bottom'>
+//       <div className="z-[2] w-full h-full overflow-hidden">
+//         <div className="relative flex  w-full h-full overflow-hidden">
+//           <div className="z-[1] absolute inset-0 gridblock"></div>
+//           <div
+//             id="sidebar"
+//             className="z-[3] hidden border-r-[1px] border-slate-600 transition-[width] px-3 duration-500 relative h-full w-[300px] bg-slate-900 lg:flex flex-col items-center py-4"
+//           >
+//             {!op && (
+//               <div className="flex w-full justify-end">
+//                 <button
+//                   onClick={() => {
+//                     open();
+//                     Setop(true);
+//                   }}
+//                   data-collapse-toggle="navbar-hamburger"
+//                   type="button"
+//                   className="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+//                   aria-controls="navbar-hamburger"
+//                   aria-expanded="false"
+//                 >
+//                   <span className="sr-only">Open main menu</span>
+//                   <svg
+//                     className="w-6 h-6"
+//                     aria-hidden="true"
+//                     fill="currentColor"
+//                     viewBox="0 0 20 20"
+//                     xmlns="http://www.w3.org/2000/svg"
+//                   >
+//                     <path
+//                       fillRule="evenodd"
+//                       d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+//                       clipRule="evenodd"
+//                     ></path>
+//                   </svg>
+//                 </button>
+//               </div>
+//             )}
+//             {op && (
+//               <div className="flex w-full justify-end">
+//                 <button
+//                   onClick={() => {
+//                     close();
+//                     Setop(false);
+//                   }}
+//                   data-collapse-toggle="navbar-hamburger"
+//                   type="button"
+//                   className="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+//                   aria-controls="navbar-hamburger"
+//                   aria-expanded="false"
+//                 >
+//                   <span className="sr-only">Open main menu</span>
+//                   <svg
+//                     aria-hidden="true"
+//                     className="w-5 h-5"
+//                     fill="currentColor"
+//                     viewBox="0 0 20 20"
+//                     xmlns="http://www.w3.org/2000/svg"
+//                   >
+//                     <path
+//                       fillRule="evenodd"
+//                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+//                       clipRule="evenodd"
+//                     ></path>
+//                   </svg>
+//                 </button>
+//               </div>
+//             )}
+//             <Link to={home_url} className="w-full">
+//               <SidebarComponent op={op} image={"Home"} text={"Home"} />
+//             </Link>
+//             <SidebarComponent
+//               op={op}
+//               select={true}
+//               image={"Explore"}
+//               text={"Explore"}
+//             />
+//             <SidebarComponent op={op} image={"Chat"} text={"Messages"} />
+//             <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
+//             <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
+//             <div className="flex px-1 w-full">
+//               <Link to="/createblog" className="w-full">
+//                 <motion.button className="bg-blue-600 gap-2 w-full flex items-center hover:bg-blue-500 text-slate-200 rounded-full border-none focus:outline-none">
+//                   <span className="cursor-pointer p-1 peer-focus:text-white text-gray-400 material-symbols-outlined">
+//                     Add
+//                   </span>
+//                   <AnimatePresence>
+//                     {op && (
+//                       <motion.p
+//                         animate={{ opacity: 1, duration: 1 }}
+//                         initial={{ opacity: 0 }}
+//                         layout
+//                         className="whitespace-nowrap w-full flex"
+//                       >
+//                         Create Blog
+//                       </motion.p>
+//                     )}
+//                   </AnimatePresence>
+//                 </motion.button>
+//               </Link>
+//             </div>
+//           </div>
+//           <div className="relative z-[6] text-slate-200 w-full ">
+//             <Topbar />
+//             <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center pt-28 pb-12">
+//               {list}
+//             </div>
+//             <Bottombar />
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
 // }
 
-  const generate_blogs=async(state)=>
-  {
-
-    const temp_list=[]
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const email=urlParams.get('email')
-
-    const response=await fetch('/explore',{
-      method:'POST',
-      body:JSON.stringify({
-        email_login:email,
-      }),
-      headers:{'Content-type':'application/json'}
-      
-    })
-
-    const json=await response.json()
-
-    const shuffled_blogs=json.all_blogs
-
-    for(let i=0;i<shuffled_blogs.length;i++)
-    {
-      temp_list.push(<Card
-        image={"images/bg.jpg"}
-        text={
-          shuffled_blogs[i].Post_text
-        }
-        Heading={shuffled_blogs[i].Title}
-        Owner={String(shuffled_blogs[i]._id)}
-        
-      />)
-    }
-
-    var url=new URL('http://localhost:3000/home')
-    url.searchParams.set('email',`${email}`)
-    Sethome_url(url)
-    Setlist(temp_list)
-    
-  }
-
-  useEffect(()=>{
-    generate_blogs()
-  },[])
-
-  // function go_home()
-  // {
-  //   window.location.replace('/home')
-  // }
-  
-  function open() {
-    document.getElementById("sidebar").style.width = "300px";
-  }
-  function close() {
-    document.getElementById("sidebar").style.width = "4rem";
-  }
-  return (
-    <div className='w-screen h-screen bg-[url("https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg")] bg-cover bg-bottom'>
-      <div className="z-[2] w-full h-full overflow-hidden">
-        <div className="relative flex  w-full h-full overflow-hidden">
-          <div className="z-[1] absolute inset-0 gridblock"></div>
-          <div
-            id="sidebar"
-            className="z-[3] hidden border-r-[1px] border-slate-600 transition-[width] px-3 duration-500 relative h-full w-[300px] bg-slate-900 lg:flex flex-col items-center py-4"
-          >
-            {!op && (
-              <div className="flex w-full justify-end">
-                <button
-                  onClick={() => {
-                    open();
-                    Setop(true);
-                  }}
-                  data-collapse-toggle="navbar-hamburger"
-                  type="button"
-                  className="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                  aria-controls="navbar-hamburger"
-                  aria-expanded="false"
-                >
-                  <span className="sr-only">Open main menu</span>
-                  <svg
-                    className="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            )}
-            {op && (
-              <div className="flex w-full justify-end">
-                <button
-                  onClick={() => {
-                    close();
-                    Setop(false);
-                  }}
-                  data-collapse-toggle="navbar-hamburger"
-                  type="button"
-                  className="h-min inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                  aria-controls="navbar-hamburger"
-                  aria-expanded="false"
-                >
-                  <span className="sr-only">Open main menu</span>
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            )}
-            <Link to={home_url} className="w-full">
-              <SidebarComponent op={op} image={"Home"} text={"Home"} />
-            </Link>
-            <SidebarComponent
-              op={op}
-              select={true}
-              image={"Explore"}
-              text={"Explore"}
-            />
-            <SidebarComponent op={op} image={"Chat"} text={"Messages"} />
-            <SidebarComponent op={op} image={"Bookmarks"} text={"Bookmarks"} />
-            <SidebarComponent op={op} image={"Settings"} text={"Settings"} />
-            <div className="flex px-1 w-full">
-              <Link to="/createblog" className="w-full">
-                <motion.button className="bg-blue-600 gap-2 w-full flex items-center hover:bg-blue-500 text-slate-200 rounded-full border-none focus:outline-none">
-                  <span className="cursor-pointer p-1 peer-focus:text-white text-gray-400 material-symbols-outlined">
-                    Add
-                  </span>
-                  <AnimatePresence>
-                    {op && (
-                      <motion.p
-                        animate={{ opacity: 1, duration: 1 }}
-                        initial={{ opacity: 0 }}
-                        layout
-                        className="whitespace-nowrap w-full flex"
-                      >
-                        Create Blog
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </motion.button>
-              </Link>
-            </div>
-          </div>
-          <div className="relative z-[6] text-slate-200 w-full ">
-            <Topbar />
-            <div className="relative sm:px-0 px-2 w-full h-full overflow-y-auto flex flex-col gap-8 items-center pt-28 pb-12">
-              {list}
-            </div>
-            <Bottombar />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Explore;
+// export default Explore;

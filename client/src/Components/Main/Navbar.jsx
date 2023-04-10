@@ -12,7 +12,7 @@ function Navbar({ logo }) {
   };
   return (
     <nav className="py-6 px-8 flex justify-between w-full text-white text-2xl items-center">
-      <p className=" font-semibold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-transparent cursor-pointer">
+      <p className="flex font-semibold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-transparent cursor-pointer">
         TheBlogPenn
       </p>
       <div className="flex gap-4 text-3xl items-center">
