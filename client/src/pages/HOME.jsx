@@ -53,12 +53,12 @@ function HOME() {
     <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
       <div className="absolute inset-0 h-full w-full gridblock"></div>
       <Navbar explore_url={explore_url}/>
-      <div className="flex h-full px-8 gap-8 z-[5]">
+      <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
         <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
           <ProfileCard />
           <Recommendation />
         </div>
-        <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-y-scroll">
+        <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
           <TOPBAR />
           {list}
         </div>

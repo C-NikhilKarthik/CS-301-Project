@@ -12,7 +12,7 @@ function Teammates() {
       <div className="w-full flex justify-center py-10 text-blue-400">
         <p className="text-2xl font-semibold ">Contributors</p>
       </div>
-      <div className="w-full z-[1] lg:px-[8rem] sm:grid sm:gap-3 sm:grid-cols-3">
+      <div className="w-full z-[1] flex flex-col gap-3 p-2 lg:px-[8rem] sm:grid sm:gap-3 sm:grid-cols-3">
         <div className="w-full h-full flex-col flex gap-3 dark:text-slate-400">
           <div data-aos="fade-right" data-aos-duration="300">
             <Teamcard name={"Avaneesh Sundarajan"} task={"Backend"} />
