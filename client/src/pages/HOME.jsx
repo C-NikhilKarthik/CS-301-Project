@@ -56,7 +56,7 @@ function HOME() {
       <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
         <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
           <ProfileCard />
-          <Recommendation />
+          {/* <Recommendation /> */}
         </div>
         <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
           <TOPBAR />
