@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Main/Navbar";
-import { HiHome } from "react-icons/hi";
+// import { HiHome } from "react-icons/hi";
 import TOPBAR from "../Components/Home/TOPBAR";
 import ProfileCard from "../Components/Home/ProfileCard";
 import Recommendation from "../Components/Home/Recommendation";
 import CARD from "../Components/Home/CARD";
+import Loading from './Loading.jsx'
 
 function Explore() {
   const [list, Setlist] = useState([]);
   const [home_url, Sethome_url] = useState("");
   const [yourblogs_url, setYourblogs_url] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  
 
   //   function shuffle(blogs)
   // {
@@ -28,6 +31,7 @@ function Explore() {
   // }
 
   const generate_blogs = async (state) => {
+    setIsLoading(true);
     const temp_list = [];
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -64,6 +68,8 @@ function Explore() {
     var url2 = new URL("http://localhost:3000/yourblogs");
     url2.searchParams.set("email", `${email}`);
     setYourblogs_url(url2)
+    setIsLoading(false) ;
+
   };
 
   useEffect(() => {
@@ -71,7 +77,8 @@ function Explore() {
   }, []);
 
   return (
-    <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+    <>{isLoading?(<Loading/>):(
+      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
       <div className="absolute inset-0 h-full w-full gridblock"></div>
       <Navbar home_url={home_url} yourblogs_url={yourblogs_url}/>
       <div className="flex h-full px-8 gap-8 z-[5]">
@@ -88,6 +95,8 @@ function Explore() {
         </div>
       </div>
     </div>
+    )}</>
+    
   );
 }
 

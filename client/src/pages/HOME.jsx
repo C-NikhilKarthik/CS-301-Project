@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Main/Navbar";
-import { HiHome } from "react-icons/hi";
+// import { HiHome } from "react-icons/hi";
 import TOPBAR from "../Components/Home/TOPBAR";
 import ProfileCard from "../Components/Home/ProfileCard";
-import Recommendation from "../Components/Home/Recommendation";
+// import Recommendation from "../Components/Home/Recommendation";
 import CARD from "../Components/Home/CARD";
+import Loading from './Loading.jsx'
+
+
 function HOME() {
   const [list, Setlist] = useState([]);
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [originallist, SetOriginal] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const generate_blogs = async (e) => {
+    setIsLoading(true);
     const temp_list = [];
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -40,6 +45,7 @@ function HOME() {
           location={blog_url}
         />
       );
+      setIsLoading(false) ;
     }
 
     var url = new URL("http://localhost:3000/explore");
@@ -96,7 +102,10 @@ function HOME() {
     generate_blogs();
   }, []);
   return (
-    <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+    <>
+    {isLoading ? (<Loading/>):
+    (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+      
       <div className="absolute inset-0 h-full w-full gridblock"></div>
       <Navbar explore_url={explore_url} yourblogs_url={yourblogs_url} />
       <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
@@ -112,7 +121,8 @@ function HOME() {
           <p>Notifications</p>
         </div>
       </div>
-    </div>
+    </div>)}
+    </>
   );
 }
 
