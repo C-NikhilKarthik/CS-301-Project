@@ -26,9 +26,14 @@ function useScrollDirection() {
   return scrollDirection;
 }
 
-function TOPBAR() {
+function TOPBAR(props) {
   const scrollDirection = useScrollDirection();
+  const [Search_query,SetSearch_query]=React.useState('')
 
+  function handle_search_home()
+  {
+    props.handle_search(Search_query)
+  }
   return (
     <div
       className={`sticky ${
@@ -61,6 +66,7 @@ function TOPBAR() {
               id="voice-search"
               class="bg-gray-50 text-gray-900 dark:text-slate-200 outline-none text-sm rounded-lg  block w-full pl-10 p-2.5  dark:bg-gray-700 "
               placeholder="Search Blogs..."
+              onChange={(e)=>SetSearch_query(e.target.value)}
               required
             />
             <button
@@ -83,7 +89,8 @@ function TOPBAR() {
             </button>
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={handle_search_home}
             class="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <svg
