@@ -73,7 +73,7 @@ function HOME() {
       const temp_list2 = [];
 
       for (let i = 0; i < json.all_blogs.length; i++) {
-        var blog_url = new URL("/slug");
+        var blog_url = new URL("http://localhost:3000/slug");
         blog_url.searchParams.set("email", `${email}`);
         blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
         temp_list2.push(
