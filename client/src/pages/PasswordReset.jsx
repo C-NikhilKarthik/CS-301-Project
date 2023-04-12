@@ -1,120 +1,91 @@
-import React, {useState} from 'react'
-import {ToastContainer, toast} from 'react-toastify';
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 //import { Link } from "react-router-dom";
 //import InputField from "../Components/InputField";
-import { AnimatePresence,  motion } from "framer-motion";
-
-
+import { AnimatePresence, motion } from "framer-motion";
+import InputField from "../Components/InputField";
 
 const PasswordReset = () => {
+  const [email, setEmail] = useState("");
 
-    const [email,setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-    const[message,setMessage]=useState("");
+  const setVal = (e) => {
+    setEmail(e.target.value);
+  };
 
-    const setVal= (e)=>{
-        setEmail(e.target.value)
+  const sendLink = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch("/sendpasswordlink", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+    if (data.status === 201) {
+      setEmail("");
+      setMessage(true);
+    } else {
+      toast.error("invalid user");
     }
-
-    const sendLink=async(e)=>{
-        e.preventDefault();
-        
-            const res= await fetch("/sendpasswordlink",{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({email})
-            });
-    
-            const data=await res.json();
-            if(data.status===201){
-                setEmail("");
-                setMessage(true)
-            }else{
-                toast.error("invalid user")
-            }
-        
-    }
+  };
 
   return (
-    
+    <>
+      <section className="w-screen h-screen flex bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed items-center justify-center">
+        <div className="p-4 rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md">
+          <div className="form-heading">
+            <h1 className="mb-6 text-slate-800 dark:text-slate-200 text-xl">
+              Enter your email
+            </h1>
+          </div>
 
-   <><section>
-   <div className="form-data">
-       <div className="form-heading">
-       <h1>Enter your email</h1>
-       </div>
+          {message ? (
+            <p style={{ color: "green", fontWeight: "bold" }}>
+              password reset link send successfully in your email
+            </p>
+          ) : (
+            ""
+          )}
 
-       {message ? <p style={{color:"green",fontWeight:"bold"}}>password reset link send successfully in your email</p>:""}
-
-       <form>
-           <div className="form-input">
-               <label htmlFor="email">Email</label>
-               <input type="email" value={email} onChange={setVal} name="email" id="email" placeholder='Enter your Email Address'/>
-           </div>
-
-           <button className='btn' onClick={sendLink}>Send</button>
-       </form>
-       <ToastContainer />
-   </div>
-</section>
-   </> 
-
-    
-//     <>  
-
-// <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')]">
-//     {/* // <div className="h-screen bg-cover flex justify-center p-3 items-center bg-center w-screen bg-slate-900"> */}
-//       <div className="absolute inset-0 h-full w-full gridblock"></div>
-//       <motion.div
-//         animate={{ x: 0, transition: { duration: 0.9,ease:"easeInOut"} ,opacity:1}}
-//         initial={{x:-100,opacity:0}}
-//         className="z-[2] relative p-3 h-fit sm:w-auto w-full rounded-md flex justify-start sm:justify-center items-center overflow-hidden shadow-lg "
-//       >
-//         <img
-//           className="absolute z-[1] left-0 w-full h-full object-cover"
-//           src="/images/login_cleanup.jpg"
-//         />
-//         <div className="relative h-full sm:w-[40rem] z-[4] flex">
-//           <div className="flex flex-col sm:w-3/5 p-7 gap-4">
-//             <div className="text-slate-200 font-semibold">
-//               <p className="whitespace-nowrap">The BlogPenn</p>
-//             </div>
-//             <AnimatePresence initial="false">
-                
-//             </AnimatePresence>
-//           </div>
-//         </div>
-//       </motion.div>
-//     </div>
-
-
-
-
-
-
-
-
-//         {/* <section>
-//             <div className="form-data">
-//                 <div className="form-heading">
-//                 <h1>Enter your email</h1>
-//                 </div>
-
-//                 <form>
-//                     <div className="form-input">
-//                         <label htmlFor="email">Email</label>
-//                         <input type="email" value={email} onChange={setVal} name="email" id="email" placeholder='Enter your Email Address'/>
-//                     </div>
-
-//                     <button className='btn' onClick={sendLink}>Login</button>
-//                 </form>
-                
-//             </div>
-//         </section> */}
-//     </>
-  )
-}
-
-export default PasswordReset
+          <form>
+            <div className="form-input">
+              <InputField
+                type={"text"}
+                name={"email"}
+                label={"Email"}
+                icon={"email"}
+                onChange={(e) => setVal(e.target.value)}
+              />
+            </div>
+            <button
+              type="button"
+              class="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Send Mail
+              <svg
+                aria-hidden="true"
+                class="w-5 h-5 ml-2 -mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </form>
+          <ToastContainer />
+        </div>
+      </section>
+    </>
+  );
+};
+export default PasswordReset;
