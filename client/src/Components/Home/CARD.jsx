@@ -18,7 +18,7 @@ function CARD({ image, text, Heading, Owner, location }) {
 
         <div className="grid sm:grid-cols-[2fr_3fr] grid-rows-[auto_1fr] mt-5 gap-3">
           <img
-            className="rounded-md border-2 border-slate-500 w-full object-cover"
+            className="rounded-md border-2 border-slate-500 w-full max-w-[20rem] object-cover"
             alt="blog"
             src={image}
             // src="https://wallpaperaccess.com/full/5667105.jpg"

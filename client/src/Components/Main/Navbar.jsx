@@ -6,6 +6,7 @@ import { HiHome } from "react-icons/hi";
 import { MdExplore } from "react-icons/md";
 import Switcher from "../Switcher";
 import Modal from "../Home/Modal";
+import FriendsSearch from "../Home/FriendsSearch";
 
 function Navbar({ logo, explore_url, home_url }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +77,7 @@ function Navbar({ logo, explore_url, home_url }) {
         </div>
         <TbGridDots />
         <Modal isOpen={isOpen} handleClose={handleClose}>
-          <p className="text-lg">Modal content goes here.</p>
+          <FriendsSearch/>
         </Modal>
       </div>
     </nav>
