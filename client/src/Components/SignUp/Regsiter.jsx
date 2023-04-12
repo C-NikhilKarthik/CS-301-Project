@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import InputField from "../InputField";
 function Regsiter() {
+  const[userName,setUsername]=useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleForm = async () => {
+  const handleForm = async (e) => {
+    e.preventDefault()
     const response = await fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        userName:userName,
         fname: fname,
         lname: lname,
         email: email,
@@ -21,7 +24,7 @@ function Regsiter() {
       }),
     });
 
-    const json = response.json();
+    const json =await response.json();
     if (json.status === "FAILED") {
       setMessage(json.message);
     }
@@ -36,6 +39,7 @@ function Regsiter() {
             name={"Username"}
             label={"Username"}
             icon={"badge"}
+            onChange={(e)=>setUsername(e.target.value)}
           />
           <InputField
             type={"text"}
