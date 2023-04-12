@@ -52,7 +52,7 @@ function FriendsSearch() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="h-full">
+    <form onChange={handleSearch} className="h-full">
       <div className="sm:w-[44rem] grid grid-rows-[auto_1fr_auto] h-full w-full bg-slate-800 text-base">
         <div class="relative w-full">
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -75,6 +75,7 @@ function FriendsSearch() {
             id="voice-search"
             onChange={(e) => {
                 setSearch(e.target.value);
+                handleSearch(e.target.value)
               }}
             class="bg-transparent text-gray-900 dark:text-slate-200 outline-none text-sm block w-full pl-10 p-2.5"
             placeholder="Search Friends..."

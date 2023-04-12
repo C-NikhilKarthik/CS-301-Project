@@ -19,8 +19,9 @@ const Card = ({ title, description, imageUrl }) => {
         src={imageUrl}
         alt={title}
       />
-      <div className="p-6">
-        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+      <div className="p-6 flex justify-end">
+        <div className="text-lg font-medium text-gray-900">{title}</div>
+        {/* {isSelected ? (<) : ()} */}
       </div>
     </div>
   );

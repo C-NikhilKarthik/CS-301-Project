@@ -33,6 +33,12 @@ function Regsiter() {
         <div className="grid px-2 py-6 rounded grid-cols-1 sm:grid-cols-2 gap-4">
           <InputField
             type={"text"}
+            name={"Username"}
+            label={"Username"}
+            icon={"badge"}
+          />
+          <InputField
+            type={"text"}
             name={"Fname"}
             label={"First Name"}
             icon={"person"}
