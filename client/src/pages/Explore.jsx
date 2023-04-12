@@ -9,6 +9,7 @@ import CARD from "../Components/Home/CARD";
 function Explore() {
   const [list, Setlist] = useState([]);
   const [home_url, Sethome_url] = useState("");
+  const [yourblogs_url, setYourblogs_url] = useState([]);
 
   //   function shuffle(blogs)
   // {
@@ -59,6 +60,10 @@ function Explore() {
     url.searchParams.set("email", `${email}`);
     Sethome_url(url);
     Setlist(temp_list);
+
+    var url2 = new URL("http://localhost:3000/yourblogs");
+    url2.searchParams.set("email", `${email}`);
+    setYourblogs_url(url2)
   };
 
   useEffect(() => {
@@ -68,7 +73,7 @@ function Explore() {
   return (
     <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
       <div className="absolute inset-0 h-full w-full gridblock"></div>
-      <Navbar home_url={home_url} />
+      <Navbar home_url={home_url} yourblogs_url={yourblogs_url}/>
       <div className="flex h-full px-8 gap-8 z-[5]">
         <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
           <ProfileCard />

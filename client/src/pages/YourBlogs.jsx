@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect } from 'react'
 import ProfileCard from '../Components/Home/ProfileCard';
 import Navbar from '../Components/Main/Navbar';
 import TOPBAR from '../Components/Home/TOPBAR';
@@ -9,12 +9,13 @@ function YourBlogs() {
     const [home_url, Sethome_url] = useState("");
     const [originallist,SetOriginal]=useState([]);
     const [explore_url, setExplore_url] = useState([]);
+
     const generate_blogs = async (e) => {
       const temp_list = [];
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const email = urlParams.get("email");
-      const response = await fetch("/home", {
+      const response = await fetch("/your_blogs", {
         method: "POST",
         body: JSON.stringify({
           email_login: email,
@@ -40,8 +41,8 @@ function YourBlogs() {
         );
       }
   
-      var url = new URL("/explore");
-      var url2 = new URL("/home")
+      var url = new URL("http://localhost:3000/explore");
+      var url2 = new URL("http://localhost:3000/home")
       url.searchParams.set("email", `${email}`);
       url2.searchParams.set("email", `${email}`);
       //console.log({explore_url:url})
@@ -50,10 +51,13 @@ function YourBlogs() {
       Setlist(temp_list);
       SetOriginal(temp_list);
     };
+    useEffect(() => {
+      generate_blogs();
+    }, []);
     return (
         <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
           <div className="absolute inset-0 h-full w-full gridblock"></div>
-          <Navbar/>
+          <Navbar explore_url={explore_url} home_url={home_url}/>
           <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
             <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
               <ProfileCard />
@@ -61,7 +65,7 @@ function YourBlogs() {
             </div>
             <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
               <TOPBAR/>
-              {/* {list} */}
+              {list}
             </div>
             <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
               <p>Notifications</p>
