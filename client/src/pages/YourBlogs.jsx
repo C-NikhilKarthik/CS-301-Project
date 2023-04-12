@@ -37,6 +37,7 @@ function YourBlogs() {
             Heading={json.all_blogs[i].Title}
             Owner={String(json.all_owners[i])}
             location={blog_url}
+            yourblog={true}
           />
         );
       }
