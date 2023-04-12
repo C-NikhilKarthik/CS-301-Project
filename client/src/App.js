@@ -15,6 +15,7 @@ import PasswordReset from "./pages/PasswordReset";
 import ForgotPassword from "./pages/ForgotPassword";
 import HOME from "./pages/HOME";
 import Loading from "./pages/Loading";
+import YourBlogs from "./pages/YourBlogs";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/password-reset" element={<PasswordReset />}></Route>
         <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />}></Route>
         <Route path="/loading" element={<Loading />}></Route>
+        <Route path="/yourblogs" element={<YourBlogs />}></Route>
       </Routes>
     </Router>
   );

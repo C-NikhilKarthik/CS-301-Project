@@ -12,7 +12,7 @@ function FriendsCard({ dp, Fname,Lname }) {
       )}
       <div className="text-slate-800 cursor-pointer dark:text-slate-300 ">{Fname} {Lname}</div>
       <div className="absolute cursor-pointer right-3 text-slate-800 dark:text-slate-100">
-        <span class="material-symbols-outlined">more_vert</span>
+        <span className="material-symbols-outlined">more_vert</span>
       </div>
     </div>
   );

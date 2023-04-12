@@ -15,7 +15,7 @@ function ProgressBar({ steps }) {
           s.id - 1 === step ? (
             <div
               key={s.id}
-              class="h-full flex justify-center items-center text-white"
+              className="h-full flex justify-center items-center text-white"
             >
               {s.content}
             </div>

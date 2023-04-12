@@ -7,8 +7,10 @@ import Recommendation from "../Components/Home/Recommendation";
 import CARD from "../Components/Home/CARD";
 function HOME() {
   const [list, Setlist] = useState([]);
-  const [originallist,SetOriginal]=useState([]);
+  const [yourblogs_url, setYourblogs_url] = useState([]);
+  const [originallist, SetOriginal] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
+
   const generate_blogs = async (e) => {
     const temp_list = [];
     const queryString = window.location.search;
@@ -41,20 +43,20 @@ function HOME() {
     }
 
     var url = new URL("http://localhost:3000/explore");
+    var url2 = new URL("http://localhost:3000/yourblogs");
     url.searchParams.set("email", `${email}`);
+    url2.searchParams.set("email", `${email}`);
     //console.log({explore_url:url})
     setExplore_url(url);
+    setYourblogs_url(url2);
     Setlist(temp_list);
     SetOriginal(temp_list);
   };
 
-  async function handle_search(Search_query)
-  {
-    
-    console.log(Search_query)
+  async function handle_search(Search_query) {
+    console.log(Search_query);
 
-    if(Search_query!=='')
-    {
+    if (Search_query !== "") {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const email = urlParams.get("email");
@@ -62,17 +64,16 @@ function HOME() {
         method: "POST",
         body: JSON.stringify({
           email_login: email,
-          search_query:Search_query
+          search_query: Search_query,
         }),
         headers: { "Content-type": "application/json" },
       });
 
       const json = await response.json();
-      const temp_list2=[]
+      const temp_list2 = [];
 
-      for(let i=0;i<json.all_blogs.length;i++)
-      {
-        var blog_url = new URL("http://localhost:3000/slug");
+      for (let i = 0; i < json.all_blogs.length; i++) {
+        var blog_url = new URL("/slug");
         blog_url.searchParams.set("email", `${email}`);
         blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
         temp_list2.push(
@@ -86,28 +87,25 @@ function HOME() {
         );
       }
       Setlist(temp_list2);
-    }
-    else{
+    } else {
       Setlist(originallist);
     }
-
-
   }
 
   useEffect(() => {
     generate_blogs();
-  },[]);
+  }, []);
   return (
     <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
       <div className="absolute inset-0 h-full w-full gridblock"></div>
-      <Navbar explore_url={explore_url}/>
+      <Navbar explore_url={explore_url} yourblogs_url={yourblogs_url} />
       <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
         <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
           <ProfileCard />
           {/* <Recommendation /> */}
         </div>
         <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
-          <TOPBAR handle_search={handle_search}/>
+          <TOPBAR handle_search={handle_search} />
           {list}
         </div>
         <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">

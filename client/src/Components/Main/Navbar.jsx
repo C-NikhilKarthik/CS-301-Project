@@ -8,7 +8,8 @@ import Switcher from "../Switcher";
 import Modal from "../Home/Modal";
 import FriendsSearch from "../Home/FriendsSearch";
 
-function Navbar({ logo, explore_url, home_url }) {
+function Navbar({ logo, explore_url, home_url, yourblogs_url }) {
+  
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
@@ -53,6 +54,23 @@ function Navbar({ logo, explore_url, home_url }) {
             <div>Explore</div>
           </a>
         )}
+        {yourblogs_url ? (
+          <a
+            href={yourblogs_url}
+            className="cursor-pointer flex py-2 px-3 z-10 rounded-full border-2 border-slate-300  gap-4 text-base items-center"
+          >
+            <HiHome />
+            <div>Your Blogs</div>
+          </a>
+        ) : (
+          <a
+            href={yourblogs_url}
+            className="cursor-pointer flex py-2 px-3 z-10 rounded-full border-2 border-blue-500 bg-blue-400/40 gap-4 text-base items-center"
+          >
+            <HiHome />
+            <div>Your Blogs</div>
+          </a>
+        )}
         <Switcher />
         <button
           onClick={() => setIsOpen(true)}
@@ -77,7 +95,7 @@ function Navbar({ logo, explore_url, home_url }) {
         </div>
         <TbGridDots />
         <Modal isOpen={isOpen} handleClose={handleClose}>
-          <FriendsSearch/>
+          <FriendsSearch />
         </Modal>
       </div>
     </nav>
