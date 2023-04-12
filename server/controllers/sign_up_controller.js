@@ -12,13 +12,14 @@ const bodyParser=require('body-parser');
 //Signup
 const signup=(req,res)=>{
     // res.send('hii');
-    let {fname,lname,email,password}=req.body;
+    let {userName,fname,lname,email,password}=req.body;
+    userName=userName.trim();
     fname=fname.trim();
     lname=lname.trim();
     email=email.trim();
     password=password.trim();
     
-    if(fname==""||lname==""||email==""||password==""){
+    if(userName==""||fname==""||lname==""||email==""||password==""){
         res.json({
             status: "FAILED",
             message:"Empty input fields!"
@@ -50,56 +51,54 @@ const signup=(req,res)=>{
     }
     else{
         // checking if user already exists
-        User.find({email}).then(result => {
-                if(result.length){
-                    //A user already exists
+        User.findOne({$or:[{EmailId: email},{UserName:userName}]  }).then(result => {
+            if (result) {
+              res.json({
+                status: "FAILED",
+                message: "User with the provided email/username already exists",
+              });
+            } else {
+              const saltRounds = 10;
+              bcrypt.hash(password, saltRounds).then(hashedPassword => {
+                const newUser = new User({
+                  UserName:userName,
+                  Fname: fname,
+                  Lname: lname,
+                  EmailId: email,
+                  Password: hashedPassword,
+                });
+                newUser
+                  .save()
+                  .then(result => {
+                    console.log("Registration Success");
                     res.json({
-                        status:"FAILED",
-                        message:"User with the provided email already exists"
-                    })
-                }else{
-                    //Try to create new user
-
-                    //password handling
-                    const saltRounds=10;
-                    bcrypt.hash(password,saltRounds).then(hashedPassword=>{
-                        const newUser=new User({
-                            Fname:fname,
-                            Lname:lname,
-                            EmailId:email,
-                            Password:hashedPassword
-
-                        });
-                        newUser.save().then(result => {
-                            console.log('Registration Success')
-                            res.json({
-                                status:"SUCCESS",
-                                message: "Signup successful",
-                                data: result,
-                            })
-                        })
-                        .catch(err => {
-                            res.json({
-                                status:"FAILED",
-                                message:"An error occured while saving user account!"
-                            })
-                        })
-
-                    })
-                    .catch(err => {
-                        res.json({
-                            status:"FAILED",
-                            message:"An error occured while hashing password!"
-                        })
-                    })
-                }
-        }).catch(err=>{
-            console.log(err);
+                      status: "SUCCESS",
+                      message: "Signup successful",
+                      data: result,
+                    });
+                  })
+                  .catch(err => {
+                    console.error(err);
+                    res.json({
+                      status: "FAILED",
+                      message: "An error occurred while saving user account!",
+                    });
+                  });
+              }).catch(err => {
+                console.error(err);
+                res.json({
+                  status: "FAILED",
+                  message: "An error occurred while hashing password!",
+                });
+              });
+            }
+          }).catch(err => {
+            console.error(err);
             res.json({
-                status:"FAILED",
-                message:"An error occured while checking for existing user!"
-            })
-        })
+              status: "FAILED",
+              message: "An error occurred while checking for existing user!",
+            });
+          });
     }
 
 }

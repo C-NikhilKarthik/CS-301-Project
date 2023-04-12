@@ -7,6 +7,7 @@ const keysecret=process.env.SECRET_KEY
 
 
 const UserSchema=new Schema({
+    UserName:String,
     Fname:String,
     Lname:String,
     EmailId:String,
