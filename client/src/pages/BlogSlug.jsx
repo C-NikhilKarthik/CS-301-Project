@@ -5,11 +5,13 @@ import Switcher from "../Components/Switcher";
 function BlogSlug() {
   const [list, Setlist] = useState([]);
   const [content, SetContent] = useState("");
+  const [home_url,setHomeUrl]=useState("")
   const generate_blogs = async (e) => {
     const temp_list = [];
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const blogId = urlParams.get("blogId");
+    const email= urlParams.get("email");
 
     const response = await fetch("/readmore", {
       method: "POST",
@@ -22,6 +24,10 @@ function BlogSlug() {
     const json = await response.json();
 
     SetContent(json.blog_details.Content);
+
+    let url=new URL("http://localhost:3000/home")
+    url.searchParams.set("email", `${email}`)
+    setHomeUrl(url)
 
     // var url = new URL("http://localhost:3000/explore");
     // url.searchParams.set("email", `${email}`);
@@ -43,9 +49,9 @@ function BlogSlug() {
           </div>
           <div className="sm:flex hidden">
             <ul className="flex justify-between text-sm items-center gap-6 px-4">
-              <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
+              <a href={home_url} className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
                 Home
-              </li>
+              </a>
               <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
                 Friends
               </li>

@@ -50,12 +50,16 @@ function Explore() {
     const shuffled_blogs = json.all_blogs;
 
     for (let i = 0; i < shuffled_blogs.length; i++) {
+      var blog_url = new URL("http://localhost:3000/slug");
+        blog_url.searchParams.set("email", `${email}`);
+        blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
       temp_list.push(
         <CARD
           image={"images/bg.jpg"}
           text={shuffled_blogs[i].Post_text}
           Heading={shuffled_blogs[i].Title}
           Owner={String(shuffled_blogs[i]._id)}
+          location={blog_url}
         />
       );
     }
