@@ -58,7 +58,7 @@ export const modules = {
       undo: undoChange,
       redo: redoChange
     },
-    backgroundColor: 'dark:bg-gray-200 light:bg-gray-100',
+    backgroundColor: 'dark:bg-gray-200 bg-gray-100',
   },
   history: {
     delay: 500,

@@ -3,7 +3,7 @@ import React, { useState ,useEffect } from "react";
 import Switcher from "../Components/Switcher";
 import Footer from "../Components/Main/Footer";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import "../Components/TextEditor/container.css";
 import EditorToolbar, {
   modules,
   formats,
@@ -15,6 +15,7 @@ import Demo from "../pages/Demo";
 
 function EditBlog() {
   const [state, setState] = useState({ value: null });
+
   const [message,setMessage]=useState('')
   const [content,setContent]=useState("")
   const [home_url,setHomeUrl]=useState("")
@@ -32,7 +33,6 @@ function EditBlog() {
     let count = 0;
     let modified = false; // Flag to indicate if any replacement was made
     do {
-      console.log('hiii from client')
       modified = false;
       const imageIndex = state.value.indexOf("<img src=", count);
       if (imageIndex !== -1) {

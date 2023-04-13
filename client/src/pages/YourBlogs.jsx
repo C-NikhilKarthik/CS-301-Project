@@ -86,9 +86,9 @@ function YourBlogs() {
             </div>
           </div>
         </div>
-      )}</>
-        
-      );
+    )}</>
+
+  );
 }
 
 export default YourBlogs
