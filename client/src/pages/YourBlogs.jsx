@@ -30,6 +30,7 @@ function YourBlogs() {
       });
   
       const json = await response.json();
+      // console.log(json);
   
       for (let i = 0; i < json.all_blogs.length; i++) {
         var blog_url = new URL("http://localhost:3000/slug");
@@ -42,6 +43,7 @@ function YourBlogs() {
   
         temp_list.push(
           <CARD
+            id={json.all_blogs[i]._id}
             image={"images/bg.jpg"}
             text={json.all_blogs[i].Post_text}
             Heading={json.all_blogs[i].Title}
