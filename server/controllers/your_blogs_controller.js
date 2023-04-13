@@ -21,7 +21,7 @@ const blogs =async (req, res) => {
       const user=await User.collection.findOne({_id:new ObjectId(blogs[i].Owner)})
       blog_owners.push(user.EmailId)
     }
-            
+    // console.log(blogs);
     res.json({ all_blogs: blogs ,all_owners:blog_owners});
                  
     
