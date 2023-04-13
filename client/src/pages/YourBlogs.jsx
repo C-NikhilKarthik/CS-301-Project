@@ -35,6 +35,10 @@ function YourBlogs() {
         var blog_url = new URL("http://localhost:3000/slug");
         blog_url.searchParams.set("email", `${email}`);
         blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+
+        var blog_edit_url=new URL("http://localhost:3000/edit");
+        blog_edit_url.searchParams.set("email", `${email}`);
+        blog_edit_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
   
         temp_list.push(
           <CARD
@@ -44,6 +48,7 @@ function YourBlogs() {
             Owner={String(json.all_owners[i])}
             location={blog_url}
             yourblog={true}
+            edit_location={blog_edit_url}
           />
         );
       }

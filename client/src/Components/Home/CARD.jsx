@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
-function CARD({ image, text, Heading, Owner, location, yourblog }) {
+function CARD({ image, text, Heading, Owner, location, yourblog ,edit_location}) {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleMenuToggle = () => {
@@ -28,7 +28,7 @@ function CARD({ image, text, Heading, Owner, location, yourblog }) {
               {showMenu && (
                 <div className="absolute z-50 right-0 mt-2 py-2 w-48 bg-white dark:bg-slate-600 rounded-md shadow-lg">
                   <a
-                    href="/edit"
+                    href={edit_location}
                     className="block px-4 py-2 text-gray-800 dark:text-slate-300 dark:hover:bg-slate-500 hover:bg-gray-100"
                   >
                     Edit Blog
