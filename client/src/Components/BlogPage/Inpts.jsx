@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import InputField from "../InputField"; 
 
 
-function Inpts() {
+function Inpts(props) {
   const [interest, setInterest] = useState("");
   const [title, setTitle] = useState("");
   const [pic, setPic] = useState("");
   const [desc, setDesc] = useState("");
   const [url, setUrl] = useState("");
   const [message,setMessage]=useState("");
-
+  
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -97,7 +97,7 @@ function Inpts() {
             <select
               name="languages"
               id="lang"
-              value={interest}
+              value={props.topic}
               onChange={handleInterest}
             >
               <option value="">None</option>
@@ -113,6 +113,7 @@ function Inpts() {
               type={"text"}
               name={"p1"}
               label={"Title"}
+              value={props.title}
               onChange={handleTitle}
             />
             <InputField
@@ -126,6 +127,7 @@ function Inpts() {
               name={"p3"}
               label={"Description"}
               onChange={handleDesc}
+              value={props.content}
             />
           </div>
           {message && (<p className="text-red-500 text-xs">{message}</p>)}

@@ -16,6 +16,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import HOME from "./pages/HOME";
 import Loading from "./pages/Loading";
 import YourBlogs from "./pages/YourBlogs";
+import EditBlog from "./pages/EditBlog";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />}></Route>
         <Route path="/loading" element={<Loading />}></Route>
         <Route path="/yourblogs" element={<YourBlogs />}></Route>
+        <Route path="/edit" element={<EditBlog />}></Route>
       </Routes>
     </Router>
   );
