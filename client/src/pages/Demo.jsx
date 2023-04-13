@@ -84,7 +84,7 @@ function Demo({ Data }) {
           </div>
           <div className="flex w-full justify-evenly">
           </div>
-          <div dangerouslySetInnerHTML={{__html: Data}} className="ql-editor w-full flex flex-col gap-4 text-sm">
+          <div dangerouslySetInnerHTML={{__html: Data}} className="ql-editor w-full">
             {/* {Data} */}
           </div>
         </div>

@@ -17,6 +17,7 @@ import HOME from "./pages/HOME";
 import Loading from "./pages/Loading";
 import YourBlogs from "./pages/YourBlogs";
 import EditBlog from "./pages/EditBlog";
+import CreateBlog from "./pages/CreateBlog";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/home" element={<HOME />}></Route>
-        <Route path="/createblog" element={<Test />}></Route>
+        <Route path="/createblog" element={<CreateBlog />}></Route>
         <Route path="/demo" element={<Demo />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
         <Route path="/test" element={<Test />}></Route>

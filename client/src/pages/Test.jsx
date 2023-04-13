@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import axios from "axios";
-import Switcher from "../Components/Switcher";
 import Footer from "../Components/Main/Footer";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -103,6 +101,10 @@ function Test() {
             <Demo Data={state.value} />
           </div>
           <form onSubmit={submitBlog}>
+            <div className="text-slate-white text-xl">Heading</div>
+            <div className="p-3 bg-slate-800 rounded mb-5" contentEditable="true"></div>
+            <div className="text-slate-white text-xl">Description</div>
+            <div className="p-3 bg-slate-800 rounded mb-5" contentEditable="true"></div>
             <EditorToolbar />
             <ReactQuill
               theme="snow"

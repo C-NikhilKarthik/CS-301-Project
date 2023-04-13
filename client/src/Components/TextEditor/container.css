@@ -60,6 +60,11 @@
     padding: 0;
     counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
   }
+  .ql-editor pre{
+    background-color: #0d0d0d;
+    padding: 6px 10px !important;
+    border-radius: 5px;
+  }
   .ql-editor ol,
   .ql-editor ul {
     padding-left: 1.5em;
@@ -612,11 +617,11 @@
   .ql-snow .ql-editor a {
     text-decoration: underline;
   }
-  .ql-snow .ql-editor blockquote {
-    border-left: 4px solid #ccc;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    padding-left: 16px;
+  .ql-snow .ql-editor blockquote,.ql-editor blockquote {
+    border-left: 4px solid #ccc !important;
+    margin-bottom: 15px !important;
+    margin-top: 15px !important;
+    padding-left: 16px !important;
   }
   .ql-snow .ql-editor code,
   .ql-snow .ql-editor pre {
@@ -625,8 +630,8 @@
   }
   .ql-snow .ql-editor pre {
     white-space: pre-wrap;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 15px !important;
+    margin-top: 15px !important;
     padding: 5px 10px;
   }
   .ql-snow .ql-editor code {
@@ -634,12 +639,13 @@
     padding: 2px 4px;
   }
   .ql-snow .ql-editor pre.ql-syntax {
-    background-color: #23241f;
+    background-color: #0d0d0d !important;
     color: #f8f8f2;
     overflow: visible;
   }
-  .ql-snow .ql-editor img {
+  .ql-snow .ql-editor img,.ql-editor img {
     max-width: 100%;
+    border-radius: 8px;
   }
   .ql-snow .ql-picker {
     color: #ddd !important;
@@ -847,10 +853,10 @@
   }
   .ql-toolbar.ql-snow {
     border: none !important;
+    border-bottom:1px solid #fff !important;
     box-sizing: border-box;
-    margin-bottom:10px;
     background-color:#1e293b;
-    border-radius: 5px;
+    border-radius: 8px 8px 0px 0px;
     font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     padding: 8px;
   }
@@ -946,6 +952,7 @@
   .ql-container.ql-snow {
     border: none !important;
     background-color:#1e293b;
-    border-radius: 5px;
+    border-radius:0px 0px 8px 8px !important;
+    min-height:10rem
   }
   
