@@ -39,7 +39,7 @@
     "react-toggle-dark-mode": "^1.1.1",
     "remark": "^14.0.2",
     "remark-html": "^15.0.2",
-    "vm2": ">=3.9.15",
+    "vm2": ">=3.9.16",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
