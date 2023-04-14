@@ -47,9 +47,9 @@ function Main() {
         initial="initial1"
         className="absolute z-10 top-0 backdrop-filter backdrop-blur-md flex py-6 px-6 w-full items-center justify-between"
       >
-        <p className="flex text-2xl font-semibold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-transparent cursor-pointer">
-          TheBlogPenn
-        </p>
+        <div className="dark:text-slate-200 text-2xl font-semibold">
+          The BlogPenn
+        </div>
         <div className="sm:flex hidden">
           <ul className="flex justify-between items-center gap-6 px-4">
             <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
