@@ -61,24 +61,16 @@ function ProgressBar({ steps }) {
         ))}
         <div className="absolute h-3 rounded-full bg-white w-full flex items-center justify-center"></div>
       </div>
-      <div className="flex z-10 justify-between">
-        <button
-          className={`px-4 py-2 bg-red-700 text-white rounded ${
-            step === 0 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          onClick={prevStep}
-          disabled={step === 0}
-        >
-          Previous
-        </button>
+      <div className="flex z-10 justify-end">
         <button
           className={`px-4 py-2 bg-green-600 text-white rounded ${
             step === steps.length - 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={nextStep}
+          type="submit"
           disabled={step === steps.length - 1}
         >
-          Next
+          Continue
         </button>
       </div>
     </div>

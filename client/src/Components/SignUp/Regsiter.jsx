@@ -72,13 +72,6 @@ function Regsiter() {
         </div>
 
         {message && <p className="text-red-500 text-xs">{message}</p>}
-
-        <button
-          type="submit"
-          className="bg-blue-600 mt-3 px-3 w-fit py-2 text-sm rounded-md text-slate-300 hover:bg-blue-700"
-        >
-          Create Account
-        </button>
       </div>
     </form>
   );
