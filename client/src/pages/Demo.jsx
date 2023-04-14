@@ -1,6 +1,5 @@
 import React from "react";
-import "react-quill/dist/quill.snow.css";
-import ReactQuill from "react-quill";
+import "../Components/TextEditor/container.css";
 function Demo({ Data }) {
   // console.log(Data)
   const timeElapsed = Date.now();
@@ -85,7 +84,7 @@ function Demo({ Data }) {
           </div>
           <div className="flex w-full justify-evenly">
           </div>
-          <div dangerouslySetInnerHTML={{__html: Data}} className="w-full flex flex-col gap-4 text-sm">
+          <div dangerouslySetInnerHTML={{__html: Data}} className="ql-editor w-full">
             {/* {Data} */}
           </div>
         </div>

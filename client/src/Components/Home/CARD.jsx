@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import { IoIosShare,IoIosChatbubbles } from "react-icons/io";
-function CARD({ image, text, Heading, Owner, location }) {
+import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
+function CARD({ id,image, text, Heading, Owner, location, yourblog ,edit_location}) {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const handelDelete=async ()=>{
+    const response=await fetch('/deletBlog',{
+      method:'POST',
+      body:JSON.stringify({
+        id
+      }),
+       headers: { 'Content-type': 'application/json' },
+    });
+    const json=await response.json();
+    if(json.msg==='SUCCESS')
+    {
+      window.alert('Post id Deleted!');
+      window.location.reload();
+    }  
+  }
+
   return (
     <div className="w-full rounded p-4 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
       <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-12 aspect-square rounded-full" />
@@ -10,11 +32,42 @@ function CARD({ image, text, Heading, Owner, location }) {
         <div className="flex justify-between items-center">
           <div className="flex sm:gap-2 flex-col sm:flex-row sm:items-center">
             <p className="text-xl font-semibold">{Owner}</p>
-            <p className="text-sm text-slate-700 dark:text-slate-500">@elonmusk</p>
+            <p className="text-sm text-slate-700 dark:text-slate-500">
+              @elonmusk
+            </p>
           </div>
-          <FiMoreHorizontal className="text-2xl" />
+          {yourblog ? (
+            <div className="relative">
+              <FiMoreHorizontal
+                onClick={handleMenuToggle}
+                className="cursor-pointer"
+              />
+              {showMenu && (
+                <div className="absolute z-50 right-0 mt-2 py-2 w-48 bg-white dark:bg-slate-600 rounded-md shadow-lg">
+                  <a
+                    href={edit_location}
+                    className="block px-4 py-2 text-gray-800 dark:text-slate-300 dark:hover:bg-slate-500 hover:bg-gray-100"
+                  >
+                    Edit Blog
+                  </a>
+                  <button
+                    type="submit"
+                    href=""
+                    className="block px-4 py-2 cursor-pointer text-red-600 dark:hover:bg-slate-500  hover:bg-gray-100"
+                    onClick={handelDelete}
+                  >
+                    Delete Blog
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <FiMoreHorizontal className="cursor-pointer" />
+          )}
         </div>
-        <div className="text-slate-700 dark:text-slate-500 text-sm">8th April, 2023</div>
+        <div className="text-slate-700 dark:text-slate-500 text-sm">
+          8th April, 2023
+        </div>
 
         <div className="grid sm:grid-cols-[2fr_3fr] grid-rows-[auto_1fr] mt-5 gap-3">
           <img
