@@ -20,7 +20,7 @@ const home =async (req, res) => {
       const user=await User.collection.findOne({_id:new ObjectId(blogs[i].Owner)})
       if(user!=null)
       {
-        blog_owners.push(user.EmailId)
+        blog_owners.push(user.UserName)
       }
       else{
         console.log(blogs[i].Owner)
