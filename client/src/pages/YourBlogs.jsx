@@ -4,6 +4,7 @@ import Navbar from '../Components/Main/Navbar';
 import TOPBAR from '../Components/Home/TOPBAR';
 import CARD from '../Components/Home/CARD';
 import Loading from './Loading.jsx'
+import { MdAddCircle } from 'react-icons/md';
 
 
 
@@ -77,7 +78,10 @@ function YourBlogs() {
         <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
           <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
             <ProfileCard />
-            {/* <Recommendation /> */}
+            <a href="/createblog" className="bg-blue-600 w-full px-2 flex justify-center gap-4 items-center rounded-full py-3 text-slate-200">
+              <MdAddCircle className="text-xl" />
+              <p>Create Blog</p>
+            </a>
           </div>
           <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
             <TOPBAR />
