@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../Components/Main/Footer";
 import Switcher from "../Components/Switcher";
 import "../Components/TextEditor/container.css";
+import Comments from "../Components/BlogPage/Comments";
 import Loading from "./Loading";
 
 function BlogSlug() {
@@ -74,6 +75,7 @@ function BlogSlug() {
         <div className="w-full flex flex-col items-center p-6 sm:p-16 md:p-24 lg:p-32">
           <div dangerouslySetInnerHTML={{ __html: content }} className="ql-editor text-slate-800 dark:text-slate-200"></div>
         </div>
+        <Comments />
         <Footer />
       </div>)}
     </>

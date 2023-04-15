@@ -91,7 +91,7 @@ const ForgotPassword = () => {
               <form>
                 {message ? (
                   <p style={{ color: "green", fontWeight: "bold" }}>
-                    Password Succesfulyy Update{" "}
+                    Password Succesfully Update{" "}
                   </p>
                 ) : (
                   ""

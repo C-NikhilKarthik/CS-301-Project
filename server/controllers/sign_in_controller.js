@@ -35,8 +35,7 @@ const login = async(req, res) => {
                     //user exists
 
                     // Set a cookie with the user ID
-                    res.cookie('userId', data[0]._id);
-
+                    res.cookie('userId',data[0].id);
                     const hashedPassword = data[0].Password;
                     bcrypt.compare(Password, hashedPassword)
                         .then(async(result) => {

@@ -39,12 +39,14 @@ function HOME() {
         var blog_url = new URL("http://localhost:3000/slug");
         blog_url.searchParams.set("email", `${email}`);
         blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
-
         temp_list.push(
           <CARD
+            key={json.all_blogs[i]._id}
+            id={json.all_blogs[i]._id}
             image={"images/bg.jpg"}
             text={json.all_blogs[i].Post_text}
             Heading={json.all_blogs[i].Title}
+            Likes={json.all_blogs[i].Likes}
             Owner={String(json.all_owners[i])}
             location={blog_url}
           />
@@ -52,7 +54,7 @@ function HOME() {
         setIsLoading(false);
       }
     }
-    else{
+    else {
       setIsLoading(false)
     }
 
