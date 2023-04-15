@@ -13,6 +13,7 @@ function Explore() {
   const [home_url, Sethome_url] = useState("");
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [UserName,setUserName] = useState('');
 
 
   //   function shuffle(blogs)
@@ -47,6 +48,7 @@ function Explore() {
     });
 
     const json = await response.json();
+    setUserName(json.UserName);
 
     const shuffled_blogs = json.all_blogs;
 
@@ -85,7 +87,7 @@ function Explore() {
     <>{isLoading ? (<Loading />) : (
       <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
         <div className="absolute inset-0 h-full w-full gridblock"></div>
-        <Navbar home_url={home_url} yourblogs_url={yourblogs_url} />
+        <Navbar UserName={UserName} home_url={home_url} yourblogs_url={yourblogs_url} />
         <div className="flex h-full px-8 gap-8 z-[5]">
           <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
             <ProfileCard />

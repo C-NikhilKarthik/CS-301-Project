@@ -102,7 +102,7 @@ function FriendsSearch() {
         </div>
         <div className="flex-grow gap-2 p-2 flex flex-col h-full overflow-y-scroll border-b-[1px] border-t-[1px] border-slate-600">
           {people.map((item, index) => (
-            <FriendsCard key={index} Fname={item.Fname} Lname={item.Lname} />
+            <FriendsCard friend={true} key={index} Fname={item.Fname} Lname={item.Lname} />
           ))}
         </div>
         <div className="flex justify-end p-3">

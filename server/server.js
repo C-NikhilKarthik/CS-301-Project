@@ -95,6 +95,8 @@ app.use('/likes',require('./routes/Likes'))
 //unlikes
 app.use('/unlikes',require('./routes/Unlikes'))
 
+//profile
+app.use('/profile',require('./routes/Profile'))
 //submit interests
 app.use('/handleinterests',require('./routes/HandleInterests'))
 
