@@ -102,7 +102,7 @@ app.use('/profile',require('./routes/Profile'))
 app.use('/handleinterests',require('./routes/HandleInterests'))
 
 //users
-// app.use('/users',require('./routes/Users'))
+app.use('/users',require('./routes/Users'))
 // //comments
 // app.use('/comments',require('./routes/'))
 

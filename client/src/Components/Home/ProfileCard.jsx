@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 function ProfileCard({ url }) {
   const [data, setData] = useState({
     name: '',
-    following:''
+    following:'',
+    followers:''
   })
   const generate_blogs = async (e) => {
     const temp_list = [];
@@ -27,9 +28,17 @@ function ProfileCard({ url }) {
     });
     const json2 = await response2.json();
     const json = await response.json();
-    setData({ name: json.UserName ,following:json.Friends.length});
-    console.log(json);
-    console.log(json2)
+    var followers = 0;
+    const id = json._id;
+    for(let i=0;i<json2.length;i++){
+      for(let j=0;j<json2[i].Friends.length;j++){
+        if(json2[i].Friends[j]===id){
+          followers++;
+        }
+      }
+    }
+
+    setData({ name: json.UserName ,following:json.Friends.length,followers:followers});
   }
 
 
@@ -50,7 +59,7 @@ function ProfileCard({ url }) {
           <p className="text-sm text-slate-500">Following</p>
         </div>
         <div className="flex flex-col items-center px-10 justify-center w-full">
-          <p className="font-semibold">9,991</p>
+          <p className="font-semibold">{data.followers}</p>
           <p className="text-sm text-slate-500">Followers</p>
         </div>
       </div>

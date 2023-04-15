@@ -13,7 +13,7 @@ function Explore() {
   const [home_url, Sethome_url] = useState("");
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [UserName,setUserName] = useState('');
+  const [UserName, setUserName] = useState('');
 
 
   //   function shuffle(blogs)
@@ -58,6 +58,8 @@ function Explore() {
       blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
       temp_list.push(
         <CARD
+          key={json.all_blogs[i]._id}
+          id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
           text={shuffled_blogs[i].Post_text}
           Heading={shuffled_blogs[i].Title}

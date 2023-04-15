@@ -41,7 +41,8 @@ function HOME() {
         blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
         temp_list.push(
           <CARD
-          id={json.all_blogs[i]._id}
+            key={json.all_blogs[i]._id}
+            id={json.all_blogs[i]._id}
             image={"images/bg.jpg"}
             text={json.all_blogs[i].Post_text}
             Heading={json.all_blogs[i].Title}
@@ -53,7 +54,7 @@ function HOME() {
         setIsLoading(false);
       }
     }
-    else{
+    else {
       setIsLoading(false)
     }
 
