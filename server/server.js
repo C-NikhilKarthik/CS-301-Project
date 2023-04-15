@@ -91,6 +91,8 @@ app.use('/deletBlog',require('./routes/deleteBlog'))
 
 //profile
 app.use('/profile',require('./routes/Profile'))
+//submit interests
+app.use('/handleinterests',require('./routes/HandleInterests'))
 
 app.all('*', (req, res) => {
     res.status(404)

@@ -10,7 +10,7 @@ function Success() {
         You have successfully created an account.
       </p>
       <a
-        href="/home"
+        href="/login"
         className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 ease-in-out"
       >
         Start using your account
