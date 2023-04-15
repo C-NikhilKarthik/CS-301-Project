@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
-function CARD({ id,image, text, Heading, Owner, location, yourblog ,edit_location}) {
-  const [showMenu, setShowMenu] = useState(false);
+import Cookies from 'js-cookie';
 
+function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
+  const [showMenu, setShowMenu] = useState(false);
+  Cookies.set('userId', 'userID.userId');
+  const userId = Cookies.get('userId');
+  console.log(userId,'hii');
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
@@ -23,6 +27,18 @@ function CARD({ id,image, text, Heading, Owner, location, yourblog ,edit_locatio
       window.alert('Post id Deleted!');
       window.location.reload();
     }  
+  }
+
+  const handleLike=async ()=>{
+    const response = await fetch('/likes',{
+      method:'POST',
+      body:JSON.stringify({
+        id
+      }),
+      headers: { 'Content-type': 'application/json' },
+    });
+
+    
   }
 
   return (
@@ -84,7 +100,7 @@ function CARD({ id,image, text, Heading, Owner, location, yourblog ,edit_locatio
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-4 sm:justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
-              <FaHeart />
+              <FaHeart onClick={handleLike}/>
               <p className="sm:flex hidden">Like</p>
             </div>
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">

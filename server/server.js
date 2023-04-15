@@ -89,6 +89,9 @@ app.use('/save_edited_blog',require('./routes/EditBlog_save'))
 //delete blog
 app.use('/deletBlog',require('./routes/deleteBlog'))
 
+//likes
+app.use('/likes',require('./routes/Likes'))
+
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {
