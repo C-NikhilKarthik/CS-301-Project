@@ -100,7 +100,7 @@ function Explore() {
             <TOPBAR />
             {list}
           </div>
-          <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md text-slate-100 bg-slate-400 dark:bg-slate-800 p-4">
+          <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md text-slate-100 bg-slate-400 dark:bg-slate-800 p-4">
             <p>Notifications</p>
           </div>
         </div>

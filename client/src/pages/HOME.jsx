@@ -13,7 +13,7 @@ function HOME() {
   const [list, Setlist] = useState([]);
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [originallist, SetOriginal] = useState([]);
-  const [profile,setProfile] = useState([]);
+  const [profile, setProfile] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [UserName, setUserName] = useState('');
@@ -34,21 +34,26 @@ function HOME() {
 
     const json = await response.json();
     setUserName(json.UserName);
-    for (let i = 0; i < json.all_blogs.length; i++) {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+    if (json.all_blogs.length > 0) {
+      for (let i = 0; i < json.all_blogs.length; i++) {
+        var blog_url = new URL("http://localhost:3000/slug");
+        blog_url.searchParams.set("email", `${email}`);
+        blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
 
-      temp_list.push(
-        <CARD
-          image={"images/bg.jpg"}
-          text={json.all_blogs[i].Post_text}
-          Heading={json.all_blogs[i].Title}
-          Owner={String(json.all_owners[i])}
-          location={blog_url}
-        />
-      );
-      setIsLoading(false);
+        temp_list.push(
+          <CARD
+            image={"images/bg.jpg"}
+            text={json.all_blogs[i].Post_text}
+            Heading={json.all_blogs[i].Title}
+            Owner={String(json.all_owners[i])}
+            location={blog_url}
+          />
+        );
+        setIsLoading(false);
+      }
+    }
+    else{
+      setIsLoading(false)
     }
 
     var url = new URL("http://localhost:3000/explore");
@@ -117,7 +122,7 @@ function HOME() {
           <Navbar UserName={UserName} explore_url={explore_url} yourblogs_url={yourblogs_url} />
           <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
             <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
-              <ProfileCard url={profile}/>
+              <ProfileCard url={profile} />
               <a href="/createblog" className="bg-blue-600 w-full px-2 flex justify-center gap-4 items-center rounded-full py-3 text-slate-200">
                 <MdAddCircle className="text-xl" />
                 <p>Create Blog</p>
@@ -127,7 +132,7 @@ function HOME() {
               <TOPBAR handle_search={handle_search} />
               {list}
             </div>
-            <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
+            <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
               <p>Notifications</p>
             </div>
           </div>
