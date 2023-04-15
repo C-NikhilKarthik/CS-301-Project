@@ -9,7 +9,6 @@ import Loading from './Loading.jsx'
 import { MdAddCircle } from "react-icons/md";
 
 
-
 function HOME() {
   const [list, Setlist] = useState([]);
   const [yourblogs_url, setYourblogs_url] = useState([]);
@@ -17,9 +16,9 @@ function HOME() {
   const [profile,setProfile] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [UserName, setUserName] = useState('');
 
   const generate_blogs = async (e) => {
-  
     setIsLoading(true);
     const temp_list = [];
     const queryString = window.location.search;
@@ -32,9 +31,9 @@ function HOME() {
       }),
       headers: { "Content-type": "application/json" },
     });
-    
-    const json = await response.json();
 
+    const json = await response.json();
+    setUserName(json.UserName);
     for (let i = 0; i < json.all_blogs.length; i++) {
       var blog_url = new URL("http://localhost:3000/slug");
       blog_url.searchParams.set("email", `${email}`);
@@ -42,11 +41,9 @@ function HOME() {
 
       temp_list.push(
         <CARD
-          id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
           text={json.all_blogs[i].Post_text}
           Heading={json.all_blogs[i].Title}
-          Likes={json.all_blogs[i].Likes}
           Owner={String(json.all_owners[i])}
           location={blog_url}
         />
@@ -87,6 +84,7 @@ function HOME() {
 
       const json = await response.json();
       const temp_list2 = [];
+
       for (let i = 0; i < json.all_blogs.length; i++) {
         var blog_url = new URL("http://localhost:3000/slug");
         blog_url.searchParams.set("email", `${email}`);

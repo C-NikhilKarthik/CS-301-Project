@@ -7,9 +7,10 @@ import Cookies from 'js-cookie';
 function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
   const [showMenu, setShowMenu] = useState(false);
   const [likeStatus,setLikeStatus]=useState(true);
-  const [noLikes,setNolikes]=useState(Likes.length);
+  // const [noLikes, setNolikes] = useState(Likes.length);
+
   let userID=Cookies.get('userId');
- 
+ console.log(Likes);
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
@@ -41,7 +42,7 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
     });
     const json = await response.json();
   if (json.msg === 'SUCCESS') {
-    setNolikes((noLikes) => noLikes + 1);
+    // setNolikes((noLikes) => noLikes + 1);
     setLikeStatus(false); // update liked status to true
   }
   }
@@ -56,7 +57,7 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
     });
     const json = await response.json();
   if (json.msg === 'SUCCESS') {
-    setNolikes((noLikes) => noLikes - 1);
+    // setNolikes((noLikes) => noLikes - 1);
     setLikeStatus(true); // update liked status to true
   }
   }
@@ -129,7 +130,7 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               {/* <FaHeart className="text-xl text-red-600" onClick={handleLike}/> */}
               {likeStatus?(<FaHeart onClick={handleLike}/>):(<FaHeart onClick={handleUnlike} className="text-xl text-red-600"/>)}
-              <p className="sm:flex hidden">Like {noLikes}</p>
+              <p className="sm:flex hidden">Like </p>
             </div>
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosShare />
