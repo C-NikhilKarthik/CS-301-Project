@@ -92,6 +92,9 @@ app.use('/deletBlog',require('./routes/deleteBlog'))
 //likes
 app.use('/likes',require('./routes/Likes'))
 
+//submit interests
+app.use('/handleinterests',require('./routes/HandleInterests'))
+
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {

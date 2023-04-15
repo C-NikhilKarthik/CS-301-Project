@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function ProgressBar({ steps }) {
   const [step, setStep] = useState(0);
   const nextStep = () => {
+    
     setStep(step + 1);
   };
   const prevStep = () => {
