@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-//import { Link } from "react-router-dom";
-//import InputField from "../Components/InputField";
 import { AnimatePresence, motion } from "framer-motion";
 import InputField from "../Components/InputField";
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
-
   const [message, setMessage] = useState("");
 
   const setVal = (e) => {
@@ -59,12 +56,13 @@ const PasswordReset = () => {
                 name={"email"}
                 label={"Email"}
                 icon={"email"}
-                onChange={(e) => setVal(e.target.value)}
+                onChange={setVal} // pass the function directly
               />
             </div>
             <button
               type="button"
               className="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={sendLink} // add onClick to trigger sendLink function
             >
               Send Mail
               <svg
@@ -88,4 +86,5 @@ const PasswordReset = () => {
     </>
   );
 };
+
 export default PasswordReset;
