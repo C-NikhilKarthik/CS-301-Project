@@ -92,6 +92,9 @@ app.use('/deletBlog',require('./routes/deleteBlog'))
 //likes
 app.use('/likes',require('./routes/Likes'))
 
+//unlikes
+app.use('/unlikes',require('./routes/Unlikes'))
+
 //submit interests
 app.use('/handleinterests',require('./routes/HandleInterests'))
 

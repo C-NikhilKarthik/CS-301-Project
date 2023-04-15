@@ -9,14 +9,15 @@ import Loading from './Loading.jsx'
 import { MdAddCircle } from "react-icons/md";
 
 
+
 function HOME() {
   const [list, Setlist] = useState([]);
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [originallist, SetOriginal] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const generate_blogs = async (e) => {
+  
     setIsLoading(true);
     const temp_list = [];
     const queryString = window.location.search;
@@ -29,9 +30,9 @@ function HOME() {
       }),
       headers: { "Content-type": "application/json" },
     });
-
+    
     const json = await response.json();
-    // console.log(json);
+    console.log(json);
     for (let i = 0; i < json.all_blogs.length; i++) {
       var blog_url = new URL("http://localhost:3000/slug");
       blog_url.searchParams.set("email", `${email}`);

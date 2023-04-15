@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
@@ -6,9 +6,11 @@ import Cookies from 'js-cookie';
 
 function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
   const [showMenu, setShowMenu] = useState(false);
-  Cookies.set('userId', 'userID.userId');
-  const userId = Cookies.get('userId');
-  console.log(userId,'hii');
+  const [likeStatus,setLikeStatus]=useState(true);
+  const [noLikes,setNolikes]=useState(Likes.length);
+  let userID=Cookies.get('userId');
+ 
+
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
@@ -37,9 +39,34 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
       }),
       headers: { 'Content-type': 'application/json' },
     });
-
-    
+    const json = await response.json();
+  if (json.msg === 'SUCCESS') {
+    setNolikes((noLikes) => noLikes + 1);
+    setLikeStatus(false); // update liked status to true
   }
+  }
+
+  const handleUnlike=async ()=>{
+    const response = await fetch('/unlikes',{
+      method:'POST',
+      body:JSON.stringify({
+        id
+      }),
+      headers: { 'Content-type': 'application/json' },
+    });
+    const json = await response.json();
+  if (json.msg === 'SUCCESS') {
+    setNolikes((noLikes) => noLikes - 1);
+    setLikeStatus(true); // update liked status to true
+  }
+  }
+
+  useEffect(() => {
+    if (Likes && Likes.includes(userID)) {
+      setLikeStatus(false);
+    }
+  }, [])
+  
 
   return (
     <div className="w-full rounded p-4 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
@@ -100,8 +127,9 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-4 sm:justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
-              <FaHeart onClick={handleLike}/>
-              <p className="sm:flex hidden">Like</p>
+              {/* <FaHeart className="text-xl text-red-600" onClick={handleLike}/> */}
+              {likeStatus?(<FaHeart onClick={handleLike}/>):(<FaHeart onClick={handleUnlike} className="text-xl text-red-600"/>)}
+              <p className="sm:flex hidden">Like {noLikes}</p>
             </div>
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosShare />
