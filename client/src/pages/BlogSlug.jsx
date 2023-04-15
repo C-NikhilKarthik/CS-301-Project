@@ -72,7 +72,7 @@ function BlogSlug() {
             </div>
           </nav>
         </div>
-        <div className="w-full flex flex-col items-center p-6 sm:p-16 md:p-24 lg:p-32">
+        <div className="w-full flex flex-col items-center p-6 mx-auto sm:w-4/5 lg:2/3 sm:p-16 md:p-24 lg:p-32">
           <div dangerouslySetInnerHTML={{ __html: content }} className="ql-editor text-slate-800 dark:text-slate-200"></div>
         </div>
         <Comments />
