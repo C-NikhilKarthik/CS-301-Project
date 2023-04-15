@@ -18,7 +18,7 @@ function ProfileCard({ url }) {
     });
     const json = await response.json();
     setData({ name: json.UserName });
-    console.log(json);
+    // console.log(json);
   }
 
 

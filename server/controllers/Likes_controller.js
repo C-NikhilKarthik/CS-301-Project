@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const Likes = async (req, res) => {
   const userId = req.cookies;
   const blogId = req.body;
+  console.log(blogId);
   try {
     await BlogHtml.findByIdAndUpdate(
       blogId.id,
