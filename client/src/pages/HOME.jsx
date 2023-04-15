@@ -13,10 +13,12 @@ function HOME() {
   const [list, Setlist] = useState([]);
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [originallist, SetOriginal] = useState([]);
+  const [profile,setProfile] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [numBlogs,setNumBlogs]=useState(0)
   const [tot_numBlogs,setTotNumBlogs]=useState(0)
+  const [UserName, setUserName] = useState('');
 
   const generate_blogs = async (e) => {
     setIsLoading(true);
@@ -36,6 +38,7 @@ function HOME() {
     setNumBlogs(json.blog_count)
     setTotNumBlogs(json.total_num_blogs)
 
+    setUserName(json.UserName);
     for (let i = 0; i < json.all_blogs.length; i++) {
       var blog_url = new URL("http://localhost:3000/slug");
       blog_url.searchParams.set("email", `${email}`);
@@ -56,11 +59,15 @@ function HOME() {
     
     var url = new URL("http://localhost:3000/explore");
     var url2 = new URL("http://localhost:3000/yourblogs");
+    var url3 = new URL("http://localhost:3000/profile");
+
     url.searchParams.set("email", `${email}`);
     url2.searchParams.set("email", `${email}`);
+    url3.searchParams.set("email", `${email}`);
     //console.log({explore_url:url})
     setExplore_url(url);
     setYourblogs_url(url2);
+    setProfile(url3);
     Setlist(temp_list);
     SetOriginal(temp_list);
   };
@@ -158,12 +165,12 @@ function HOME() {
         (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
 
           <div className="absolute inset-0 h-full w-full gridblock"></div>
-          <Navbar explore_url={explore_url} yourblogs_url={yourblogs_url} />
+          <Navbar UserName={UserName} explore_url={explore_url} yourblogs_url={yourblogs_url} />
           <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
             <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
-              <ProfileCard />
+              <ProfileCard url={profile}/>
               <a href="/createblog" className="bg-blue-600 w-full px-2 flex justify-center gap-4 items-center rounded-full py-3 text-slate-200">
-                <MdAddCircle className="text-xl"/>
+                <MdAddCircle className="text-xl" />
                 <p>Create Blog</p>
               </a>
             </div>
