@@ -91,8 +91,14 @@ app.use('/deletBlog',require('./routes/deleteBlog'))
 
 //profile
 app.use('/profile',require('./routes/Profile'))
+
 //submit interests
 app.use('/handleinterests',require('./routes/HandleInterests'))
+
+//users
+// app.use('/users',require('./routes/Users'))
+// //comments
+// app.use('/comments',require('./routes/'))
 
 app.all('*', (req, res) => {
     res.status(404)
