@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+// import Box from "@mui/material/Box";
+// import CircularProgress from "@mui/material/CircularProgress";
 
 const ForgotPassword = () => {
   const { id, token } = useParams();
@@ -120,17 +120,7 @@ const ForgotPassword = () => {
           </section>
         </>
       ) : (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          Loading... &nbsp;
-          <CircularProgress />
-        </Box>
+        <p>Loading... &nspp</p>
       )}
     </>
   );
