@@ -89,6 +89,12 @@ app.use('/save_edited_blog',require('./routes/EditBlog_save'))
 //delete blog
 app.use('/deletBlog',require('./routes/deleteBlog'))
 
+//likes
+app.use('/likes',require('./routes/Likes'))
+
+//unlikes
+app.use('/unlikes',require('./routes/Unlikes'))
+
 //profile
 app.use('/profile',require('./routes/Profile'))
 //submit interests
