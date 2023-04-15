@@ -1,22 +1,20 @@
-const express = require("express");
-
 const User = require("../models/UserModel");
 const Blog = require("../models/BlogModel");
 const { ObjectId } = require("mongodb");
+const getmore=async(req,res)=>{
+    const present_user_email = req.body.email_login;
+    const present_blog_count=req.body.blog_num
 
-const home =async (req, res) => {
-  const present_user_email = req.body.email_login;
   const user_details=await User.collection.findOne({ EmailId: present_user_email })
   let blogs=[]
   if (typeof(user_details.Friends) !== "undefined") {
     const cursor=Blog.collection.find({ Owner: { $in: user_details.Friends } })
     blogs=await cursor.toArray()
-    const len=blogs.length
-    blogs=blogs.slice(0,5) 
+    blogs=blogs.slice(present_blog_count,present_blog_count+5) 
           
     const blog_owners=[]
 
-    //reduce load time more by storing owner username directly in database
+    //reduce load time more by storing owner username directly in blogs collection
     for(let i=0;i<blogs.length;i++)
     {
       const user=await User.collection.findOne({_id:new ObjectId(blogs[i].Owner)})
@@ -28,14 +26,16 @@ const home =async (req, res) => {
         console.log(blogs[i].Owner)
       }
     }
-            
-    res.json({ all_blogs: blogs ,all_owners:blog_owners,blog_count:blogs.length,total_num_blogs:len});
+
+    
+    res.json({ all_blogs: blogs ,all_owners:blog_owners,blog_count:(present_blog_count+blogs.length)});
                  
     }
     else {
       res.json({ all_blogs: blogs });
     }
-    
-};
 
-module.exports = { home };
+
+}
+
+module.exports={getmore}

@@ -92,6 +92,12 @@ app.use('/deletBlog',require('./routes/deleteBlog'))
 //submit interests
 app.use('/handleinterests',require('./routes/HandleInterests'))
 
+//get more blogs
+app.use('/get_more_blogs',require('./routes/getmoreblogs'))
+
+//test
+app.use('/testing',require('./routes/testing'))
+
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {

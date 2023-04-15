@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/C-NikhilKarthik/CS-301-Project/issues"
   },
-  "homepage": "https://github.com/C-NikhilKarthik/CS-301-Project#readme"
+  "homepage": "https://github.com/C-NikhilKarthik/CS-301-Project#readme",
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
 }
