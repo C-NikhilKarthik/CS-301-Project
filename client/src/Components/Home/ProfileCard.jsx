@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 function ProfileCard({ url }) {
   const [data, setData] = useState({
-    name: ''
+    name: '',
+    following:''
   })
   const generate_blogs = async (e) => {
     const temp_list = [];
@@ -16,9 +17,19 @@ function ProfileCard({ url }) {
       }),
       headers: { "Content-type": "application/json" },
     });
+
+    const response2 = await fetch("/users", {
+      method: "POST",
+      body: JSON.stringify({
+        email_login: email,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+    const json2 = await response2.json();
     const json = await response.json();
-    setData({ name: json.UserName });
+    setData({ name: json.UserName ,following:json.Friends.length});
     console.log(json);
+    console.log(json2)
   }
 
 
@@ -35,7 +46,7 @@ function ProfileCard({ url }) {
       <div className="text-sm mb-2">✨Posting and Learning✨</div>
       <div className="flex items-center border-[1px] border-r-0 border-l-0 border-slate-600 w-full p-2">
         <div className="border-r-[1px] flex flex-col px-10 py-4  items-center justify-start border-slate-600 w-full">
-          <p className="font-semibold">6,664</p>
+          <p className="font-semibold">{data.following}</p>
           <p className="text-sm text-slate-500">Following</p>
         </div>
         <div className="flex flex-col items-center px-10 justify-center w-full">
