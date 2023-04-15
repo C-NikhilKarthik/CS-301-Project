@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InputField from "../InputField";
-function Regsiter() {
+function Regsiter(props) {
   const[userName,setUsername]=useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -10,6 +10,7 @@ function Regsiter() {
 
   const handleForm = async (e) => {
     e.preventDefault()
+    props.setuser(userName)
     const response = await fetch("/signup", {
       method: "POST",
       headers: {
@@ -27,6 +28,9 @@ function Regsiter() {
     const json =await response.json();
     if (json.status === "FAILED") {
       setMessage(json.message);
+    }
+    else{
+      window.alert("account created")
     }
   };
 
@@ -72,6 +76,13 @@ function Regsiter() {
         </div>
 
         {message && <p className="text-red-500 text-xs">{message}</p>}
+      
+        <button
+          type="submit"
+          className="bg-blue-600 mt-3 px-3 w-fit py-2 text-sm rounded-md text-slate-300 hover:bg-blue-700"
+          >
+          Create Account
+          </button>
       </div>
     </form>
   );

@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-const Card = ({ title, imageUrl }) => {
+const Card = ({ title, imageUrl ,Selected,onSelect}) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const handleCardClick = () => {
+    onSelect(!isSelected)
     setIsSelected(!isSelected);
   };
 
