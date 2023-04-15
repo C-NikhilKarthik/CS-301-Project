@@ -18,6 +18,7 @@ import Loading from "./pages/Loading";
 import YourBlogs from "./pages/YourBlogs";
 import EditBlog from "./pages/EditBlog";
 import CreateBlog from "./pages/CreateBlog";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/loading" element={<Loading />}></Route>
         <Route path="/yourblogs" element={<YourBlogs />}></Route>
         <Route path="/edit" element={<EditBlog />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </Router>
   );

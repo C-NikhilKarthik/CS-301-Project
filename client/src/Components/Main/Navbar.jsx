@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Logo from "../../assets/Logo.png";
 import { TbGridDots } from "react-icons/tb";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { HiHome } from "react-icons/hi";
@@ -8,7 +7,7 @@ import Switcher from "../Switcher";
 import Modal from "../Home/Modal";
 import FriendsSearch from "../Home/FriendsSearch";
 
-function Navbar({ logo, explore_url, home_url, yourblogs_url }) {
+function Navbar({ logo, explore_url, home_url, yourblogs_url,UserName }) {
   
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -90,7 +89,7 @@ function Navbar({ logo, explore_url, home_url, yourblogs_url }) {
           ) : (
             <div className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 h-8 aspect-square rounded-full" />
           )}
-          <div className="text-lg">TheNetherAxe</div>
+          <div className="text-lg">{UserName}</div>
           <TiArrowSortedDown className="text-lg" />
         </div>
         <TbGridDots />

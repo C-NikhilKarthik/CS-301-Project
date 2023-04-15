@@ -7,7 +7,7 @@ const { ObjectId } = require("mongodb");
 const blogs =async (req, res) => {
   const present_user_email = req.body.email_login;
   const user_details=await User.collection.findOne({ EmailId: present_user_email })
-
+  const UserName = user_details.UserName;
   let blogs=[]
   
     const cursor=Blog.collection.find({ Owner:user_details._id }).limit(5)
@@ -22,7 +22,7 @@ const blogs =async (req, res) => {
       blog_owners.push(user.UserName)
     }
     // console.log(blogs);
-    res.json({ all_blogs: blogs ,all_owners:blog_owners});
+    res.json({ UserName:UserName,all_blogs: blogs ,all_owners:blog_owners});
                  
     
     

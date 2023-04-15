@@ -89,6 +89,9 @@ app.use('/save_edited_blog',require('./routes/EditBlog_save'))
 //delete blog
 app.use('/deletBlog',require('./routes/deleteBlog'))
 
+//profile
+app.use('/profile',require('./routes/Profile'))
+
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {

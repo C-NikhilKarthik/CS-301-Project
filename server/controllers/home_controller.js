@@ -7,6 +7,7 @@ const { ObjectId } = require("mongodb");
 const home =async (req, res) => {
   const present_user_email = req.body.email_login;
   const user_details=await User.collection.findOne({ EmailId: present_user_email })
+  const UserName = user_details.UserName;
   let blogs=[]
   if (typeof(user_details.Friends) !== "undefined") {
     const cursor=Blog.collection.find({ Owner: { $in: user_details.Friends } }).limit(5)
@@ -27,11 +28,11 @@ const home =async (req, res) => {
       }
     }
             
-    res.json({ all_blogs: blogs ,all_owners:blog_owners});
+    res.json({ UserName:UserName,all_blogs: blogs ,all_owners:blog_owners});
                  
     }
     else {
-      res.json({ all_blogs: blogs });
+      res.json({ UserName:UserName,all_blogs: blogs });
     }
     
 };
