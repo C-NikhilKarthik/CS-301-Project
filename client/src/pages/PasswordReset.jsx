@@ -26,8 +26,10 @@ const PasswordReset = () => {
     if (data.status === 201) {
       setEmail("");
       setMessage(true);
+    } else if (data.status === 400) {
+      toast.error("Invalid user");
     } else {
-      toast.error("invalid user");
+      toast.error("Something went wrong");
     }
   };
 
@@ -43,26 +45,26 @@ const PasswordReset = () => {
 
           {message ? (
             <p style={{ color: "green", fontWeight: "bold" }}>
-              password reset link send successfully in your email
+              Password reset link sent successfully to your email
             </p>
           ) : (
             ""
           )}
 
-          <form>
+          <form onSubmit={sendLink}>
             <div className="form-input">
               <InputField
                 type={"text"}
                 name={"email"}
                 label={"Email"}
                 icon={"email"}
-                onChange={setVal} // pass the function directly
+                value={email}
+                onChange={setVal}
               />
             </div>
             <button
-              type="button"
+              type="submit"
               className="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              onClick={sendLink} // add onClick to trigger sendLink function
             >
               Send Mail
               <svg
