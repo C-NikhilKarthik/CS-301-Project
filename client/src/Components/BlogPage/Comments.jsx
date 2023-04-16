@@ -1,38 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
+  const [userName, setUsername] = useState([]);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const blogId = urlParams.get("blogId");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("/addComment", {
+      method: "POST",
+      body: JSON.stringify({
+        comment,
+        blogId,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+  };
+
+  const handleDelete=async (commentId)=>{
+    const response = await fetch("/deleteComments", {
+      method: "POST",
+      body: JSON.stringify({
+        commentId,
+        blogId,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+  }
 
   useEffect(() => {
-    axios.get('/comments')
-      .then(res => setComments(res.data))
-      .catch(err => console.log(err));
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post('/comments', { name, email, comment })
-      .then(res => {
-        setComments([...comments, res.data]);
-        setName('');
-        setEmail('');
-        setComment('');
-      })
-      .catch(err => console.log(err));
-  };
-
-  const handleDelete = (id) => {
-    axios.delete(`/comments/${id}`)
-      .then(res => {
-        setComments(comments.filter(comment => comment._id !== id));
-        console.log(res.data);
-      })
-      .catch(err => console.log(err));
-  };
+    const fetchData = async () => {
+      const response = await fetch("/getComments", {
+        method: "POST",
+        body: JSON.stringify({
+          blogId,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+      const json = await response.json();
+      // console.log(json.array);
+      if (json) {
+        setComments(json.comments);
+        setUsername(json.array);
+      }
+    };
+    fetchData();
+  }, [blogId]);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -42,13 +58,15 @@ const Comments = () => {
         <p>No comments yet.</p>
       ) : (
         <ul className="space-y-4">
-            
-          {comments.map(comment => (
+          {comments.map((comment, index) => (
             <li key={comment._id}>
               <div className="bg-gray-100 p-4 rounded-lg">
-                <h2 className="text-lg font-medium mb-2">{comment.name}</h2>
-                <p className="text-gray-600 mb-4">{comment.comment}</p>
-                <button onClick={() => handleDelete(comment._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">Delete</button>
+                <h2 className="text-lg font-medium mb-2">{userName[index]}</h2>
+                <p className="text-gray-600 mb-4">{comment.text}</p>
+                
+                <button onClick={() => handleDelete(comment._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                  Delete
+                </button>
               </div>
             </li>
           ))}
@@ -58,18 +76,24 @@ const Comments = () => {
       <form onSubmit={handleSubmit} className="mt-8">
         <h2 className="text-lg font-medium mb-4">Leave a comment</h2>
         <div className="mb-4">
-          <label htmlFor="name" className="block font-medium mb-2">Name</label>
-          <input type="text" id="name" name="name" value={name} onChange={e => setName(e.target.value)} className="border border-gray-300 px-4 py-2 rounded-lg w-full" required />
+          <label htmlFor="comment" className="block font-medium mb-2">
+            Comment
+          </label>
+          <textarea
+            id="comment"
+            name="comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            className="border border-gray-300 px-4 py-2 rounded-lg w-full"
+            required
+          ></textarea>
         </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block font-medium mb-2">Email</label>
-          <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} className="border border-gray-300 px-4 py-2 rounded-lg w-full" required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="comment" className="block font-medium mb-2">Comment</label>
-          <textarea id="comment" name="comment" value={comment} onChange={e => setComment(e.target.value)} className="border border-gray-300 px-4 py-2 rounded-lg w-full" required></textarea>
-        </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Submit</button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

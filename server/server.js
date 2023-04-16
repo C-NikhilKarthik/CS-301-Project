@@ -103,8 +103,15 @@ app.use('/handleinterests',require('./routes/HandleInterests'))
 
 //users
 app.use('/users',require('./routes/Users'))
-// //comments
-// app.use('/comments',require('./routes/'))
+
+//add comments
+app.use('/addComment',require('./routes/AddComment'))
+
+//add comments
+app.use('/getComments',require('./routes/GetComments'))
+
+//add comments
+app.use('/deleteComments',require('./routes/DeleteComments'))
 
 app.all('*', (req, res) => {
     res.status(404)
