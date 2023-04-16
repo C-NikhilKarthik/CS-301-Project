@@ -14,7 +14,7 @@ function Navbar({ logo, explore_url, home_url, yourblogs_url,UserName }) {
     setIsOpen(false);
   };
   return (
-    <nav className="py-6 px-8 flex justify-between w-full text-white text-2xl items-center">
+    <nav className="py-6 px-8 flex justify-between w-full text-slate-900 dark:text-white text-2xl items-center">
       <p className="flex font-semibold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-transparent cursor-pointer">
         TheBlogPenn
       </p>
