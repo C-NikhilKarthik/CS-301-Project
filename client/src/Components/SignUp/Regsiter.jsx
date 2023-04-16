@@ -31,6 +31,7 @@ function Regsiter(props) {
     }
     else{
       window.alert("account created")
+      props.setcontinuebutton(true)
     }
   };
 

@@ -14,7 +14,7 @@ const interests=async(req,res)=>{
     User.collection.updateOne({UserName:req.body.user},{$set:{Interests:user_interests}})
     .then(()=>{
         console.log("interests added")
-        res.json({mssg:"interests added"})
+        res.json({mssg:"SUCCESS"})
     })
     
 }
