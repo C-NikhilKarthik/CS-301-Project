@@ -113,6 +113,13 @@ app.use('/getComments',require('./routes/GetComments'))
 //add comments
 app.use('/deleteComments',require('./routes/DeleteComments'))
 
+//get more blogs
+app.use('/get_more_blogs',require('./routes/getmoreblogs'))
+
+//test
+app.use('/testing',require('./routes/testing'))
+
+
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {

@@ -16,7 +16,8 @@ function HOME() {
   const [profile, setProfile] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [UserName, setUserName] = useState('');
+  const [numBlogs, setNumBlogs] = useState(0)
+  const [tot_numBlogs, setTotNumBlogs] = useState(0)
 
   const generate_blogs = async (e) => {
     setIsLoading(true);
@@ -33,43 +34,39 @@ function HOME() {
     });
 
     const json = await response.json();
-    setUserName(json.UserName);
-    if (json.all_blogs.length > 0) {
-      for (let i = 0; i < json.all_blogs.length; i++) {
-        var blog_url = new URL("http://localhost:3000/slug");
-        blog_url.searchParams.set("email", `${email}`);
-        blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
-        temp_list.push(
-          <CARD
-            key={json.all_blogs[i]._id}
-            id={json.all_blogs[i]._id}
-            image={"images/bg.jpg"}
-            text={json.all_blogs[i].Post_text}
-            Heading={json.all_blogs[i].Title}
-            Likes={json.all_blogs[i].Likes}
-            Owner={String(json.all_owners[i])}
-            location={blog_url}
-          />
-        );
-        setIsLoading(false);
-      }
+    setNumBlogs(json.blog_count)
+    setTotNumBlogs(json.total_num_blogs)
+
+    for (let i = 0; i < json.all_blogs.length; i++) {
+      var blog_url = new URL("http://localhost:3000/slug");
+      blog_url.searchParams.set("email", `${email}`);
+      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+
+      temp_list.push(
+        <CARD
+          image={"images/bg.jpg"}
+          text={json.all_blogs[i].Post_text}
+          Heading={json.all_blogs[i].Title}
+          Owner={String(json.all_owners[i])}
+          location={blog_url}
+        />
+      );
+
     }
-    else {
-      setIsLoading(false)
-    }
+    setIsLoading(false);
 
     var url = new URL("http://localhost:3000/explore");
     var url2 = new URL("http://localhost:3000/yourblogs");
     var url3 = new URL("http://localhost:3000/profile");
-
     url.searchParams.set("email", `${email}`);
     url2.searchParams.set("email", `${email}`);
     url3.searchParams.set("email", `${email}`);
     //console.log({explore_url:url})
+    
     setExplore_url(url);
     setYourblogs_url(url2);
-    setProfile(url3);
     Setlist(temp_list);
+    setProfile(url3);
     SetOriginal(temp_list);
   };
 
@@ -112,6 +109,49 @@ function HOME() {
     }
   }
 
+  const get_more_blogs = async () => {
+    let temp_list = [...list]
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const email = urlParams.get("email");
+    const response = await fetch("/get_more_blogs", {
+      method: "POST",
+      body: JSON.stringify({
+        email_login: email,
+        blog_num: numBlogs
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+
+    const json = await response.json()
+
+    for (let i = 0; i < json.all_blogs.length; i++) {
+      var blog_url = new URL("http://localhost:3000/slug");
+      blog_url.searchParams.set("email", `${email}`);
+      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      temp_list.push(
+        <CARD
+          image={"images/bg.jpg"}
+          text={json.all_blogs[i].Post_text}
+          Heading={json.all_blogs[i].Title}
+          Owner={String(json.all_owners[i])}
+          location={blog_url}
+        />
+      );
+    }
+
+    Setlist(temp_list)
+    console.log("list length", list.length)
+    setNumBlogs(json.blog_count)
+    console.log(numBlogs, tot_numBlogs)
+    const button = document.getElementById("SeeMore_button")
+    if (numBlogs === tot_numBlogs) {
+      button.style.display = "none";
+    }
+
+
+  }
+
   useEffect(() => {
     generate_blogs();
   }, []);
@@ -121,7 +161,7 @@ function HOME() {
         (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
 
           <div className="absolute inset-0 h-full w-full gridblock"></div>
-          <Navbar UserName={UserName} explore_url={explore_url} yourblogs_url={yourblogs_url} />
+          <Navbar explore_url={explore_url} yourblogs_url={yourblogs_url} />
           <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
             <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
               <ProfileCard url={profile} />
@@ -133,8 +173,9 @@ function HOME() {
             <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
               <TOPBAR handle_search={handle_search} />
               {list}
+              <button onClick={get_more_blogs} id="SeeMore_button" className="dark:text-slate-200 text-slate-900">see more</button>
             </div>
-            <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
+            <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
               <p>Notifications</p>
             </div>
           </div>
