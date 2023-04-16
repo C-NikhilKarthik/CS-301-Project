@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState}from "react";
 import Card from "./Card";
 const cards = [
   {
@@ -39,8 +39,13 @@ const cards = [
   },
 ];
 function Interests(props) { 
+  const [flag,setFlag]=useState(false)
   const user=props.presentuser
 
+  if(flag===false)
+  {
+    props.setcontinuebutton(false)
+  }
   const changeSelected=(index,isselected)=>{
     cards[index].Selected=isselected
     console.log(cards[index].Selected)
@@ -48,7 +53,7 @@ function Interests(props) {
   }
 
   const handleinterests=async(e)=>{
-
+    e.preventDefault()
     console.log("entered handleinterests")
     const response = await fetch("/handleinterests", {
       method: "POST",
@@ -62,7 +67,16 @@ function Interests(props) {
     });
 
     const json=await response.json()
-    console.log(json)
+    if(json.mssg==="SUCCESS")
+    {
+      window.alert("Interests added")
+      props.setcontinuebutton(true)
+      setFlag(true)
+    }
+    else{
+      window.alert("error in adding interests")
+    }
+   
 
 
   }
