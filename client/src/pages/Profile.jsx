@@ -3,10 +3,12 @@ import Navbar from '../Components/Main/Navbar'
 import CARD from '../Components/Home/CARD';
 import TOPBAR from '../Components/Home/TOPBAR';
 import FriendsCard from '../Components/Home/FriendsCard';
+import Loading from './Loading';
 
 function Profile({ bg, Image }) {
     const [list, Setlist] = useState([]);
     const [data, setData] = useState({
+        loading: false,
         name: '',
         followers: '',
         following: '',
@@ -15,6 +17,7 @@ function Profile({ bg, Image }) {
     })
 
     const generate_blogs = async (e) => {
+        setData({ loading: true });
         const temp_list = [];
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -56,7 +59,6 @@ function Profile({ bg, Image }) {
                 }
             }
         }
-        setData({ name: json.UserName, followers: followers, following: json.Friends.length, blogs_number: json3.all_blogs.length, friends: json4 });
         for (let i = 0; i < json3.all_blogs.length; i++) {
             var blog_url = new URL("http://localhost:3000/slug");
             blog_url.searchParams.set("email", `${email}`);
@@ -82,7 +84,7 @@ function Profile({ bg, Image }) {
         }
         console.log(json4)
         Setlist(temp_list);
-
+        setData({ name: json.UserName, followers: followers, following: json.Friends.length, blogs_number: json3.all_blogs.length, friends: json4 ,loading: false});
     }
 
     useEffect(() => {
@@ -96,53 +98,55 @@ function Profile({ bg, Image }) {
         ? { background: `url(${Image})` }
         : { background: 'url("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")' }
     return (
-        <div className="w-full h-full pb-6 flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+        <>
+            {data.loading ? (<Loading />) : (<div className="w-full h-full pb-6 flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
 
-            <Navbar />
-            <div className="relative min-h-[30vh] w-full" style={backgroundStyle}>
-                <div className='absolute left-10 rounded-full h-52 bg-cover bg-center aspect-square border-4 bottom-0 translate-y-[50%]' style={ImageStyle}></div>
-            </div>
-            <div className="flex w-full p-10 gap-4 h-full">
-                <div className="w-fit h-fit flex flex-col gap-4 bg-slate-800/60 backdrop-blur-md rounded p-3 mt-20">
-                    <div className='text-xl text-slate-200 font-semibold '>
-                        <p>{data.name}</p>
-                        <p className="-mt-1 text-sm text-slate-600">@elonmusk</p>
-                    </div>
-                    <div className='text-slate-400 max-w-[16rem] w-full'>I am a core backend developer at TheBlogPenn website, responsible for its backend operations.</div>
+                <Navbar UserName={data.name}/>
+                <div className="relative min-h-[30vh] w-full" style={backgroundStyle}>
+                    <div className='absolute left-10 rounded-full h-52 bg-cover bg-center aspect-square border-4 bottom-0 translate-y-[50%]' style={ImageStyle}></div>
                 </div>
-                <div className='w-full h-full grid grid-cols-[1fr_auto] gap-4'>
-                    <div className='w-full flex h-full flex-col gap-4'>
-                        <div className='flex justify-between bg-slate-800/60 rounded py-3 px-10'>
-                            <div className='flex flex-col items-center'>
-                                <div className='text-lg font-semibold text-slate-200'>{data.following}</div>
-                                <p className='-mt-1 text-sm text-slate-400'>Following</p>
+                <div className="flex w-full p-10 gap-4 h-full">
+                    <div className="w-fit h-fit flex flex-col gap-4 bg-slate-800/60 backdrop-blur-md rounded p-3 mt-20">
+                        <div className='text-xl text-slate-200 font-semibold '>
+                            <p>{data.name}</p>
+                            <p className="-mt-1 text-sm text-slate-600">@elonmusk</p>
+                        </div>
+                        <div className='text-slate-400 max-w-[16rem] w-full'>I am a core backend developer at TheBlogPenn website, responsible for its backend operations.</div>
+                    </div>
+                    <div className='w-full h-full grid grid-cols-[1fr_auto] gap-4'>
+                        <div className='w-full flex h-full flex-col gap-4'>
+                            <div className='flex justify-between bg-slate-800/60 rounded py-3 px-10'>
+                                <div className='flex flex-col items-center'>
+                                    <div className='text-lg font-semibold text-slate-200'>{data.following}</div>
+                                    <p className='-mt-1 text-sm text-slate-400'>Following</p>
+                                </div>
+                                <div className='flex flex-col items-center'>
+                                    <div className='text-lg font-semibold text-slate-200'>{data.followers}</div>
+                                    <p className='-mt-1 text-sm text-slate-400'>Followers</p>
+                                </div>
+                                <div className='flex flex-col items-center'>
+                                    <div className='text-lg font-semibold text-slate-200'>{data.blogs_number}</div>
+                                    <p className='-mt-1 text-sm text-slate-400'>Blogs Posted</p>
+                                </div>
                             </div>
-                            <div className='flex flex-col items-center'>
-                                <div className='text-lg font-semibold text-slate-200'>{data.followers}</div>
-                                <p className='-mt-1 text-sm text-slate-400'>Followers</p>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <div className='text-lg font-semibold text-slate-200'>{data.blogs_number}</div>
-                                <p className='-mt-1 text-sm text-slate-400'>Blogs Posted</p>
+                            <div className="relative rounded-md h-[70vh] flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
+                                <TOPBAR />
+                                {list}
                             </div>
                         </div>
-                        <div className="relative rounded-md h-[70vh] flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
-                            <TOPBAR />
-                            {list}
+                        <div className='flex flex-col gap-4'>
+                            <div className='flex justify-between bg-slate-800/60 rounded py-3 text-xl text-slate-200 font-semibold px-10'>Friends</div>
+                            <div className="w-[32rem] h-full flex flex-col gap-4 overflow-y-scroll pb-4">
+                                {data.friends.map((s) => (
+                                    <FriendsCard Fname={s} />
+                                ))}
+                            </div>
                         </div>
                     </div>
-                    <div className='flex flex-col gap-4'>
-                        <div className='flex justify-between bg-slate-800/60 rounded py-3 text-xl text-slate-200 font-semibold px-10'>Friends</div>
-                        <div className="w-[32rem] h-full flex flex-col gap-4 overflow-y-scroll px-4 pt-32 sm:pt-20 pb-4">
-                            {data.friends.map((s) => (
-                                <FriendsCard Fname={s} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+            )}</>
     );
 }
 
