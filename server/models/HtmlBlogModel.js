@@ -9,11 +9,13 @@ const CommentSchema = new Schema({
 const HtmlBlogSchema = new Schema({
     Owner: Schema.Types.ObjectId,
     Heading: String,
+    Desc: String,
+    Heading: String,
     Description: String,
     Content: String,
     Likes: [Schema.Types.ObjectId],
     Comments: [CommentSchema]
-}, {collection: 'Blog_Posts'});
+}, { collection: 'Blog_Posts' });
 
 const BlogHtml = mongoose.model('HtmlBlog', HtmlBlogSchema);
 module.exports = BlogHtml;

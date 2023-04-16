@@ -1,6 +1,9 @@
 import React from "react";
 
 function FriendsCard({ dp, Fname, Lname, friend, setFriend }) {
+
+
+  
   return (
     <div className="relative justify-between border-[1px] border-slate-600 rounded-lg hover:bg-blue-400 dark:hover:bg-blue-500 cursor-pointer transition-[background-color] p-4 items-center bg-white dark:bg-slate-800 flex gap-4">
       <div className="flex items-center gap-4">
