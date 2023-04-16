@@ -50,6 +50,8 @@ function CreateBlog() {
 
   const [state, setState] = useState({ value: null });
   const [message, setMessage] = useState('')
+  const [heading,setHeading]=useState('');
+  const [desc,setDesc]=useState('');
   const handleChange = (value) => {
     setState({ value });
     // console.log(state.value);
@@ -59,7 +61,7 @@ function CreateBlog() {
     let count = 0;
     let modified = false; // Flag to indicate if any replacement was made
     do {
-      console.log('hiii from client')
+      // console.log('hiii from client')
       modified = false;
       const imageIndex = state.value.indexOf("<img src=", count);
       if (imageIndex !== -1) {
@@ -78,7 +80,7 @@ function CreateBlog() {
       }
       count = imageIndex + 1; // Update count to the next character after the image tag
     } while (modified && count < state.value.length);
-    console.log(state.value);
+    // console.log(state.value);
   };
 
 
@@ -106,9 +108,12 @@ function CreateBlog() {
   const submitBlog = async (e) => {
     e.preventDefault();
     replaceImage();
+    console.log(heading,desc,state)
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({
+        heading,
+        desc,
         state,
       }),
       headers: { "Content-type": "application/json" },
@@ -129,9 +134,9 @@ function CreateBlog() {
       content: (
         <form onSubmit={submitBlog} className="w-full h-fit min-h-[30rem]">
           <div className="dark:text-white text-xl">Heading</div>
-          <div className="p-3 bg-slate-800 rounded mb-5" contentEditable="true"></div>
+          <input type='text' className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={heading} onChange={(e)=>setHeading(e.target.value)}></input>
           <div className="dark:text-white text-xl">Description</div>
-          <div className="p-3 bg-slate-800 rounded mb-5" contentEditable="true"></div>
+          <input  type="text" className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={desc} onChange={(e)=>setDesc(e.target.value)}></input>
           <EditorToolbar />
           <ReactQuill
             theme="snow"

@@ -4,7 +4,7 @@ import FriendsCard from "./FriendsCard";
 function FriendsSearch() {
   const [search, setSearch] = useState("");
   const [people, setPeople] = useState([]);
-
+  const [friend,setFriend] = useState(); 
   const handleSearch = async (e) => {
     e.preventDefault();
     const response = await fetch("/searchFriends", {
@@ -15,6 +15,7 @@ function FriendsSearch() {
       headers: { "Content-type": "application/json" },
     });
     const json = await response.json();
+    console.log(json);
     setPeople(json);
     console.log(json);
   };
@@ -102,14 +103,14 @@ function FriendsSearch() {
         </div>
         <div className="flex-grow gap-2 p-2 flex flex-col h-full overflow-y-scroll border-b-[1px] border-t-[1px] border-slate-600">
           {people.map((item, index) => (
-            <FriendsCard friend={true} key={index} Fname={item.Fname} Lname={item.Lname} />
+            <FriendsCard friend={item.Status} setFriend={item.Status ? removeFriend : addFriend} key={index} Fname={item.Fname} Lname={item.Lname} />
           ))}
         </div>
         <div className="flex justify-end p-3">
           <button
             type="submit"
             className="inline-flex items-center w-fit py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
+          > 
             <svg
               aria-hidden="true"
               className="w-5 h-5 mr-2 -ml-1"
