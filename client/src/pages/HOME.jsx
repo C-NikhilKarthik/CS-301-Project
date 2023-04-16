@@ -158,8 +158,7 @@ function HOME() {
   return (
     <>
       {isLoading ? (<Loading />) :
-        (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
-
+        (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-top bg-fixed ">
           <div className="absolute inset-0 h-full w-full gridblock"></div>
           <Navbar explore_url={explore_url} yourblogs_url={yourblogs_url} />
           <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">

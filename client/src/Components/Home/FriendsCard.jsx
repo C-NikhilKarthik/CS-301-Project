@@ -14,10 +14,10 @@ function FriendsCard({ dp, Fname, Lname, friend, setFriend }) {
         <div className="text-slate-800 cursor-pointer dark:text-slate-300 ">{Fname} {Lname}</div>
       </div>
       <div className="flex items-center gap-4">
-        {friend? (
-          <a href="/" className="rounded bg-green-500 py-2 px-3 flex w-fit">Add Friend</a>
+        {!friend? (
+          <div onClick={setFriend} className="rounded bg-green-500 py-2 px-3 flex w-fit">Add Friend</div>
         ) : (
-          <a href="/" className="rounded bg-red-500 py-2 px-3 flex w-fit">Remove Friend</a>
+          <div onClick={setFriend} className="rounded bg-red-500 py-2 px-3 flex w-fit">Remove Friend</div>
         )}
         <div className="cursor-pointer text-slate-800 dark:text-slate-100">
           <span className="material-symbols-outlined">more_vert</span>
