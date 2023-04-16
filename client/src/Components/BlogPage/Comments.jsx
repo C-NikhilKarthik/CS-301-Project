@@ -6,7 +6,7 @@ const Comments = () => {
   const [userName, setUsername] = useState([]);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const blogId = urlParams.get("blogId");
+  const [blogId, setBlogId] = useState(urlParams.get("blogId"));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +18,9 @@ const Comments = () => {
       }),
       headers: { "Content-type": "application/json" },
     });
+    setComment("");
+    setBlogId(blogId); // update blogId to trigger useEffect hook
+    fetchData();
   };
 
   const handleDelete=async (commentId)=>{
@@ -29,24 +32,27 @@ const Comments = () => {
       }),
       headers: { "Content-type": "application/json" },
     });
+    setBlogId(blogId); // update blogId to trigger useEffect hook
+    fetchData();
   }
+  const fetchData = async () => {
+    const response = await fetch("/getComments", {
+      method: "POST",
+      body: JSON.stringify({
+        blogId,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+    const json = await response.json();
+    // console.log(json.array);
+    if (json) {
+      setComments(json.comments);
+      setUsername(json.array);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/getComments", {
-        method: "POST",
-        body: JSON.stringify({
-          blogId,
-        }),
-        headers: { "Content-type": "application/json" },
-      });
-      const json = await response.json();
-      // console.log(json.array);
-      if (json) {
-        setComments(json.comments);
-        setUsername(json.array);
-      }
-    };
+    
     fetchData();
   }, [blogId]);
 
