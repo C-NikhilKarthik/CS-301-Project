@@ -89,16 +89,29 @@ app.use('/save_edited_blog',require('./routes/EditBlog_save'))
 //delete blog
 app.use('/deletBlog',require('./routes/deleteBlog'))
 
+//likes
+app.use('/likes',require('./routes/Likes'))
+
+//unlikes
+app.use('/unlikes',require('./routes/Unlikes'))
+
 //profile
 app.use('/profile',require('./routes/Profile'))
+
 //submit interests
 app.use('/handleinterests',require('./routes/HandleInterests'))
+
+//users
+app.use('/users',require('./routes/Users'))
+// //comments
+// app.use('/comments',require('./routes/'))
 
 //get more blogs
 app.use('/get_more_blogs',require('./routes/getmoreblogs'))
 
 //test
 app.use('/testing',require('./routes/testing'))
+
 
 app.all('*', (req, res) => {
     res.status(404)

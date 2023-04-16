@@ -14,7 +14,7 @@ function YourBlogs() {
   const [originallist, SetOriginal] = useState([]);
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [UserName,setUserName] = useState('');
+  const [UserName, setUserName] = useState('');
 
 
 
@@ -48,6 +48,7 @@ function YourBlogs() {
 
       temp_list.push(
         <CARD
+          key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
           text={json.all_blogs[i].Post_text}
@@ -91,7 +92,7 @@ function YourBlogs() {
             <TOPBAR />
             {list}
           </div>
-          <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
+          <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
             <p>Notifications</p>
           </div>
         </div>

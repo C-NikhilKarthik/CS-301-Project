@@ -644,7 +644,7 @@
     overflow: visible;
   }
   .ql-snow .ql-editor img,.ql-editor img {
-    max-width: 100%;
+    width: 100%;
     border-radius: 8px;
   }
   .ql-snow .ql-picker {
