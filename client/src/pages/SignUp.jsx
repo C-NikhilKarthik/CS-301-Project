@@ -8,6 +8,7 @@ import Switcher from "../Components/Switcher";
 
 function SignUp() {
   const [user, setUser] = useState('none')
+  const [continue_button,setContinue]=useState(false)
   const steps = [
     {
       id: 1,
@@ -27,7 +28,8 @@ function SignUp() {
           ></path>
         </svg>
       ),
-      content: <Regsiter setuser={(val) => setUser(val)} />,
+      content: <Regsiter setuser={(val) => setUser(val)} setcontinuebutton={(val)=>{setContinue(val)
+        console.log("register:",continue_button)}}/>,
     },
     {
       id: 2,
@@ -48,7 +50,10 @@ function SignUp() {
           ></path>
         </svg>
       ),
-      content: <Interests presentuser={user} />,
+      content: <Interests presentuser={user} setcontinuebutton={(val)=>
+        {console.log("setting continue button to ",val)
+           setContinue(val) 
+          console.log("interests: " ,continue_button)}}/>,
     },
     {
       id: 3,
@@ -99,7 +104,7 @@ function SignUp() {
         </div>
       </nav>
       <div className="flex flex-col w-full sm:w-[50rem]">
-        <ProgressBar steps={steps} />
+        <ProgressBar steps={steps} setcontinuebutton={continue_button}/>
       </div>
     </div>
   );
