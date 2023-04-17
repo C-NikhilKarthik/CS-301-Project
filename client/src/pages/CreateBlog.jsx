@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect , useRef} from "react";
 import Footer from "../Components/Main/Footer";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -46,6 +46,8 @@ function CreateBlog() {
   //     parseInt(initialSize) + parseInt(e.clientX - initialPos)
   //   }px`;
   // };
+  const [isRecording, setIsRecording] = useState(false);
+  const recognitionRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
 
   const [state, setState] = useState({ value: null });
@@ -165,6 +167,48 @@ function CreateBlog() {
     },
   ];
 
+  //speech:
+  useEffect(() => {
+  const recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognition.onresult = (event) => {
+      let interimTranscript = '';
+      let finalTranscript = '';
+
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+
+      console.log("final transcript",finalTranscript)
+      setState({value:finalTranscript});
+    };
+
+    recognitionRef.current = recognition;
+  }, []);
+
+  const startRecording = () => {
+    recognitionRef.current.start();
+  };
+
+  const stopRecording = () => {
+    recognitionRef.current.stop();
+  };
+
   return (
     <div className="w-full min-h-[100vh] bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
       <Navbar />
@@ -188,6 +232,9 @@ function CreateBlog() {
           <div className="mt-8 p-3">
             <p>{tabs[activeTab].content}</p>
           </div>
+          <button onClick={isRecording ? stopRecording : startRecording}>
+        {isRecording ? 'Stop recording' : 'Start recording'}
+      </button>
         </div>
       </div>
       <Footer />

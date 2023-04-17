@@ -14,25 +14,25 @@ const cards = [
       Selected:false
   },
   {
-    title: "Space1",
+    title: "Food and Cooking",
     imageUrl:
       "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__340.jpg",
       Selected:false
   },
   {
-    title: "Space2",
+    title: "Personal Development",
     imageUrl:
       "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__340.jpg",
       Selected:false
   },
   {
-    title: "Space3",
+    title: "Health and Wellness",
     imageUrl:
       "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__340.jpg",
       Selected:false
   },
   {
-    title: "Space4",
+    title: "Travel",
     imageUrl:
       "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__340.jpg",
       Selected:false
