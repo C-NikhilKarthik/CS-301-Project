@@ -36,8 +36,8 @@ function YourBlogs() {
     setUserName(json.UserName);
 
     // console.log(json);
-
-    for (let i = 0; i < json.all_blogs.length; i++) {
+    console.log(json.all_blogs)
+    for (let i = json.all_blogs.length - 1; i > -1; i--) {
       urlParams.set('email', email);
       urlParams.set('blogId', String(json.all_blogs[i]._id));
       var blog_url = window.location.pathname.replace('/yourblogs', '/slug') + '?' + urlParams.toString();
@@ -51,8 +51,8 @@ function YourBlogs() {
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
-          text={json.all_blogs[i].Post_text}
-          Heading={json.all_blogs[i].Title}
+          text={json.all_blogs[i].Desc}
+          Heading={json.all_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
           location={blog_url}
           yourblog={true}
@@ -78,7 +78,7 @@ function YourBlogs() {
   }, []);
   return (
     <>{isLoading ? (<Loading />) : (
-      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-center bg-fixed ">
         <div className="absolute inset-0 h-full w-full gridblock"></div>
         <Navbar UserName={UserName} explore_url={explore_url} home_url={home_url} />
         <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
@@ -89,7 +89,7 @@ function YourBlogs() {
               <p>Create Blog</p>
             </a>
           </div>
-          <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
+          <div className="relative rounded-md flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
             <TOPBAR />
             {list}
           </div>

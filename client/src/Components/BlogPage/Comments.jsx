@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CommentsCard from "./CommentsCard";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -57,7 +58,7 @@ const Comments = () => {
   }, [blogId]);
 
   return (
-    <div className="w-full flex gap-2 mb-12  flex-col items-center bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 mx-auto p-6 sm:w-4/5 lg:w-2/3 sm:px-16 md:px-24 lg:px-32">
+    <div className="w-full flex rounded-md p-3 gap-2 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-800 flex-col dark:text-slate-200">
       <h1 className="text-3xl font-bold mb-8">Comments</h1>
       {comments.length === 0 ? (
         <p>No comments yet.</p>
@@ -65,14 +66,7 @@ const Comments = () => {
         <ul className="w-full flex flex-col gap-2">
           {comments.map((comment, index) => (
             <li key={comment._id}>
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <h2 className="text-lg font-medium mb-2">{userName[index]}</h2>
-                <p className="text-gray-600 mb-4">{comment.text}</p>
-                
-                <button onClick={() => handleDelete(comment._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
-                  Delete
-                </button>
-              </div>
+              <CommentsCard key={comment._id} owner={userName[index]} text={comment.text}/>
             </li>
           ))}
         </ul>
@@ -81,15 +75,13 @@ const Comments = () => {
       <form onSubmit={handleSubmit} className="mt-8">
         <h2 className="text-lg font-medium mb-4">Leave a comment</h2>
         <div className="mb-4">
-          <label htmlFor="comment" className="block font-medium mb-2">
-            Comment
-          </label>
           <textarea
             id="comment"
             name="comment"
             value={comment}
+            placeholder="Add your Thoughts ..."
             onChange={(e) => setComment(e.target.value)}
-            className="border border-gray-300 px-4 py-2 rounded-lg w-full"
+            className="bg-white dark:bg-slate-800 outline-none px-4 py-2 rounded-md w-full"
             required
           ></textarea>
         </div>

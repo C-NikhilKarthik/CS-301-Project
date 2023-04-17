@@ -54,10 +54,10 @@ function BlogSlug() {
         <div className="w-full p-3">
         <Navbar home_url={home_url}/>
         </div>
-        <div className="w-full flex flex-col items-center bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md p-6 mx-auto sm:w-4/5 lg:2/3 sm:px-16 mb-16 md:px-24 lg:px-32">
-          <div dangerouslySetInnerHTML={{ __html: content }} className="ql-editor text-slate-800 dark:text-slate-200"></div>
+        <div className="w-full flex flex-col items-center gap-6 p-6 mx-auto sm:w-4/5 lg:2/3 sm:px-16 mb-16 md:px-24 lg:px-32">
+          <div dangerouslySetInnerHTML={{ __html: content }} className="rounded-md w-full ql-editor bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-800 dark:text-slate-200"></div>
+          <Comments />
         </div>
-        <Comments />
         <Footer />
       </div>)}
     </>
