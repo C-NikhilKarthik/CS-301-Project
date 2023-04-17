@@ -21,6 +21,7 @@ function FriendsSearch() {
   };
 
   const addFriend = async (userId, index) => {
+    console.log("entered addFriend")
     const response = await fetch("/addFriends", {
       method: "POST",
       body: JSON.stringify({
@@ -33,6 +34,9 @@ function FriendsSearch() {
       const updatedPeople = [...people];
       updatedPeople[index].Status = true;
       setPeople(updatedPeople);
+    }
+    else{
+      console.log("add friend failed")
     }
   };
 
@@ -103,7 +107,7 @@ function FriendsSearch() {
         </div>
         <div className="flex-grow gap-2 p-2 flex flex-col h-full overflow-y-scroll border-b-[1px] border-t-[1px] border-slate-600">
           {people.map((item, index) => (
-            <FriendsCard friend={item.Status} setFriend={item.Status ? removeFriend : addFriend} key={index} Fname={item.Fname} Lname={item.Lname} />
+            <FriendsCard friend={item.Status} setFriend1={()=>addFriend(item.Uid,index)} setFriend2={()=>removeFriend(item.Uid,index)} key={index} Fname={item.Fname} Lname={item.Lname} />
           ))}
         </div>
         <div className="flex justify-end p-3">
