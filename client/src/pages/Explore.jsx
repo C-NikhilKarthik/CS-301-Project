@@ -53,29 +53,30 @@ function Explore() {
     const shuffled_blogs = json.all_blogs;
 
     for (let i = 0; i < shuffled_blogs.length; i++) {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/explore', '/slug') + '?' + urlParams.toString();
       temp_list.push(
         <CARD
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
+          Likes={json.all_blogs[i].Likes}
           image={"images/bg.jpg"}
-          text={shuffled_blogs[i].Post_text}
-          Heading={shuffled_blogs[i].Title}
+          text={shuffled_blogs[i].Desc}
+          Heading={shuffled_blogs[i].Heading}
           Owner={String(shuffled_blogs[i]._id)}
           location={blog_url}
         />
       );
     }
-
-    var url = new URL("http://localhost:3000/home");
-    url.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    var url = window.location.pathname.replace('/explore', '/home') + '?' + urlParams.toString();
     Sethome_url(url);
     Setlist(temp_list);
-
-    var url2 = new URL("http://localhost:3000/yourblogs");
-    url2.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    var url2 = window.location.pathname.replace('/explore', '/yourblogs') + '?' + urlParams.toString();
     setYourblogs_url(url2)
     setIsLoading(false);
 
@@ -87,7 +88,7 @@ function Explore() {
 
   return (
     <>{isLoading ? (<Loading />) : (
-      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-center bg-fixed ">
         <div className="absolute inset-0 h-full w-full gridblock"></div>
         <Navbar UserName={UserName} home_url={home_url} yourblogs_url={yourblogs_url} />
         <div className="flex h-full px-8 gap-8 z-[5]">
@@ -102,7 +103,7 @@ function Explore() {
             <TOPBAR />
             {list}
           </div>
-          <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md text-slate-100 bg-slate-400 dark:bg-slate-800 p-4">
+          <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
             <p>Notifications</p>
           </div>
         </div>

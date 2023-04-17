@@ -4,6 +4,7 @@ import Switcher from "../Components/Switcher";
 import "../Components/TextEditor/container.css";
 import Comments from "../Components/BlogPage/Comments";
 import Loading from "./Loading";
+import Navbar from "../Components/Main/Navbar";
 
 function BlogSlug() {
   const [list, Setlist] = useState([]);
@@ -29,9 +30,10 @@ function BlogSlug() {
     const json = await response.json();
 
     SetContent(json.blog_details.Content);
-
-    let url = new URL("http://localhost:3000/home")
-    url.searchParams.set("email", `${email}`)
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    const url = window.location.pathname.replace('/slug', '/home') + '?' + urlParams.toString();
+    
     setHomeUrl(url)
     setIsLoading(false)
     // var url = new URL("http://localhost:3000/explore");
@@ -47,35 +49,15 @@ function BlogSlug() {
   }, []);
   return (
     <>
-      {isLoading ? (<Loading />) : (<div className="w-full flex flex-col bg-[url('https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg')] dark:bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover bg-center bg-fixed ">
+      {isLoading ? (<Loading />) : (
+      <div className="overflow-hidden flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-top bg-fixed ">
         <div className="w-full p-3">
-          <nav className="w-full backdrop-filter backdrop-blur-md flex py-4 px-6 items-center justify-between dark:bg-slate-700 rounded">
-            <div className="text-lg font-semibold dark:text-slate-200">
-              The BlogPenn
-            </div>
-            <div className="sm:flex hidden">
-              <ul className="flex justify-between text-sm items-center gap-6 px-4">
-                <a href={home_url} className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
-                  Home
-                </a>
-                <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
-                  Friends
-                </li>
-                <li className="dark:text-gray-300 dark:hover:text-white after:transition-[width] cursor-pointer after:rounded after:mt-1 after:block after:w-0 after:h-1 after:bg-blue-500 hover:after:w-full">
-                  Explore
-                </li>
-              </ul>
-              <div className="flex border-l-[1px] items-center border-slate-200 px-2">
-                <Switcher />
-                <i className="fa fa-github text-2xl dark:hover:text-white cursor-pointer dark:text-slate-200 px-2"></i>
-              </div>
-            </div>
-          </nav>
+        <Navbar home_url={home_url}/>
         </div>
-        <div className="w-full flex flex-col items-center p-6 mx-auto sm:w-4/5 lg:2/3 sm:p-16 md:p-24 lg:p-32">
-          <div dangerouslySetInnerHTML={{ __html: content }} className="ql-editor text-slate-800 dark:text-slate-200"></div>
+        <div className="w-full flex flex-col items-center gap-6 p-6 mx-auto sm:w-4/5 lg:2/3 sm:px-16 mb-16 md:px-24 lg:px-32">
+          <div dangerouslySetInnerHTML={{ __html: content }} className="rounded-md w-full ql-editor bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-800 dark:text-slate-200"></div>
+          <Comments />
         </div>
-        <Comments />
         <Footer />
       </div>)}
     </>

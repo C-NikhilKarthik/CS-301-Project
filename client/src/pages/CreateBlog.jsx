@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Footer from "../Components/Main/Footer";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -46,12 +46,14 @@ function CreateBlog() {
   //     parseInt(initialSize) + parseInt(e.clientX - initialPos)
   //   }px`;
   // };
+  const [isRecording, setIsRecording] = useState(false);
+  const recognitionRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
 
   const [state, setState] = useState({ value: null });
   const [message, setMessage] = useState('')
-  const [heading,setHeading]=useState('');
-  const [desc,setDesc]=useState('');
+  const [heading, setHeading] = useState('');
+  const [desc, setDesc] = useState('');
   const handleChange = (value) => {
     setState({ value });
     // console.log(state.value);
@@ -108,7 +110,7 @@ function CreateBlog() {
   const submitBlog = async (e) => {
     e.preventDefault();
     replaceImage();
-    console.log(heading,desc,state)
+    console.log(heading, desc, state)
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({
@@ -134,9 +136,9 @@ function CreateBlog() {
       content: (
         <form onSubmit={submitBlog} className="w-full h-fit min-h-[30rem]">
           <div className="dark:text-white text-xl">Heading</div>
-          <input type='text' className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={heading} onChange={(e)=>setHeading(e.target.value)}></input>
+          <input type='text' className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={heading} onChange={(e) => setHeading(e.target.value)}></input>
           <div className="dark:text-white text-xl">Description</div>
-          <input  type="text" className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={desc} onChange={(e)=>setDesc(e.target.value)}></input>
+          <input type="text" className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={desc} onChange={(e) => setDesc(e.target.value)}></input>
           <EditorToolbar />
           <ReactQuill
             theme="snow"
@@ -149,9 +151,12 @@ function CreateBlog() {
           {message && (
             <p className="text-red-500 text-xs">{message}</p>
           )}
+          <div className="flex justify-end">
           <button type="submit" className="z-[1] cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
             Submit Blog
           </button>
+          </div>
+
         </form>
       ),
     },
@@ -164,6 +169,48 @@ function CreateBlog() {
       ),
     },
   ];
+
+  //speech:
+  useEffect(() => {
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognition.onresult = (event) => {
+      let interimTranscript = state.value;
+      let finalTranscript = state.value;
+
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+
+      console.log("final transcript", finalTranscript)
+      setState({ value: finalTranscript });
+    };
+
+    recognitionRef.current = recognition;
+  }, []);
+
+  const startRecording = () => {
+    recognitionRef.current.start();
+  };
+
+  const stopRecording = () => {
+    recognitionRef.current.stop();
+  };
 
   return (
     <div className="w-full min-h-[100vh] bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
@@ -188,6 +235,9 @@ function CreateBlog() {
           <div className="mt-8 p-3">
             <p>{tabs[activeTab].content}</p>
           </div>
+          <button onClick={isRecording ? stopRecording : startRecording} className="z-[1] w-fit m-3 cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
+            {isRecording ? 'Stop recording' : 'Start recording'}
+          </button>
         </div>
       </div>
       <Footer />

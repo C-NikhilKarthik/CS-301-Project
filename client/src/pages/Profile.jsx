@@ -47,10 +47,14 @@ function Profile({ bg, Image }) {
             method: "POST",
         });
         const json4 = await response4.json();
+        console.log("friends")
         const json3 = await response3.json();
+        console.log("friends2")
         const json2 = await response2.json();
+        console.log("friends3")
         const json = await response.json();
         var followers = 0;
+        console.log("here")
         const id = json._id;
         for (let i = 0; i < json2.length; i++) {
             for (let j = 0; j < json2[i].Friends.length; j++) {
@@ -60,13 +64,13 @@ function Profile({ bg, Image }) {
             }
         }
         for (let i = 0; i < json3.all_blogs.length; i++) {
-            var blog_url = new URL("http://localhost:3000/slug");
-            blog_url.searchParams.set("email", `${email}`);
-            blog_url.searchParams.set("blogId", `${String(json3.all_blogs[i]._id)}`);
+            urlParams.set('email', email);
+            urlParams.set('blogId', String(json.all_blogs[i]._id));
+            var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
 
-            var blog_edit_url = new URL("http://localhost:3000/edit");
-            blog_edit_url.searchParams.set("email", `${email}`);
-            blog_edit_url.searchParams.set("blogId", `${String(json3.all_blogs[i]._id)}`);
+            urlParams.set('email', email);
+            urlParams.set('blogId', String(json.all_blogs[i]._id));
+            var blog_edit_url = window.location.pathname.replace('/home', '/edit') + '?' + urlParams.toString();
 
             temp_list.push(
                 <CARD

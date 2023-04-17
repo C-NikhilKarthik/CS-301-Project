@@ -8,10 +8,11 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
   const [showMenu, setShowMenu] = useState(false);
   const [likeStatus,setLikeStatus]=useState(true);
   const [noLikes, setNolikes] = useState(Likes?.length);
-  // // if(Likes)
-  // // {
-  // //   var noLikes=Likes.length;
-  // // }
+  console.log(Likes,'hii');
+  // if(Likes.length>0)
+  // {
+  //   setNolikes(Likes.length);
+  // }
 
   let userID=Cookies.get('userId');
 //  console.log(id);
@@ -99,14 +100,14 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
                   >
                     Edit Blog
                   </a>
-                  <button
+                  <a
                     type="submit"
                     href=""
-                    className="block px-4 py-2 cursor-pointer text-red-600 dark:hover:bg-slate-500  hover:bg-gray-100"
+                    className="block px-4 w-full py-2 cursor-pointer text-red-600 dark:hover:bg-slate-500  hover:bg-gray-100"
                     onClick={handelDelete}
                   >
                     Delete Blog
-                  </button>
+                  </a>
                 </div>
               )}
             </div>

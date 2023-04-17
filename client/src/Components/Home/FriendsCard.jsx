@@ -1,9 +1,20 @@
-import React from "react";
+import React,{useState} from "react";
 
-function FriendsCard({ dp, Fname, Lname, friend, setFriend }) {
-
-
-  
+function FriendsCard({ dp, Fname, Lname, friend, setFriend1,setFriend2 }) {
+  function handleFriend1()
+  {
+    //friend=true
+    
+    setFriend1()
+    console.log("made as friend")
+  }
+  function handleFriend2()
+  {
+    //friend=false
+    
+    setFriend2()
+    console.log("removed friend")
+  }
   return (
     <div className="relative justify-between border-[1px] border-slate-600 rounded-lg hover:bg-blue-400 dark:hover:bg-blue-500 cursor-pointer transition-[background-color] p-4 items-center bg-white dark:bg-slate-800 flex gap-4">
       <div className="flex items-center gap-4">
@@ -18,9 +29,9 @@ function FriendsCard({ dp, Fname, Lname, friend, setFriend }) {
       </div>
       <div className="flex items-center gap-4">
         {!friend? (
-          <div onClick={setFriend} className="rounded bg-green-500 py-2 px-3 flex w-fit">Add Friend</div>
+          <div onClick={handleFriend1} className="rounded bg-green-500 py-2 px-3 flex w-fit">Add Friend</div>
         ) : (
-          <div onClick={setFriend} className="rounded bg-red-500 py-2 px-3 flex w-fit">Remove Friend</div>
+          <div onClick={handleFriend2} className="rounded bg-red-500 py-2 px-3 flex w-fit">Remove Friend</div>
         )}
         <div className="cursor-pointer text-slate-800 dark:text-slate-100">
           <span className="material-symbols-outlined">more_vert</span>
