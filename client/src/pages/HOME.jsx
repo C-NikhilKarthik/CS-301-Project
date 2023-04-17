@@ -39,7 +39,7 @@ function HOME() {
     setTotNumBlogs(json.total_num_blogs)
 
     setUserName(json.UserName);
-    for (let i = 0; i < json.all_blogs.length; i++) {
+    for (let i = json.all_blogs.length - 1; i > -1; i--) {
       urlParams.set('email', email);
       urlParams.set('blogId', String(json.all_blogs[i]._id));
       var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
@@ -50,8 +50,8 @@ function HOME() {
       temp_list.push(
         <CARD
           image={"images/bg.jpg"}
-          text={json.all_blogs[i].Post_text}
-          Heading={json.all_blogs[i].Title}
+          text={json.all_blogs[i].Desc}
+          Heading={json.all_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
           location={blog_url}
         />
@@ -100,8 +100,8 @@ function HOME() {
         temp_list2.push(
           <CARD
             image={"images/bg.jpg"}
-            text={json.all_blogs[i].Post_text}
-            Heading={json.all_blogs[i].Title}
+            text={json.all_blogs[i].Desc}
+            Heading={json.all_blogs[i].Heading}
             Owner={String(json.all_owners[i])}
             location={blog_url}
           />
