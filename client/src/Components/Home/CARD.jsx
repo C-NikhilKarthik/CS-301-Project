@@ -7,11 +7,12 @@ import Cookies from 'js-cookie';
 function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
   const [showMenu, setShowMenu] = useState(false);
   const [likeStatus,setLikeStatus]=useState(true);
-  const [noLikes, setNolikes] = useState(Likes?.length);
-  // // if(Likes)
-  // // {
-  // //   var noLikes=Likes.length;
-  // // }
+  const [noLikes, setNolikes] = useState('');
+  console.log(Likes);
+  if(Likes)
+  {
+    setNolikes(Likes.length);
+  }
 
   let userID=Cookies.get('userId');
 //  console.log(id);

@@ -35,6 +35,7 @@ function HOME() {
     });
 
     const json = await response.json();
+    // console.log(json);
     setNumBlogs(json.blog_count)
     setTotNumBlogs(json.total_num_blogs)
 
@@ -49,6 +50,8 @@ function HOME() {
 
       temp_list.push(
         <CARD
+          id={json.all_blogs[i]._id}
+          Likes={json.all_blogs[i].Likes}
           image={"images/bg.jpg"}
           text={json.all_blogs[i].Post_text}
           Heading={json.all_blogs[i].Title}
