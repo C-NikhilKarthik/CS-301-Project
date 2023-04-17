@@ -57,13 +57,12 @@ const Comments = () => {
   }, [blogId]);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="w-full flex gap-2 mb-12  flex-col items-center bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 mx-auto p-6 sm:w-4/5 lg:w-2/3 sm:px-16 md:px-24 lg:px-32">
       <h1 className="text-3xl font-bold mb-8">Comments</h1>
-
       {comments.length === 0 ? (
         <p>No comments yet.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="w-full flex flex-col gap-2">
           {comments.map((comment, index) => (
             <li key={comment._id}>
               <div className="bg-gray-100 p-4 rounded-lg">

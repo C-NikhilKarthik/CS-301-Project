@@ -179,7 +179,6 @@ function HOME() {
               <TOPBAR handle_search={handle_search} />
               {list}
               <button onClick={get_more_blogs} id="SeeMore_button" className="dark:text-slate-200 text-slate-900">see more</button>
-              <button onClick={get_more_blogs} id="SeeMore_button" className="dark:text-slate-200 text-slate-900">see more</button>
             </div>
             <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
               <p>Notifications</p>
