@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import Switcher from "../Components/Switcher";
 import Footer from "../Components/Main/Footer";
@@ -19,14 +19,14 @@ function EditBlog() {
 
   const [state, setState] = useState({ value: null });
 
-  const [message,setMessage]=useState('')
-  const [content,setContent]=useState("")
-  const [home_url,setHomeUrl]=useState("")
-  const [topic,setTopic]=useState("")
-  const [title,setTitle]=useState("")
-  
+  const [message, setMessage] = useState('')
+  const [content, setContent] = useState("")
+  const [home_url, setHomeUrl] = useState("")
+  const [desc, setDesc] = useState("")
+  const [title, setTitle] = useState("")
+
   const handleChange = (value) => {
-    
+
     setContent(value)
     //setState({ value });
     // console.log(state.value);
@@ -56,8 +56,8 @@ function EditBlog() {
     } while (modified && count < state.value.length);
     console.log(state.value);
   };
-  
-  
+
+
 
   const uploadOnCloudinary = async (pic) => {
     const data = new FormData();
@@ -99,16 +99,16 @@ function EditBlog() {
     if (json2.err === "FAILED") {
       setMessage(json2.msg);
     }
-    else{
+    else {
       // var hrefUrl=new URL('http://localhost:3000/home')
       // window.location.replace(hrefUrl)
-      let url=new URL('http://localhost:3000/slug')
+      let url = new URL('http://localhost:3000/slug')
       url.searchParams.set("email", `${email}`);
       url.searchParams.set("blogId", `${blogId}`);
 
       window.alert("POST SUCCESSFULLY UPDATED")
-      window.location.href=url
-      
+      window.location.href = url
+
     }
   };
 
@@ -130,12 +130,12 @@ function EditBlog() {
     const json = await response.json();
 
     setContent(json.blog_details.Content)
-    setTitle(json.blog_details.Title)
-    setTopic(json.blog_details.Topic)
+    setTitle(json.blog_details.Heading)
+    setDesc(json.blog_details.Desc)
 
     //setState(json.blog_details.Content)
 
-    var url= new URL("http://localhost:3000/home")
+    var url = new URL("http://localhost:3000/home")
     url.searchParams.set("email", `${email}`);
     setHomeUrl(url)
 
@@ -150,9 +150,9 @@ function EditBlog() {
       content: (
         <form onSubmit={submitBlog} className="w-full h-fit min-h-[30rem]">
           <div className="dark:text-white text-xl">Heading</div>
-          <div className="p-3 bg-slate-800 rounded mb-5" contentEditable="true"></div>
+          <input type='text' className="p-3 w-full bg-slate-800 rounded mb-5" contentEditable="true" value={title} onChange={(e) => setTitle(e.target.value)}></input>
           <div className="dark:text-white text-xl">Description</div>
-          <div className="p-3 bg-slate-800 rounded mb-5" contentEditable="true"></div>
+          <input type="text" className="p-3 w-full bg-slate-800 rounded mb-5" contentEditable="true" value={desc} onChange={(e) => setDesc(e.target.value)}></input>
           <EditorToolbar />
           <ReactQuill
             theme="snow"
@@ -235,31 +235,31 @@ function EditBlog() {
     //   <Footer />
     // </div>
     <div className="w-full min-h-[100vh] bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
-    <Navbar />
-    {/* Demo of the blog  */}
-    <div className="w-full p-6 flex justify-center">
-      <div className="w-full dark:text-slate-300 bg-[#fefeff] dark:bg-[#0c1116] md:w-2/3 lg:w-4/5 xl:w-3/5 flex flex-col gap-4 rounded-md">
-        <div className="flex px-3 pt-4 border-b-[1px] border-[#d1d9de] dark:border-[#31373d] bg-[#f6f8fa] dark:bg-[#171b23] rounded -mb-px">
-          {tabs.map((tab, index) => (
-            <button
-              key={tab.label}
-              className={`${activeTab === index
-                ? "border-x-[1px] border-t-[1px] text-slate-800 font-semibold dark:text-white border-b-transparent border-[#d1d9de] dark:border-[#31373d] rounded-t bg-[#fefeff] dark:bg-[#0c1116]"
-                : "border-b border-transparent"
-                } px-4 py-2 text-sm -mb-[2px] font-medium text-[#646d77] dark:text-gray-500 dark:hover:text-white focus:outline-none `}
-              onClick={() => setActiveTab(index)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        <div className="mt-8 p-3">
-          <p>{tabs[activeTab].content}</p>
+      <Navbar />
+      {/* Demo of the blog  */}
+      <div className="w-full p-6 flex justify-center">
+        <div className="w-full dark:text-slate-300 bg-[#fefeff] dark:bg-[#0c1116] md:w-2/3 lg:w-4/5 xl:w-3/5 flex flex-col gap-4 rounded-md">
+          <div className="flex px-3 pt-4 border-b-[1px] border-[#d1d9de] dark:border-[#31373d] bg-[#f6f8fa] dark:bg-[#171b23] rounded -mb-px">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.label}
+                className={`${activeTab === index
+                  ? "border-x-[1px] border-t-[1px] text-slate-800 font-semibold dark:text-white border-b-transparent border-[#d1d9de] dark:border-[#31373d] rounded-t bg-[#fefeff] dark:bg-[#0c1116]"
+                  : "border-b border-transparent"
+                  } px-4 py-2 text-sm -mb-[2px] font-medium text-[#646d77] dark:text-gray-500 dark:hover:text-white focus:outline-none `}
+                onClick={() => setActiveTab(index)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className="mt-8 p-3">
+            <p>{tabs[activeTab].content}</p>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
 
   );
 }

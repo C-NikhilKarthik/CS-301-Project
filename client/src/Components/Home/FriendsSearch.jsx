@@ -4,7 +4,6 @@ import FriendsCard from "./FriendsCard";
 function FriendsSearch() {
   const [search, setSearch] = useState("");
   const [people, setPeople] = useState([]);
-  const [friend,setFriend] = useState(); 
   const handleSearch = async (e) => {
     e.preventDefault();
     const response = await fetch("/searchFriends", {
