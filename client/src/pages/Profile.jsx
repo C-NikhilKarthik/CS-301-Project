@@ -48,13 +48,13 @@ function Profile({ bg, Image }) {
         });
         const json4 = await response4.json();
         console.log("friends")
-        const json3 = await response3.json();
+        const json3 = await response3.json(); //
         console.log("friends2")
-        const json2 = await response2.json();
+        const json2 = await response2.json(); //all users
         console.log("friends3")
-        const json = await response.json();
+        const json = await response.json(); //user
         var followers = 0;
-        console.log("here")
+        console.log(json3)
         const id = json._id;
         for (let i = 0; i < json2.length; i++) {
             for (let j = 0; j < json2[i].Friends.length; j++) {
@@ -65,20 +65,20 @@ function Profile({ bg, Image }) {
         }
         for (let i = 0; i < json3.all_blogs.length; i++) {
             urlParams.set('email', email);
-            urlParams.set('blogId', String(json.all_blogs[i]._id));
-            var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
+            urlParams.set('blogId', String(json3.all_blogs[i]._id));
+            var blog_url = window.location.pathname.replace('/profile', '/slug') + '?' + urlParams.toString();
 
             urlParams.set('email', email);
-            urlParams.set('blogId', String(json.all_blogs[i]._id));
-            var blog_edit_url = window.location.pathname.replace('/home', '/edit') + '?' + urlParams.toString();
+            urlParams.set('blogId', String(json3.all_blogs[i]._id));
+            var blog_edit_url = window.location.pathname.replace('/profile', '/edit') + '?' + urlParams.toString();
 
             temp_list.push(
                 <CARD
                     key={json3.all_blogs[i]._id}
                     id={json3.all_blogs[i]._id}
                     image={"images/bg.jpg"}
-                    text={json3.all_blogs[i].Post_text}
-                    Heading={json3.all_blogs[i].Title}
+                    text={json3.all_blogs[i].Desc}
+                    Heading={json3.all_blogs[i].Heading}
                     Owner={String(json3.all_owners[i])}
                     location={blog_url}
                     yourblog={true}

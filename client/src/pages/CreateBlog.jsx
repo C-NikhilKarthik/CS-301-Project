@@ -8,6 +8,7 @@ import EditorToolbar, {
 } from "../Components/TextEditor/EditorToolbar";
 import Demo from "../pages/Demo";
 import Navbar from "../Components/Main/Navbar";
+import Tags from "../Components/BlogPage/Tags";
 import FadeLoader from 'react-spinners/FadeLoader'
 
 // function makeResizableDiv() {
@@ -47,6 +48,34 @@ function CreateBlog() {
   //     parseInt(initialSize) + parseInt(e.clientX - initialPos)
   //   }px`;
   // };
+
+  const cards = [
+    {
+      title: "Technology",
+      Selected: false
+    },
+    {
+      title: "Finance",
+      Selected: false
+    },
+    {
+      title: "Food and Cooking",
+      Selected: false
+    },
+    {
+      title: "Personal Development",
+      Selected: false
+    },
+    {
+      title: "Health and Wellness",
+      Selected: false
+    },
+    {
+      title: "Travel",
+      Selected: false
+    },
+  ];
+
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -61,7 +90,12 @@ function CreateBlog() {
     setState({ value });
     // console.log(state.value);
   };
+  const [flag, setFlag] = useState(false)
+  const changeSelected = (index, isselected) => {
+    cards[index].Selected = isselected
+    console.log(cards[index].Selected)
 
+  }
   const replaceImage = async () => {
     let count = 0;
     let modified = false; // Flag to indicate if any replacement was made
@@ -158,7 +192,6 @@ function CreateBlog() {
           </button>
           
           </div>
-
         </form>
       ),
     },
@@ -174,6 +207,7 @@ function CreateBlog() {
 
   //speech:
   useEffect(() => {
+
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
@@ -218,7 +252,7 @@ function CreateBlog() {
     <div className="w-full min-h-[100vh] bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
       <Navbar />
       {/* Demo of the blog  */}
-      <div className="w-full p-6 flex justify-center">
+      <div className="w-full p-6 flex flex-col gap-10 items-center justify-center">
         <div className="w-full dark:text-slate-300 bg-[#fefeff] dark:bg-[#0c1116] md:w-2/3 lg:w-4/5 xl:w-3/5 flex flex-col gap-4 rounded-md">
           <div className="flex px-3 pt-4 border-b-[1px] border-[#d1d9de] dark:border-[#31373d] bg-[#f6f8fa] dark:bg-[#171b23] rounded -mb-px">
             {tabs.map((tab, index) => (
@@ -239,6 +273,17 @@ function CreateBlog() {
           </div>
           <button onClick={isRecording ? stopRecording : startRecording} className="z-[1] w-fit m-3 cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
             {isRecording ? 'Stop recording' : 'Start recording'}
+          </button>
+        </div>
+        <div className="w-full items-end dark:text-slate-300 p-4 bg-[#fefeff] dark:bg-[#0c1116] md:w-2/3 lg:w-4/5 xl:w-3/5 flex flex-col gap-4 rounded-md">
+          <div className="text-xl w-full text-white font-semibold">Choose Tags</div>
+          <div className="flex flex-wrap gap-4 p-2 w-full">
+            {cards.map((card, index) => (
+              <Tags key={index} {...card} onSelect={(isselected) => changeSelected(index, isselected)} />
+            ))}
+          </div>
+          <button type="submit" className="z-[1] w-fit cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
+            Submit Tags
           </button>
         </div>
       </div>
