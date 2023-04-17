@@ -125,6 +125,7 @@ function CreateBlog() {
       setMessage(json2.msg);
     }
     else {
+
       // var hrefUrl=new URL('http://localhost:3000/home')
       // window.location.replace(hrefUrl)
     }
