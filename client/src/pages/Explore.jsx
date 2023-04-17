@@ -61,8 +61,8 @@ function Explore() {
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
-          text={shuffled_blogs[i].Post_text}
-          Heading={shuffled_blogs[i].Title}
+          text={shuffled_blogs[i].Desc}
+          Heading={shuffled_blogs[i].Heading}
           Owner={String(shuffled_blogs[i]._id)}
           location={blog_url}
         />
@@ -87,7 +87,7 @@ function Explore() {
 
   return (
     <>{isLoading ? (<Loading />) : (
-      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+      <div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-center bg-fixed ">
         <div className="absolute inset-0 h-full w-full gridblock"></div>
         <Navbar UserName={UserName} home_url={home_url} yourblogs_url={yourblogs_url} />
         <div className="flex h-full px-8 gap-8 z-[5]">
@@ -102,7 +102,7 @@ function Explore() {
             <TOPBAR />
             {list}
           </div>
-          <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md text-slate-100 bg-slate-400 dark:bg-slate-800 p-4">
+          <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
             <p>Notifications</p>
           </div>
         </div>
