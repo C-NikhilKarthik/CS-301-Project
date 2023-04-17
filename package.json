@@ -4,8 +4,10 @@
   "description": "front-end, and Node.js for server-side JavaScript execution.",
   "main": "./server/server.js",
   "scripts": {
-    "install": "cd server && npm install && cd ../client && npm install && exit 0",
+    "install": "cd server && npm install && cd ../client && npm install",
+    "build": "cd ./server && npm install && cd ../client && npm run build",
     "start": "cd ./server && npm run dev",
+    "Str":"node ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,5 +28,4 @@
   "dependencies": {
     "node-fetch": "^3.3.1"
   }
-
 }

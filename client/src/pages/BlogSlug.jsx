@@ -29,9 +29,10 @@ function BlogSlug() {
     const json = await response.json();
 
     SetContent(json.blog_details.Content);
-
-    let url = new URL("http://localhost:3000/home")
-    url.searchParams.set("email", `${email}`)
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    const url = window.location.pathname.replace('/slug', '/home') + '?' + urlParams.toString();
+    
     setHomeUrl(url)
     setIsLoading(false)
     // var url = new URL("http://localhost:3000/explore");

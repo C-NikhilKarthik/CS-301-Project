@@ -7,12 +7,14 @@ const BlogHtml = require("../models/HtmlBlogModel");
 const compression = require("compression");
 
 const create_blog_html = async (req, res) => {
-  const fileStr = req.body;
+  const fileStr = req.body.state;
+  const heading=req.body.heading;
+  const desc=req.body.desc;
   const userId = req.cookies;
   console.log(userId.userId);
-  console.log(fileStr.state.value);
+  console.log(fileStr,heading,desc);
 
-  if(fileStr.state.value==="")
+  if(fileStr.value==="")
   {
     res.status(500).json({
       err: "FAILED",
@@ -23,7 +25,9 @@ const create_blog_html = async (req, res) => {
   try {
     const post = new BlogHtml({
       Owner: userId.userId,
-      Content: fileStr.state.value
+      Heading:heading,
+      Desc:desc,
+      Content: fileStr.value
     });
 
     const result = await post.save();

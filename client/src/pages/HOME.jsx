@@ -40,9 +40,12 @@ function HOME() {
 
     setUserName(json.UserName);
     for (let i = 0; i < json.all_blogs.length; i++) {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
+
+      // blog_url.searchParams.set("email", `${email}`);
+      // blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
 
       temp_list.push(
         <CARD
@@ -56,19 +59,18 @@ function HOME() {
       
     }
     setIsLoading(false);
-    
-    var url = new URL("http://localhost:3000/explore");
-    var url2 = new URL("http://localhost:3000/yourblogs");
-    var url3 = new URL("http://localhost:3000/profile");
-    url.searchParams.set("email", `${email}`);
-    url2.searchParams.set("email", `${email}`);
-    url3.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    const profile_url = window.location.pathname.replace('/home', '/profile') + '?' + urlParams.toString();
+    const your_blogs_url = window.location.pathname.replace('/home', '/yourblogs') + '?' + urlParams.toString();
+    const explore_url = window.location.pathname.replace('/home', '/explore') + '?' + urlParams.toString();
+    // window.location.replace(newUrl);
     //console.log({explore_url:url})
     
-    setExplore_url(url);
-    setYourblogs_url(url2);
+    setExplore_url(explore_url);
+    setYourblogs_url(your_blogs_url);
     Setlist(temp_list);
-    setProfile(url3);
+    setProfile(profile_url);
     SetOriginal(temp_list);
   };
 
@@ -92,9 +94,9 @@ function HOME() {
       const temp_list2 = [];
 
       for (let i = 0; i < json.all_blogs.length; i++) {
-        var blog_url = new URL("http://localhost:3000/slug");
-        blog_url.searchParams.set("email", `${email}`);
-        blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+        urlParams.set('email', email);
+        urlParams.set('blogId', String(json.all_blogs[i]._id));
+        var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
         temp_list2.push(
           <CARD
             image={"images/bg.jpg"}
@@ -129,9 +131,9 @@ function HOME() {
 
     for(let i=0;i<json.all_blogs.length;i++)
     {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
       temp_list.push(
         <CARD
           image={"images/bg.jpg"}
@@ -162,8 +164,7 @@ function HOME() {
   return (
     <>
       {isLoading ? (<Loading />) :
-        (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
-
+        (<div className="w-screen h-screen pb-6 overflow-hidden flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-top bg-fixed ">
           <div className="absolute inset-0 h-full w-full gridblock"></div>
           <Navbar explore_url={explore_url} yourblogs_url={yourblogs_url} />
           <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
@@ -177,7 +178,6 @@ function HOME() {
             <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
               <TOPBAR handle_search={handle_search} />
               {list}
-              <button onClick={get_more_blogs} id="SeeMore_button" className="dark:text-slate-200 text-slate-900">see more</button>
               <button onClick={get_more_blogs} id="SeeMore_button" className="dark:text-slate-200 text-slate-900">see more</button>
             </div>
             <div className="z-[5] hidden lg:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
