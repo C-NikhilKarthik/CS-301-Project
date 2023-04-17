@@ -1,7 +1,4 @@
-
-const User = require("../models/UserModel");
 const BlogHtml = require("../models/HtmlBlogModel");
-const { ObjectId } = require("mongodb");
 const cookieParser = require('cookie-parser');
 
 const Likes = async (req, res) => {

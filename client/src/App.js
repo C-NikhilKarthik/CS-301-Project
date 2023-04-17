@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import Home from "./pages/Home";
 import Main from "./pages/Main";
@@ -19,31 +19,40 @@ import YourBlogs from "./pages/YourBlogs";
 import EditBlog from "./pages/EditBlog";
 import CreateBlog from "./pages/CreateBlog";
 import Profile from "./pages/Profile";
+import Cookies from "js-cookie";
 
 function App() {
+  const isLoggedIn = Cookies.get('userId') ? true : false;
+
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Main />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/home" element={<HOME />}></Route>
-        <Route path="/createblog" element={<CreateBlog />}></Route>
-        <Route path="/demo" element={<Demo />}></Route>
-        <Route path="/explore" element={<Explore />}></Route>
-        <Route path="/test" element={<Test />}></Route>
-        <Route path="/interests" element={<Interests />}></Route>
-        <Route path="/friends" element={<Friends />}></Route>
-        <Route path="/slug" element={<BlogSlug />}></Route>
-        <Route path="/password-reset" element={<PasswordReset />}></Route>
-        <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />}></Route>
-        <Route path="/loading" element={<Loading />}></Route>
-        <Route path="/yourblogs" element={<YourBlogs />}></Route>
-        <Route path="/edit" element={<EditBlog />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+      <>
+            <Route exact path="/" element={<Main />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+          </>
+        {isLoggedIn && (
+          <>
+            <Route path="/home" element={<HOME />}></Route>
+            <Route path="/createblog" element={<CreateBlog />}></Route>
+            <Route path="/demo" element={<Demo />}></Route>
+            <Route path="/explore" element={<Explore />}></Route>
+            <Route path="/test" element={<Test />}></Route>
+            <Route path="/interests" element={<Interests />}></Route>
+            <Route path="/friends" element={<Friends />}></Route>
+            <Route path="/slug" element={<BlogSlug />}></Route>
+            <Route path="/password-reset" element={<PasswordReset />}></Route>
+            <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />}></Route>
+            <Route path="/loading" element={<Loading />}></Route>
+            <Route path="/yourblogs" element={<YourBlogs />}></Route>
+            <Route path="/edit" element={<EditBlog />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+          </>
+        )}
       </Routes>
     </Router>
   );
 }
+
 
 export default App;

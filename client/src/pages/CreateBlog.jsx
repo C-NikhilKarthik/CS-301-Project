@@ -9,6 +9,7 @@ import EditorToolbar, {
 import Demo from "../pages/Demo";
 import Navbar from "../Components/Main/Navbar";
 import Tags from "../Components/BlogPage/Tags";
+import FadeLoader from 'react-spinners/FadeLoader'
 
 // function makeResizableDiv() {
 //   const element = document.getElementById("main");
@@ -78,6 +79,8 @@ function CreateBlog() {
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const color="#efefef"
 
   const [state, setState] = useState({ value: null });
   const [message, setMessage] = useState('')
@@ -143,6 +146,7 @@ function CreateBlog() {
 
   const submitBlog = async (e) => {
     e.preventDefault();
+    setLoading(true);
     replaceImage();
     console.log(heading, desc, state)
     const response = await fetch("/htmlBlog", {
@@ -158,10 +162,7 @@ function CreateBlog() {
     if (json2.err === "FAILED") {
       setMessage(json2.msg);
     }
-    else {
-      // var hrefUrl=new URL('http://localhost:3000/home')
-      // window.location.replace(hrefUrl)
-    }
+    setLoading(false);
   };
 
   const tabs = [
@@ -186,9 +187,10 @@ function CreateBlog() {
             <p className="text-red-500 text-xs">{message}</p>
           )}
           <div className="flex justify-end">
-            <button type="submit" className="z-[1] cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
-              Submit Blog
-            </button>
+          <button type="submit" className="z-[1] cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
+          {loading ? <FadeLoader color={color}/> : "Submit Blog"}
+          </button>
+          
           </div>
         </form>
       ),
