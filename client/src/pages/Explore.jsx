@@ -60,6 +60,7 @@ function Explore() {
         <CARD
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
+          Likes={json.all_blogs[i].Likes}
           image={"images/bg.jpg"}
           text={shuffled_blogs[i].Desc}
           Heading={shuffled_blogs[i].Heading}
