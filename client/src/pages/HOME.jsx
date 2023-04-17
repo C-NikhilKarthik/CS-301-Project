@@ -40,9 +40,12 @@ function HOME() {
 
     setUserName(json.UserName);
     for (let i = 0; i < json.all_blogs.length; i++) {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
+
+      // blog_url.searchParams.set("email", `${email}`);
+      // blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
 
       temp_list.push(
         <CARD
@@ -56,19 +59,18 @@ function HOME() {
       
     }
     setIsLoading(false);
-    
-    var url = new URL("http://localhost:3000/explore");
-    var url2 = new URL("http://localhost:3000/yourblogs");
-    var url3 = new URL("http://localhost:3000/profile");
-    url.searchParams.set("email", `${email}`);
-    url2.searchParams.set("email", `${email}`);
-    url3.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    const profile_url = window.location.pathname.replace('/home', '/profile') + '?' + urlParams.toString();
+    const your_blogs_url = window.location.pathname.replace('/home', '/yourblogs') + '?' + urlParams.toString();
+    const explore_url = window.location.pathname.replace('/home', '/explore') + '?' + urlParams.toString();
+    // window.location.replace(newUrl);
     //console.log({explore_url:url})
     
-    setExplore_url(url);
-    setYourblogs_url(url2);
+    setExplore_url(explore_url);
+    setYourblogs_url(your_blogs_url);
     Setlist(temp_list);
-    setProfile(url3);
+    setProfile(profile_url);
     SetOriginal(temp_list);
   };
 
@@ -92,9 +94,9 @@ function HOME() {
       const temp_list2 = [];
 
       for (let i = 0; i < json.all_blogs.length; i++) {
-        var blog_url = new URL("http://localhost:3000/slug");
-        blog_url.searchParams.set("email", `${email}`);
-        blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+        urlParams.set('email', email);
+        urlParams.set('blogId', String(json.all_blogs[i]._id));
+        var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
         temp_list2.push(
           <CARD
             image={"images/bg.jpg"}
@@ -129,9 +131,9 @@ function HOME() {
 
     for(let i=0;i<json.all_blogs.length;i++)
     {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/home', '/slug') + '?' + urlParams.toString();
       temp_list.push(
         <CARD
           image={"images/bg.jpg"}

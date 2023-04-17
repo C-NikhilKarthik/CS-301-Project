@@ -58,9 +58,11 @@ function Login() {
       setMessage(response.message)
     }
     else if (response.status === 'SUCCESS') {
-      var url = new URL('http://localhost:3000/home')
-      url.searchParams.set('email', `${email_login}`)
-      window.location.replace(url);
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      urlParams.set('email', email_login);
+      const newUrl = window.location.pathname.replace('/login', '/home') + '?' + urlParams.toString();
+      window.location.replace(newUrl);
     }
   }
   const loginhandle = async (email_l, password_l) => {

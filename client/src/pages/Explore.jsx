@@ -53,9 +53,9 @@ function Explore() {
     const shuffled_blogs = json.all_blogs;
 
     for (let i = 0; i < shuffled_blogs.length; i++) {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/explore', '/slug') + '?' + urlParams.toString();
       temp_list.push(
         <CARD
           key={json.all_blogs[i]._id}
@@ -68,14 +68,14 @@ function Explore() {
         />
       );
     }
-
-    var url = new URL("http://localhost:3000/home");
-    url.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    var url = window.location.pathname.replace('/explore', '/home') + '?' + urlParams.toString();
     Sethome_url(url);
     Setlist(temp_list);
-
-    var url2 = new URL("http://localhost:3000/yourblogs");
-    url2.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    var url2 = window.location.pathname.replace('/explore', '/yourblogs') + '?' + urlParams.toString();
     setYourblogs_url(url2)
     setIsLoading(false);
 

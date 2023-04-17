@@ -38,13 +38,13 @@ function YourBlogs() {
     // console.log(json);
 
     for (let i = 0; i < json.all_blogs.length; i++) {
-      var blog_url = new URL("http://localhost:3000/slug");
-      blog_url.searchParams.set("email", `${email}`);
-      blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_url = window.location.pathname.replace('/yourblogs', '/slug') + '?' + urlParams.toString();
 
-      var blog_edit_url = new URL("http://localhost:3000/edit");
-      blog_edit_url.searchParams.set("email", `${email}`);
-      blog_edit_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', String(json.all_blogs[i]._id));
+      var blog_edit_url = window.location.pathname.replace('/yourblogs', '/edit') + '?' + urlParams.toString();
 
       temp_list.push(
         <CARD
@@ -60,11 +60,12 @@ function YourBlogs() {
         />
       );
     }
-
-    var url = new URL("http://localhost:3000/explore");
-    var url2 = new URL("http://localhost:3000/home")
-    url.searchParams.set("email", `${email}`);
-    url2.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    var url2 = window.location.pathname.replace('/yourblogs', '/home') + '?' + urlParams.toString();
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    var url = window.location.pathname.replace('/yourblogs', '/explore') + '?' + urlParams.toString();
     //console.log({explore_url:url})
     setExplore_url(url);
     Sethome_url(url2);
