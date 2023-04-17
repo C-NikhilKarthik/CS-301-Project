@@ -4,7 +4,6 @@ import FriendsCard from "./FriendsCard";
 function FriendsSearch() {
   const [search, setSearch] = useState("");
   const [people, setPeople] = useState([]);
-  const [friend,setFriend] = useState(); 
   const handleSearch = async (e) => {
     e.preventDefault();
     const response = await fetch("/searchFriends", {
@@ -103,7 +102,7 @@ function FriendsSearch() {
         </div>
         <div className="flex-grow gap-2 p-2 flex flex-col h-full overflow-y-scroll border-b-[1px] border-t-[1px] border-slate-600">
           {people.map((item, index) => (
-            <FriendsCard friend={item.Status} setFriend={item.Status ? removeFriend : addFriend} key={index} Fname={item.Fname} Lname={item.Lname} />
+            <FriendsCard friend={item.Status} setFriend={item.Status ? (()=> removeFriend(item._id, index)) : (()=>addFriend(item._id, index))} key={index} Fname={item.Fname} Lname={item.Lname} />
           ))}
         </div>
         <div className="flex justify-end p-3">
