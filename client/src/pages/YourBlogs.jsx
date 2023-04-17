@@ -15,6 +15,7 @@ function YourBlogs() {
   const [explore_url, setExplore_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [UserName, setUserName] = useState('');
+  const [profile, setProfile] = useState([]);
 
 
 
@@ -52,8 +53,8 @@ function YourBlogs() {
           id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
           Likes={json.all_blogs[i].Likes}
-          text={json.all_blogs[i].Post_text}
-          Heading={json.all_blogs[i].Title}
+          text={json.all_blogs[i].Desc}
+          Heading={json.all_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
           location={blog_url}
           yourblog={true}
@@ -66,11 +67,13 @@ function YourBlogs() {
     var url2 = window.location.pathname.replace('/yourblogs', '/home') + '?' + urlParams.toString();
     urlParams.delete('blogId');
     urlParams.set('email', email);
+    const profile_url = window.location.pathname.replace('/yourblogs', '/profile') + '?' + urlParams.toString();
     var url = window.location.pathname.replace('/yourblogs', '/explore') + '?' + urlParams.toString();
     //console.log({explore_url:url})
     setExplore_url(url);
     Sethome_url(url2);
     Setlist(temp_list);
+    setProfile(profile_url);
     SetOriginal(temp_list);
     setIsLoading(false);
   };
@@ -84,7 +87,7 @@ function YourBlogs() {
         <Navbar UserName={UserName} explore_url={explore_url} home_url={home_url} />
         <div className="flex h-full px-2 overflow-hidden sm:px-8 gap-8 z-[5]">
           <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
-            <ProfileCard />
+            <ProfileCard url={profile}/>
             <a href="/createblog" className="bg-blue-600 w-full px-2 flex justify-center gap-4 items-center rounded-full py-3 text-slate-200">
               <MdAddCircle className="text-xl" />
               <p>Create Blog</p>
