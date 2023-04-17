@@ -8,10 +8,11 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
   const [showMenu, setShowMenu] = useState(false);
   const [likeStatus,setLikeStatus]=useState(true);
   const [noLikes, setNolikes] = useState(Likes?.length);
-  // // if(Likes)
-  // // {
-  // //   var noLikes=Likes.length;
-  // // }
+  console.log(Likes,'hii');
+  // if(Likes.length>0)
+  // {
+  //   setNolikes(Likes.length);
+  // }
 
   let userID=Cookies.get('userId');
 //  console.log(id);
