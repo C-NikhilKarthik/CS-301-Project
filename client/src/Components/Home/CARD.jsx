@@ -149,10 +149,10 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
           <div className="flex items-center gap-4">
           {likeStatus?
             (<div onClick={handleLike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
-              <FaHeart className="text-xl text-white" onClick={handleLike}/>
+              <FaHeart className="text-xl text-white"/>
               <p className="sm:flex hidden">Like {noLikes}</p>
             </div>) : (<div onClick={handleUnlike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
-              <FaHeart className="text-xl text-red-600" onClick={handleLike}/>
+              <FaHeart className="text-xl text-red-600"/>
               <p className="sm:flex hidden">Like {noLikes}</p>
             </div>)}
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
