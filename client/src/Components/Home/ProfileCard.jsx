@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 function ProfileCard({ url }) {
   const [data, setData] = useState({
     name: '',
-    following:'',
-    followers:''
+    following: '',
+    followers: ''
   })
   const generate_blogs = async (e) => {
     const temp_list = [];
@@ -30,15 +30,21 @@ function ProfileCard({ url }) {
     const json = await response.json();
     var followers = 0;
     const id = json._id;
-    for(let i=0;i<json2.length;i++){
-      for(let j=0;j<json2[i].Friends.length;j++){
-        if(json2[i].Friends[j]===id){
-          followers++;
-        }
-      }
-    }
+    // for (let i = 0; i < json2.length; i++) {
+    //   if (json2[i].Friends.length === 0) {
+    //     continue;
+    //   }
+    //   else {
+    //     for (let j = 0; j < json2[i].Friends.length; j++) {
+    //       if (json2[i].Friends[j] === id) {
+    //         followers++;
+    //       }
+    //     }
+    //   }
+    // }
 
-    setData({ name: json.UserName ,following:json.Friends.length,followers:followers});
+    setData({ name: json.UserName, following: (json.Friends.length > 0) ? json.Friends.length : 0, followers: followers });
+    console.log(data)
   }
 
 
