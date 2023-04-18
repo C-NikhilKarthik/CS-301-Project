@@ -116,6 +116,9 @@ app.use('/deleteComments',require('./routes/DeleteComments'))
 //get more blogs
 app.use('/get_more_blogs',require('./routes/getmoreblogs'))
 
+//get more blogs for explore
+app.use('/get_more_blogs_explpore',require('./routes/getmoreblogsExplore'))
+
 //test
 app.use('/testing',require('./routes/testing'))
 
