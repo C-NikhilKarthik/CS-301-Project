@@ -82,7 +82,7 @@ function CreateBlog() {
   const [loading, setLoading] = useState(false);
   const color="#efefef"
 
-  const [state, setState] = useState({ value: null });
+  const [state, setState] = useState({ value:'' });
   const [message, setMessage] = useState('')
   const [heading, setHeading] = useState('');
   const [desc, setDesc] = useState('');
@@ -221,8 +221,8 @@ function CreateBlog() {
     };
 
     recognition.onresult = (event) => {
-      let interimTranscript = state.value;
-      let finalTranscript = state.value;
+      let interimTranscript = '';
+      let finalTranscript = '';
 
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript = event.results[i][0].transcript;
