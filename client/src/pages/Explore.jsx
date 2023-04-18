@@ -15,6 +15,9 @@ function Explore() {
   const [isLoading, setIsLoading] = useState(false);
   const [UserName, setUserName] = useState('');
   const [profile, setProfile] = useState([]);
+  const [numBlogs, setNumBlogs] = useState(0);
+  const [tot_numBlogs, setTotNumBlogs] = useState(0);
+  const [originallist, SetOriginal] = useState([]);
 
 
   //   function shuffle(blogs)
@@ -62,10 +65,11 @@ function Explore() {
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           Likes={json.all_blogs[i].Likes}
+          time={json.all_blogs[i].Time}
           image={"images/bg.jpg"}
           text={shuffled_blogs[i].Desc}
           Heading={shuffled_blogs[i].Heading}
-          Owner={String(shuffled_blogs[i]._id)}
+          Owner={String(json.all_owners[i])}
           location={blog_url}
         />
       );
@@ -85,6 +89,91 @@ function Explore() {
 
   };
 
+  const get_more_blogs = async () => {
+    let temp_list = [...list];
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const email = urlParams.get("email");
+    const response = await fetch("/get_more_blogs_explore", {
+      method: "POST",
+      body: JSON.stringify({
+        email_login: email,
+        blog_num: numBlogs,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+
+    const json = await response.json();
+
+    for (let i = json.all_blogs.length - 1; i > -1; i--) {
+      urlParams.set("email", email);
+      urlParams.set("blogId", String(json.all_blogs[i]._id));
+      var blog_url =
+        window.location.pathname.replace("/home", "/slug") +
+        "?" +
+        urlParams.toString();
+      temp_list.push(
+        <CARD
+          image={"images/bg.jpg"}
+          text={json.all_blogs[i].Desc}
+          Heading={json.all_blogs[i].Heading}
+          time={json.all_blogs[i].Time}
+          Owner={String(json.all_owners[i])}
+          location={blog_url}
+        />
+      );
+    }
+
+    Setlist(temp_list);
+    setNumBlogs(json.blog_count);
+    const button = document.getElementById("SeeMore_button");
+    if (numBlogs === tot_numBlogs) {
+      button.style.display = "none";
+    }
+  };
+
+  async function handle_search(Search_query) {
+    console.log(Search_query);
+
+    if (Search_query !== "") {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const email = urlParams.get("email");
+      const response = await fetch("/search_query_home", {
+        method: "POST",
+        body: JSON.stringify({
+          email_login: email,
+          search_query: Search_query,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+
+      const json = await response.json();
+      const temp_list2 = [];
+
+      for (let i = 0; i < json.all_blogs.length; i++) {
+        urlParams.set("email", email);
+        urlParams.set("blogId", String(json.all_blogs[i]._id));
+        var blog_url =
+          window.location.pathname.replace("/home", "/slug") +
+          "?" +
+          urlParams.toString();
+        temp_list2.push(
+          <CARD
+            image={"images/bg.jpg"}
+            text={json.all_blogs[i].Desc}
+            Heading={json.all_blogs[i].Heading}
+            Owner={String(json.all_owners[i])}
+            location={blog_url}
+          />
+        );
+      }
+      Setlist(temp_list2);
+    } else {
+      Setlist(originallist);
+    }
+  }
+
   useEffect(() => {
     generate_blogs();
   }, []);
@@ -103,8 +192,15 @@ function Explore() {
             </a>
           </div>
           <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center  gap-6 w-full overflow-y-scroll">
-            <TOPBAR />
+            <TOPBAR handle_search={handle_search}/>
             {list}
+            <button
+                onClick={get_more_blogs}
+                id="SeeMore_button"
+                className="text-white w-fit bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-xs sm:text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
+              >
+                see more
+              </button>
           </div>
           <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
             <p>Notifications</p>

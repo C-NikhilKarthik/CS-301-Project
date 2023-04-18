@@ -14,7 +14,6 @@ const save = async (req, res) => {
   try {
     BlogHtml.collection.updateOne({_id:new ObjectId(blogid)},{$set:{Content:edited_content}})
     .then(()=>{
-        console.log("blog id ",blogid," has been updated")
         res.json({err:"no problems"})
     })
   }catch (error) {

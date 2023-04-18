@@ -46,7 +46,6 @@ function EditBlog() {
   const [flag, setFlag] = useState(false)
   const changeSelected = (index, isselected) => {
     cards[index].Selected = isselected
-    console.log(cards[index].Selected)
 
   }
   const [activeTab, setActiveTab] = useState(0);
@@ -58,12 +57,13 @@ function EditBlog() {
   const [home_url, setHomeUrl] = useState("")
   const [desc, setDesc] = useState("")
   const [title, setTitle] = useState("")
+  const [userName, setUserName] = useState("")
+  const [explore_url,setExplore_url] = useState([])
+  const [yourblogs_url,setYourblogs_url] = useState([])
 
   const handleChange = (value) => {
 
     setContent(value)
-    //setState({ value });
-    // console.log(state.value);
   };
 
   const replaceImage = async () => {
@@ -88,7 +88,6 @@ function EditBlog() {
       }
       count = imageIndex + 1; // Update count to the next character after the image tag
     } while (modified && count < state.value.length);
-    console.log(state.value);
   };
 
 
@@ -136,9 +135,9 @@ function EditBlog() {
     else {
       // var hrefUrl=new URL('http://localhost:3000/home')
       // window.location.replace(hrefUrl)
-      let url = new URL('http://localhost:3000/slug')
-      url.searchParams.set("email", `${email}`);
-      url.searchParams.set("blogId", `${blogId}`);
+      urlParams.set('email', email);
+      urlParams.set('blogId', blogId);
+      const url = window.location.pathname.replace('/edit', '/slug') + '?' + urlParams.toString();
 
       window.alert("POST SUCCESSFULLY UPDATED")
       window.location.href = url
@@ -160,19 +159,33 @@ function EditBlog() {
       }),
       headers: { "Content-type": "application/json" },
     });
-
+    const response1 = await fetch("/users", {
+      method: "POST",
+      body: JSON.stringify({
+        email_login: email,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+    const json1 = await response1.json();
     const json = await response.json();
-
     setContent(json.blog_details.Content)
     setTitle(json.blog_details.Heading)
     setDesc(json.blog_details.Desc)
-
+    for (let i = 0; i < json1.length; i++) {
+      if(json1[i].EmailId === email){
+        setUserName(json1[i].UserName)
+      }
+    }
     //setState(json.blog_details.Content)
 
-    var url = new URL("http://localhost:3000/home")
-    url.searchParams.set("email", `${email}`);
+    urlParams.delete('blogId');
+    urlParams.set('email', email);
+    const url = window.location.pathname.replace('/edit', '/home') + '?' + urlParams.toString();
+    const url1 = window.location.pathname.replace('/edit', '/explore') + '?' + urlParams.toString();
+    const url2 = window.location.pathname.replace('/edit', '/yourblogs') + '?' + urlParams.toString();
     setHomeUrl(url)
-
+    setYourblogs_url(url2)
+    setExplore_url(url1)
   }
   useEffect(() => {
     generate_blogs();
@@ -268,8 +281,8 @@ function EditBlog() {
     //   </div>
     //   <Footer />
     // </div>
-    <div className="w-full min-h-[100vh] bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
-      <Navbar />
+    <div className="w-full min-h-[100vh] bg-bg3 dark:bg-bg2 bg-cover bg-center bg-fixed ">
+      <Navbar home_url={home_url} explore_url={explore_url} yourblogs_url={yourblogs_url} UserName={userName}/>
       {/* Demo of the blog  */}
       <div className="w-full items-center gap-10 flex-col p-6 flex justify-center">
         <div className="w-full dark:text-slate-300 bg-[#fefeff] dark:bg-[#0c1116] md:w-2/3 lg:w-4/5 xl:w-3/5 flex flex-col gap-4 rounded-md">

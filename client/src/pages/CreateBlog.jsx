@@ -84,15 +84,13 @@ function CreateBlog() {
   const color = "#efefef";
   console.log(selectedCards,'cards');
 
-  const [state, setState] = useState({ value: null });
-  const [message, setMessage] = useState("");
-  const [heading, setHeading] = useState("");
-  const [desc, setDesc] = useState("");
-  const [time, setTime] = useState("");
-  // console.log(time);
+  const [state, setState] = useState({ value:'' });
+  const [message, setMessage] = useState('')
+  const [heading, setHeading] = useState('');
+  const [desc, setDesc] = useState('');
+  const [time,setTime]=useState('');
   const handleChange = (value) => {
     setState({ value });
-    // console.log(state.value);
   };
   const [flag, setFlag] = useState(false);
   const changeSelected = (index, isselected,card) => {
@@ -161,7 +159,6 @@ function CreateBlog() {
     e.preventDefault();
     setLoading(true);
     replaceImage();
-    console.log(heading, desc, state);
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({
@@ -260,8 +257,8 @@ function CreateBlog() {
     };
 
     recognition.onresult = (event) => {
-      let interimTranscript = state.value;
-      let finalTranscript = state.value;
+      let interimTranscript = '';
+      let finalTranscript = '';
 
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript = event.results[i][0].transcript;
@@ -283,7 +280,7 @@ function CreateBlog() {
     recognitionRef.current.start();
   };
 
-  const stopRecording = () => {
+  const stopRecording = () => {;
     recognitionRef.current.stop();
   };
 

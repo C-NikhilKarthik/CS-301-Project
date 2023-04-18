@@ -1,7 +1,6 @@
 import React from "react";
 import "../Components/TextEditor/container.css";
 function Demo({ Data }) {
-  // console.log(Data)
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
   var time = today.toUTCString();

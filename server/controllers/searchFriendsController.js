@@ -30,8 +30,8 @@ const searchFriends = async (req, res) => {
   {
     const isFriend=myMap.has(person[i]._id.toString());
     data.push({
-        Lname: person[i].Lname,
-        Fname: person[i].Fname,
+        Lname: person[i].UserName,
+        Fname: person[i].UserName,
         Uid: person[i]._id,
         Status: isFriend
     })

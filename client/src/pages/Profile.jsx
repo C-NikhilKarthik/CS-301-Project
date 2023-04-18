@@ -13,7 +13,11 @@ function Profile({ bg, Image }) {
         followers: '',
         following: '',
         blogs_number: '',
-        friends: []
+        friends: [],
+        home: '',
+        explore: '',
+        yourblogs: '',
+        url: []
     })
 
     const generate_blogs = async (e) => {
@@ -47,14 +51,10 @@ function Profile({ bg, Image }) {
             method: "POST",
         });
         const json4 = await response4.json();
-        console.log("friends")
         const json3 = await response3.json(); //
-        console.log("friends2")
         const json2 = await response2.json(); //all users
-        console.log("friends3")
         const json = await response.json(); //user
         var followers = 0;
-        console.log(json3)
         const id = json._id;
         for (let i = 0; i < json2.length; i++) {
             for (let j = 0; j < json2[i].Friends.length; j++) {
@@ -72,6 +72,12 @@ function Profile({ bg, Image }) {
             urlParams.set('blogId', String(json3.all_blogs[i]._id));
             var blog_edit_url = window.location.pathname.replace('/profile', '/edit') + '?' + urlParams.toString();
 
+            urlParams.set('email', email);
+            urlParams.delete('blogId')
+            var url = window.location.pathname.replace('/profile', '/home') + '?' + urlParams.toString();
+            var url1 = window.location.pathname.replace('/profile', '/explore') + '?' + urlParams.toString();
+            var url2 = window.location.pathname.replace('/profile', '/yourblogs') + '?' + urlParams.toString();
+
             temp_list.push(
                 <CARD
                     key={json3.all_blogs[i]._id}
@@ -86,9 +92,27 @@ function Profile({ bg, Image }) {
                 />
             );
         }
-        console.log(json4)
+        const urls = [];
+        for (let i = 0; i < json4.urls.length; i++) {
+            urlParams.set('email', json4.urls[i]);
+            const url1 = window.location.pathname.replace('/profile', '/profile') + '?' + urlParams.toString();
+            urls.push(url1);
+        }
+        console.log(json4.friendName);
+
         Setlist(temp_list);
-        setData({ name: json.UserName, followers: followers, following: json.Friends.length, blogs_number: json3.all_blogs.length, friends: json4 ,loading: false});
+        setData({
+            name: json.UserName,
+            followers: followers,
+            following: json.Friends.length,
+            blogs_number: json3.all_blogs.length,
+            friends: json4.friendName,
+            loading: false,
+            home: url,
+            explore: url1,
+            yourblogs: url2,
+            url: urls
+        });
     }
 
     useEffect(() => {
@@ -103,9 +127,9 @@ function Profile({ bg, Image }) {
         : { background: 'url("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")' }
     return (
         <>
-            {data.loading ? (<Loading />) : (<div className="w-full h-full pb-6 flex flex-col bg-[url('https://wallpaperaccess.com/full/3298375.jpg')] dark:bg-bg2 bg-cover bg-center bg-fixed ">
+            {data.loading ? (<Loading />) : (<div className="w-full h-full pb-6 flex flex-col bg-bg3 dark:bg-bg2 bg-cover bg-center bg-fixed ">
 
-                <Navbar UserName={data.name}/>
+                <Navbar home_url={data.home} explore_url={data.explore} yourblogs_url={data.yourblogs} UserName={data.name} />
                 <div className="relative min-h-[30vh] w-full" style={backgroundStyle}>
                     <div className='absolute left-10 rounded-full h-52 bg-cover bg-center aspect-square border-4 bottom-0 translate-y-[50%]' style={ImageStyle}></div>
                 </div>
@@ -141,8 +165,8 @@ function Profile({ bg, Image }) {
                         <div className='flex flex-col gap-4'>
                             <div className='flex justify-between bg-slate-800/60 rounded py-3 text-xl text-slate-200 font-semibold px-10'>Friends</div>
                             <div className="w-[32rem] h-full flex flex-col gap-4 overflow-y-scroll pb-4">
-                                {data.friends.map((s) => (
-                                    <FriendsCard Fname={s} />
+                                {data.friends.map((s,index) => (
+                                    <FriendsCard Fname={s} url={data.url[index]} profile={true} />
                                 ))}
                             </div>
                         </div>

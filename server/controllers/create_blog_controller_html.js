@@ -13,8 +13,6 @@ const create_blog_html = async (req, res) => {
   const time=req.body.time;
   const tags=req.body.selectedCards;
   const userId = req.cookies;
-  console.log(userId.userId);
-  console.log(fileStr,heading,desc);
 
   if(fileStr.value==="")
   {

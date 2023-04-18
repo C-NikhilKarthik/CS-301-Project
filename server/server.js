@@ -77,6 +77,9 @@ app.use('/removeFriends',require('./routes/RemoveFriends'));
 //search query in home page
 app.use('/search_query_home',require('./routes/SearchHome'))
 
+//search query in your blogs page
+app.use('/search_query_yourblogs',require('./routes/SearchYourBlogs'))
+
 //your blogs
 app.use('/your_blogs',require('./routes/YourBlogs'))
 
@@ -115,6 +118,9 @@ app.use('/deleteComments',require('./routes/DeleteComments'))
 
 //get more blogs
 app.use('/get_more_blogs',require('./routes/getmoreblogs'))
+
+//get more blogs for explore
+app.use('/get_more_blogs_explpore',require('./routes/getmoreblogsExplore'))
 
 //test
 app.use('/testing',require('./routes/testing'))

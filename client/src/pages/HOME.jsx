@@ -60,14 +60,17 @@ function HOME() {
       for (let i = 0; i < images.length; i++) {
         if (images[i].src) {
           imageLinks.push(images[i].src);
-        } else {
-          imageLinks.push("images/bg.jpg");
         }
       }
 
+      if (imageLinks.length === 0) {
+        imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+      }
 
       temp_list.push(
         <CARD
+          key={json.all_blogs[i]._id}
+          time={json.all_blogs[i].Time}
           id={json.all_blogs[i]._id}
           Likes={json.all_blogs[i].Likes}
           image={imageLinks[0]}
@@ -104,7 +107,6 @@ function HOME() {
   };
 
   async function handle_search(Search_query) {
-    console.log(Search_query);
 
     if (Search_query !== "") {
       const queryString = window.location.search;
@@ -129,9 +131,29 @@ function HOME() {
           window.location.pathname.replace("/home", "/slug") +
           "?" +
           urlParams.toString();
+        const htmlString = json.all_blogs[i].Content;
+        // console.log(htmlString)
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, "text/html");
+
+        const images = doc.getElementsByTagName("img");
+        const imageLinks = [];
+        for (let i = 0; i < images.length; i++) {
+          if (images[i].src) {
+            imageLinks.push(images[i].src);
+          }
+        }
+
+        if (imageLinks.length === 0) {
+          imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+        }
         temp_list2.push(
           <CARD
-            image={"images/bg.jpg"}
+            key={json.all_blogs[i]._id}
+            time={json.all_blogs[i].Time}
+            id={json.all_blogs[i]._id}
+            Likes={json.all_blogs[i].Likes}
+            image={imageLinks[0]}
             text={json.all_blogs[i].Desc}
             Heading={json.all_blogs[i].Heading}
             Owner={String(json.all_owners[i])}
@@ -168,9 +190,29 @@ function HOME() {
         window.location.pathname.replace("/home", "/slug") +
         "?" +
         urlParams.toString();
+      const htmlString = json.all_blogs[i].Content;
+      // console.log(htmlString)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlString, "text/html");
+
+      const images = doc.getElementsByTagName("img");
+      const imageLinks = [];
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].src) {
+          imageLinks.push(images[i].src);
+        }
+      }
+
+      if (imageLinks.length === 0) {
+        imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+      }
       temp_list.push(
         <CARD
-          image={"images/bg.jpg"}
+          key={json.all_blogs[i]._id}
+          id={json.all_blogs[i]._id}
+          time={json.all_blogs[i].Time}
+          Likes={json.all_blogs[i].Likes}
+          image={imageLinks[0]}
           text={json.all_blogs[i].Desc}
           Heading={json.all_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
@@ -180,9 +222,7 @@ function HOME() {
     }
 
     Setlist(temp_list);
-    console.log("list length", list.length);
     setNumBlogs(json.blog_count);
-    console.log(numBlogs, tot_numBlogs);
     const button = document.getElementById("SeeMore_button");
     if (numBlogs === tot_numBlogs) {
       button.style.display = "none";
