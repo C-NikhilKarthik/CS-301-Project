@@ -252,7 +252,7 @@ function CreateBlog() {
     recognitionRef.current.start();
   };
 
-  const stopRecording = () => {
+  const stopRecording = () => {;
     recognitionRef.current.stop();
   };
 

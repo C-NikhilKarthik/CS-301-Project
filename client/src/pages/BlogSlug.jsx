@@ -38,9 +38,10 @@ function BlogSlug() {
       headers: { "Content-type": "application/json" },
     });
     const json1 = await response1.json();
-    const json = await response.json();
+    const json = await response.json()
     SetContent(json.blog_details.Content);
     Setheading(json.blog_details.Heading);
+    getTextFromHtml(json.blog_details.Content,setText)
 
     for (let i = 0; i < json1.length; i++) {
       if (json1[i]._id === json.blog_details.Owner) {
@@ -48,11 +49,12 @@ function BlogSlug() {
       }
     }
     urlParams.delete('blogId');
-    urlParams.set('email', email);
+    urlParams.set('email', email)
     const url = window.location.pathname.replace('/slug', '/home') + '?' + urlParams.toString();
 
     setHomeUrl(url)
     setIsLoading(false)
+    setTextToRead(json.blog_details.Content)
     // var url = new URL("http://localhost:3000/explore");
     // url.searchParams.set("email", `${email}`);
     // setExplore_url(url);
@@ -64,6 +66,7 @@ function BlogSlug() {
   const [synthesis, setSynthesis] = useState(null);
 const [isPlaying, setIsPlaying] = useState(false);
 function startSpeech(text) {
+  console.log("text is ",text)
   const utterance = new SpeechSynthesisUtterance(text);
   const synth = window.speechSynthesis;
 
@@ -89,6 +92,7 @@ const handleSpeechButtonClick = () => {
 };
 
   function getTextFromHtml(html,callback) {
+    console.log("html text is ",html)
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
     let text = "";
@@ -97,7 +101,8 @@ const handleSpeechButtonClick = () => {
     while (treeWalker.nextNode()) {
       text += treeWalker.currentNode.textContent.trim() + " ";
     }
-  
+    
+    console.log("text from gettext from html is ->",text)
     callback(text);
   }
 
@@ -108,11 +113,10 @@ const handleSpeechButtonClick = () => {
   // window.speechSynthesis.speak(utterance);
   // };
 
-  console.log(content);
+  console.log(content)
   useEffect(() => {
     generate_blogs();
-    getTextFromHtml(content, setText);
-  }, [html]);
+  }, []);
   return (
     <>
       {isLoading ? (<Loading />) : (
@@ -129,7 +133,8 @@ const handleSpeechButtonClick = () => {
               </div>
               <div dangerouslySetInnerHTML={{ __html: content }} className="w-full" />
             </div>
-          <button onClick={handleSpeechButtonClick} className="text-white">
+          <button onClick={handleSpeechButtonClick} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
       {isPlaying ? "Stop" : "Speak"}
     </button>
             <Comments />
