@@ -5,68 +5,64 @@ import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
 import Cookies from 'js-cookie';
 import SyncLoader from 'react-spinners/SyncLoader'
 
-function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
+function CARD({ id, image, time, text, Heading, Likes, Owner, location, yourblog, edit_location }) {
   const [showMenu, setShowMenu] = useState(false);
-  const [likeStatus,setLikeStatus]=useState(true);
+  const [likeStatus, setLikeStatus] = useState(true);
   const [noLikes, setNolikes] = useState(Likes?.length);
-  console.log(Likes,'hii');
   // if(Likes.length>0)
   // {
   //   setNolikes(Likes.length);
   // }
 
-  let userID=Cookies.get('userId');
-//  console.log(id);
-//  console.log(Likes,'Hii')
+  let userID = Cookies.get('userId');
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
 
-  const handelDelete=async ()=>{
-    const response=await fetch('/deletBlog',{
-      method:'POST',
-      body:JSON.stringify({
+  const handelDelete = async () => {
+    const response = await fetch('/deletBlog', {
+      method: 'POST',
+      body: JSON.stringify({
         id
       }),
-       headers: { 'Content-type': 'application/json' },
+      headers: { 'Content-type': 'application/json' },
     });
-    const json=await response.json();
-    if(json.msg==='SUCCESS')
-    {
+    const json = await response.json();
+    if (json.msg === 'SUCCESS') {
       window.alert('Post id Deleted!');
       window.location.reload();
-    }  
+    }
   }
 
-  const handleLike=async ()=>{
-    const response = await fetch('/likes',{
-      method:'POST',
-      body:JSON.stringify({
+  const handleLike = async () => {
+    const response = await fetch('/likes', {
+      method: 'POST',
+      body: JSON.stringify({
         id
       }),
       headers: { 'Content-type': 'application/json' },
     });
     const json = await response.json();
-  if (json.msg === 'SUCCESS') {
-    setNolikes((noLikes) => noLikes + 1);
-    setLikeStatus(false); // update liked status to true
-  }
+    if (json.msg === 'SUCCESS') {
+      setNolikes((noLikes) => noLikes + 1);
+      setLikeStatus(false); // update liked status to true
+    }
   }
 
-  const handleUnlike=async ()=>{
-    const response = await fetch('/unlikes',{
-      method:'POST',
-      body:JSON.stringify({
+  const handleUnlike = async () => {
+    const response = await fetch('/unlikes', {
+      method: 'POST',
+      body: JSON.stringify({
         id
       }),
       headers: { 'Content-type': 'application/json' },
     });
     const json = await response.json();
-  if (json.msg === 'SUCCESS') {
-    setNolikes((noLikes) => noLikes - 1);
-    setLikeStatus(true); // update liked status to true
-  }
+    if (json.msg === 'SUCCESS') {
+      setNolikes((noLikes) => noLikes - 1);
+      setLikeStatus(true); // update liked status to true
+    }
   }
 
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -81,9 +77,9 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
       setLikeStatus(false);
     }
   }, [])
-  
+
   const color = "#ccfff2"
-  
+
   return (
     <div className="w-full rounded p-4 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
       <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-12 aspect-square rounded-full" />
@@ -125,12 +121,12 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
           )}
         </div>
         <div className="text-slate-700 dark:text-slate-500 text-sm">
-          8th April, 2023
+          {time}
         </div>
 
         <div className="grid sm:grid-cols-[2fr_3fr] items-center justify-center grid-rows-[auto_1fr] mt-5 gap-3">
           <div>
-              {!imageLoaded && <div className="w-full flex items-center max-w-[20rem] aspect-square justify-center"><SyncLoader color={color} /></div>}
+            {!imageLoaded && <div className="w-full flex items-center max-w-[20rem] aspect-square justify-center"><SyncLoader color={color} /></div>}
             <img
               className="rounded-md border-2 border-slate-500 w-full max-w-[20rem] object-cover"
               alt="blog"
@@ -147,14 +143,14 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
         </div>
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-4 sm:justify-between">
           <div className="flex items-center gap-4">
-          {likeStatus?
-            (<div onClick={handleLike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
-              <FaHeart className="text-xl text-white"/>
-              <p className="sm:flex hidden">Like {noLikes}</p>
-            </div>) : (<div onClick={handleUnlike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
-              <FaHeart className="text-xl text-red-600"/>
-              <p className="sm:flex hidden">Like {noLikes}</p>
-            </div>)}
+            {likeStatus ?
+              (<div onClick={handleLike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
+                <FaHeart className="text-xl text-white" />
+                <p className="sm:flex hidden">Like {noLikes}</p>
+              </div>) : (<div onClick={handleUnlike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
+                <FaHeart className="text-xl text-red-600" />
+                <p className="sm:flex hidden">Like {noLikes}</p>
+              </div>)}
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosShare />
               <p className="sm:flex hidden">Share</p>

@@ -4,7 +4,6 @@ const fs=require('fs')
 const fsPromises=require('fs').promises
 const path=require('path')
 
-
 //uuid will create a specific id for every log item
 const logEvents=async(message,logFileName)=>{
     const dateTime=`${format(new Date(),'yyyyMMdd\tHH:mm:ss')}`

@@ -2,7 +2,6 @@ const express=require('express');
 const BlogHTML=require('../models/HtmlBlogModel')
 
 const deleteblog=async(req,res)=>{
-    console.log(req.body);
     const {id} = req.body;
     try {
         const result = await BlogHTML.deleteOne({ _id: id });

@@ -45,7 +45,6 @@ const Comments = () => {
       headers: { "Content-type": "application/json" },
     });
     const json = await response.json();
-    // console.log(json.array);
     if (json) {
       setComments(json.comments);
       setUsername(json.array);

@@ -44,7 +44,6 @@ function ProfileCard({ url }) {
     }
 
     setData({ name: json.UserName, following: (json.Friends.length > 0) ? json.Friends.length : 0, followers: followers });
-    console.log(data)
   }
 
 

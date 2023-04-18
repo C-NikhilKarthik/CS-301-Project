@@ -13,7 +13,6 @@ const GetComments = async (req, res) => {
             array.push(user.UserName);
           }
           const result={array,comments}
-        console.log(result);
         res.json(result);
     } catch (error) {
         console.error(error);

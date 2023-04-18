@@ -48,7 +48,6 @@ function Interests(props) {
   }
   const changeSelected=(index,isselected)=>{
     cards[index].Selected=isselected
-    console.log(cards[index].Selected)
 
   }
 

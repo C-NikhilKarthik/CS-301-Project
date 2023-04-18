@@ -16,7 +16,6 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
 
   const userValid = async () => {
-    console.log(id, token);
     const res = await fetch(`/forgotpassword/${id}/${token}`, {
       method: "GET",
       headers: {

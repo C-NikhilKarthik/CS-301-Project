@@ -43,7 +43,6 @@ function Test() {
       }
       count = imageIndex + 1; // Update count to the next character after the image tag
     } while (modified && count < state.value.length);
-    console.log(state.value);
   };
   
   

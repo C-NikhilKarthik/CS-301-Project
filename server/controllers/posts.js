@@ -29,12 +29,9 @@ const readmore=(req,res)=>{
   const blogId=req.body.BlogId
   
   
-  console.log(blogId)
-
   const blog_info=[]
   Blog.collection.find({_id: new ObjectId(blogId)}).forEach((blog)=>blog_info.push(blog))
   .then(()=>{
-    //console.log(blog_info)
     res.json({blog_details:blog_info[0]})
   })
 
