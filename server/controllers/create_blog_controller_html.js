@@ -10,6 +10,7 @@ const create_blog_html = async (req, res) => {
   const fileStr = req.body.state;
   const heading=req.body.heading;
   const desc=req.body.desc;
+  const time=req.body.time;
   const userId = req.cookies;
   console.log(userId.userId);
   console.log(fileStr,heading,desc);
@@ -24,6 +25,7 @@ const create_blog_html = async (req, res) => {
 
   try {
     const post = new BlogHtml({
+      Time:time,
       Owner: userId.userId,
       Heading:heading,
       Desc:desc,

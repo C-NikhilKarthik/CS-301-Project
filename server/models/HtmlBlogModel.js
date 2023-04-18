@@ -8,11 +8,13 @@ const CommentSchema = new Schema({
 
 const HtmlBlogSchema = new Schema({
     Owner: Schema.Types.ObjectId,
+    Time:String,
     Heading: String,
     Desc: String,
     Heading: String,
     Description: String,
     Content: String,
+    Tags:[String],
     Likes: [Schema.Types.ObjectId],
     Comments: [CommentSchema]
 }, { collection: 'Blog_Posts' });

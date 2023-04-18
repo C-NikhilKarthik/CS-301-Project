@@ -86,6 +86,8 @@ function CreateBlog() {
   const [message, setMessage] = useState('')
   const [heading, setHeading] = useState('');
   const [desc, setDesc] = useState('');
+  const [time,setTime]=useState('');
+  // console.log(time);
   const handleChange = (value) => {
     setState({ value });
     // console.log(state.value);
@@ -144,6 +146,11 @@ function CreateBlog() {
     }
   };
 
+  useEffect(() => {
+    setTime(new Date().toLocaleTimeString())
+  })
+  
+
   const submitBlog = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -152,6 +159,7 @@ function CreateBlog() {
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({
+        time,
         heading,
         desc,
         state,
