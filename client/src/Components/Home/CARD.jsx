@@ -3,6 +3,7 @@ import { FiMoreHorizontal } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
 import Cookies from 'js-cookie';
+import SyncLoader from 'react-spinners/SyncLoader'
 
 function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
   const [showMenu, setShowMenu] = useState(false);
@@ -68,13 +69,21 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
   }
   }
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const imageSrc = image;
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   useEffect(() => {
     if (Likes && Likes.includes(userID)) {
       setLikeStatus(false);
     }
   }, [])
   
-
+  const color = "#ccfff2"
+  
   return (
     <div className="w-full rounded p-4 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md dark:text-slate-200 flex gap-3">
       <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-12 aspect-square rounded-full" />
@@ -119,13 +128,18 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
           8th April, 2023
         </div>
 
-        <div className="grid sm:grid-cols-[2fr_3fr] grid-rows-[auto_1fr] mt-5 gap-3">
-          <img
-            className="rounded-md border-2 border-slate-500 w-full max-w-[20rem] object-cover"
-            alt="blog"
-            src={image}
-            // src="https://wallpaperaccess.com/full/5667105.jpg"
-          />
+        <div className="grid sm:grid-cols-[2fr_3fr] items-center justify-center grid-rows-[auto_1fr] mt-5 gap-3">
+          <div>
+              {!imageLoaded && <div className="w-full flex items-center max-w-[20rem] aspect-square justify-center"><SyncLoader color={color} /></div>}
+            <img
+              className="rounded-md border-2 border-slate-500 w-full max-w-[20rem] object-cover"
+              alt="blog"
+              src={imageSrc}
+              onLoad={handleImageLoad}
+              style={{ display: imageLoaded ? "block" : "none" }}
+            />
+          </div>
+
           <div className="text-base sm:ml-4 max-h-[16rem] flex flex-col gap-4 items-end text-justify overflow-hidden">
             <p className="text-xl w-full">{Heading}</p>
             {text}
@@ -133,11 +147,14 @@ function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_l
         </div>
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-4 sm:justify-between">
           <div className="flex items-center gap-4">
-            <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
-              {/* <FaHeart className="text-xl text-red-600" onClick={handleLike}/> */}
-              {likeStatus?(<FaHeart onClick={handleLike}/>):(<FaHeart onClick={handleUnlike} className="text-xl text-red-600"/>)}
+          {likeStatus?
+            (<div onClick={handleLike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
+              <FaHeart className="text-xl text-white"/>
               <p className="sm:flex hidden">Like {noLikes}</p>
-            </div>
+            </div>) : (<div onClick={handleUnlike} className="bg-slate-300/70 dark:bg-slate-700 cursor-pointer rounded-md p-3 flex items-center gap-3">
+              <FaHeart className="text-xl text-red-600"/>
+              <p className="sm:flex hidden">Like {noLikes}</p>
+            </div>)}
             <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosShare />
               <p className="sm:flex hidden">Share</p>

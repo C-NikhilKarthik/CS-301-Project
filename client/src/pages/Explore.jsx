@@ -14,6 +14,7 @@ function Explore() {
   const [yourblogs_url, setYourblogs_url] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [UserName, setUserName] = useState('');
+  const [profile, setProfile] = useState([]);
 
 
   //   function shuffle(blogs)
@@ -76,8 +77,10 @@ function Explore() {
     Setlist(temp_list);
     urlParams.delete('blogId');
     urlParams.set('email', email);
+    const profile_url = window.location.pathname.replace('/explore', '/profile') + '?' + urlParams.toString();
     var url2 = window.location.pathname.replace('/explore', '/yourblogs') + '?' + urlParams.toString();
     setYourblogs_url(url2)
+    setProfile(profile_url);
     setIsLoading(false);
 
   };
@@ -93,7 +96,7 @@ function Explore() {
         <Navbar UserName={UserName} home_url={home_url} yourblogs_url={yourblogs_url} />
         <div className="flex h-full px-8 gap-8 z-[5]">
           <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
-            <ProfileCard />
+            <ProfileCard url={profile}/>
             <a href="/createblog" className="bg-blue-600 w-full px-2 flex justify-center gap-4 items-center rounded-full py-3 text-slate-200">
               <MdAddCircle className="text-xl" />
               <p>Create Blog</p>

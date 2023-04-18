@@ -37,7 +37,8 @@ const signup=(req,res)=>{
             message:"Invalid lname entered"
         })
     }
-    else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+    else if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+{
         res.json({
             status: "FAILED",
             message: "Invalid email entered"

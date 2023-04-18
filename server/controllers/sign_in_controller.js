@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 
 // signin
-const login = (req, res) => {
+const login = async(req, res) => {
     const fileStr = req.body;
     EmailId = fileStr.email_login.trim();
     Password = fileStr.password_login.trim();
@@ -38,8 +38,9 @@ const login = (req, res) => {
                     res.cookie('userId',data[0].id);
                     const hashedPassword = data[0].Password;
                     bcrypt.compare(Password, hashedPassword)
-                        .then((result) => {
+                        .then(async(result) => {
                             if (result) {
+
                                 //Password match
                                 console.log('Signed In');
                                 res.json({
