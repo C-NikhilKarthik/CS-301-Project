@@ -5,7 +5,7 @@ import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
 import Cookies from 'js-cookie';
 import SyncLoader from 'react-spinners/SyncLoader'
 
-function CARD({ id,image, text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
+function CARD({ id,image,text, Heading,Likes, Owner, location, yourblog ,edit_location}) {
   const [showMenu, setShowMenu] = useState(false);
   const [likeStatus,setLikeStatus]=useState(true);
   const [noLikes, setNolikes] = useState(Likes?.length);

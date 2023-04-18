@@ -11,6 +11,7 @@ const create_blog_html = async (req, res) => {
   const heading=req.body.heading;
   const desc=req.body.desc;
   const time=req.body.time;
+  const tags=req.body.selectedCards;
   const userId = req.cookies;
   console.log(userId.userId);
   console.log(fileStr,heading,desc);
@@ -29,7 +30,8 @@ const create_blog_html = async (req, res) => {
       Owner: userId.userId,
       Heading:heading,
       Desc:desc,
-      Content: fileStr.value
+      Content: fileStr.value,
+      Tags:tags
     });
 
     const result = await post.save();
