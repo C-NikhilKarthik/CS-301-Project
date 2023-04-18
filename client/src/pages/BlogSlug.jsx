@@ -12,6 +12,8 @@ function BlogSlug() {
   const [content, SetContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [home_url, setHomeUrl] = useState("")
+  const [textToRead, setTextToRead] = useState("");
+
   const generate_blogs = async (e) => {
     setIsLoading(true);
     const temp_list = [];
@@ -58,10 +60,59 @@ function BlogSlug() {
     //Setlist(temp_list);
   };
 
+  //read speech:
+  const [synthesis, setSynthesis] = useState(null);
+const [isPlaying, setIsPlaying] = useState(false);
+function startSpeech(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  const synth = window.speechSynthesis;
+
+  synth.cancel();
+  synth.speak(utterance);
+  setIsPlaying(true);
+  setSynthesis(synth);
+}
+
+function stopSpeech() {
+  synthesis.cancel();
+  setIsPlaying(false);
+}
+const [html, setHtml] = useState(content);
+const [text, setText] = useState("");
+
+const handleSpeechButtonClick = () => {
+  if (!isPlaying) {
+    startSpeech(text);
+  } else {
+    stopSpeech();
+  }
+};
+
+  function getTextFromHtml(html,callback) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    let text = "";
+  
+    const treeWalker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT, null, false);
+    while (treeWalker.nextNode()) {
+      text += treeWalker.currentNode.textContent.trim() + " ";
+    }
+  
+    callback(text);
+  }
+
+  // const handleSpeakButtonClick = () => {
+  //   const text = getTextFromHtml(content);
+
+  // const utterance = new SpeechSynthesisUtterance(text);
+  // window.speechSynthesis.speak(utterance);
+  // };
+
   console.log(content);
   useEffect(() => {
     generate_blogs();
-  }, []);
+    getTextFromHtml(content, setText);
+  }, [html]);
   return (
     <>
       {isLoading ? (<Loading />) : (
@@ -78,6 +129,9 @@ function BlogSlug() {
               </div>
               <div dangerouslySetInnerHTML={{ __html: content }} className="w-full" />
             </div>
+          <button onClick={handleSpeechButtonClick} className="text-white">
+      {isPlaying ? "Stop" : "Speak"}
+    </button>
             <Comments />
           </div>
           <Footer />
