@@ -41,9 +41,10 @@ function BlogSlug() {
       headers: { "Content-type": "application/json" },
     });
     const json1 = await response1.json();
-    const json = await response.json();
+    const json = await response.json()
     SetContent(json.blog_details.Content);
     Setheading(json.blog_details.Heading);
+    getTextFromHtml(json.blog_details.Content,setText)
     setTime(json.blog_details.Time);
     for (let i = 0; i < json1.length; i++) {
       if (json1[i]._id === json.blog_details.Owner) {
@@ -54,7 +55,7 @@ function BlogSlug() {
       }
     }
     urlParams.delete('blogId');
-    urlParams.set('email', email);
+    urlParams.set('email', email)
     const url = window.location.pathname.replace('/slug', '/home') + '?' + urlParams.toString();
     const url2 = window.location.pathname.replace('/slug', '/explore') + '?' + urlParams.toString();
     const url3 = window.location.pathname.replace('/slug', '/yourblogs') + '?' + urlParams.toString();
@@ -63,6 +64,7 @@ function BlogSlug() {
     setExplore_url(url2)
     setYourblogs_url(url3)
     setIsLoading(false)
+    setTextToRead(json.blog_details.Content)
     // var url = new URL("http://localhost:3000/explore");
     // url.searchParams.set("email", `${email}`);
     // setExplore_url(url);
@@ -120,8 +122,7 @@ function BlogSlug() {
 
   useEffect(() => {
     generate_blogs();
-    getTextFromHtml(content, setText);
-  }, [html]);
+  }, []);
   return (
     <>
       {isLoading ? (<Loading />) : (
@@ -138,9 +139,10 @@ function BlogSlug() {
               </div>
               <div dangerouslySetInnerHTML={{ __html: content }} className="w-full" />
             </div>
-            <button onClick={handleSpeechButtonClick} className="text-white">
-              {isPlaying ? "Stop" : "Speak"}
-            </button>
+          <button onClick={handleSpeechButtonClick} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+      {isPlaying ? "Stop" : "Speak"}
+    </button>
             <Comments />
           </div>
           <Footer />
