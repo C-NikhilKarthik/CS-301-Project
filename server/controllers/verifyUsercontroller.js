@@ -8,7 +8,6 @@ const keysecret=process.env.SECRET_KEY
 const Verifyuser=async(req,res)=>{
     const {id,token} = req.body;
 
-    console.log(req.params,'verifyUser')
 
     try {
         const validuser = await User.findOne({_id:id,verifytoken:token});

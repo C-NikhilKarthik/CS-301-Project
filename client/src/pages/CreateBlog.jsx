@@ -87,15 +87,12 @@ function CreateBlog() {
   const [heading, setHeading] = useState('');
   const [desc, setDesc] = useState('');
   const [time,setTime]=useState('');
-  // console.log(time);
   const handleChange = (value) => {
     setState({ value });
-    // console.log(state.value);
   };
   const [flag, setFlag] = useState(false)
   const changeSelected = (index, isselected) => {
     cards[index].Selected = isselected
-    console.log(cards[index].Selected)
 
   }
   const replaceImage = async () => {
@@ -155,7 +152,6 @@ function CreateBlog() {
     e.preventDefault();
     setLoading(true);
     replaceImage();
-    console.log(heading, desc, state)
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({

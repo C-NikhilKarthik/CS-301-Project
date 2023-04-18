@@ -66,7 +66,6 @@ function Login() {
     }
   }
   const loginhandle = async (email_l, password_l) => {
-    console.log(email_l, password_l);
     try {
       const response = await fetch('/signin', {
         method: 'POST',

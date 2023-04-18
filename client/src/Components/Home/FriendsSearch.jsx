@@ -14,9 +14,7 @@ function FriendsSearch() {
       headers: { "Content-type": "application/json" },
     });
     const json = await response.json();
-    console.log(json);
     setPeople(json);
-    console.log(json);
   };
 
   const addFriend = async (userId, index) => {

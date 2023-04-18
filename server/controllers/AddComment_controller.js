@@ -15,7 +15,6 @@ const AddComment = async (req, res) => {
         { $push: {Comments:newComment} },
         { new: true } 
       );
-      console.log('comment added');
 
     } catch (error) {
       console.error('hello');

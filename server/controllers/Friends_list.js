@@ -8,7 +8,6 @@ const Friends = async (req, res) => {
   const friendName = [];
   // const myObjectIdString = '6427cb7e3bec49434e2c8b68';
   const userId = req.cookies;
-  console.log(userId);
   // const userId = ObjectId.createFromHexString(myObjectIdString);
   try {
     // const userId=req.session.userId;

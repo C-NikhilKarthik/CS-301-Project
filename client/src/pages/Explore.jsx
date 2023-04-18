@@ -64,6 +64,7 @@ function Explore() {
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           Likes={json.all_blogs[i].Likes}
+          time={json.all_blogs[i].Time}
           image={"images/bg.jpg"}
           text={shuffled_blogs[i].Desc}
           Heading={shuffled_blogs[i].Heading}
@@ -115,6 +116,7 @@ function Explore() {
           image={"images/bg.jpg"}
           text={json.all_blogs[i].Desc}
           Heading={json.all_blogs[i].Heading}
+          time={json.all_blogs[i].Time}
           Owner={String(json.all_owners[i])}
           location={blog_url}
         />
@@ -122,9 +124,7 @@ function Explore() {
     }
 
     Setlist(temp_list);
-    console.log("list length", list.length);
     setNumBlogs(json.blog_count);
-    console.log(numBlogs, tot_numBlogs);
     const button = document.getElementById("SeeMore_button");
     if (numBlogs === tot_numBlogs) {
       button.style.display = "none";

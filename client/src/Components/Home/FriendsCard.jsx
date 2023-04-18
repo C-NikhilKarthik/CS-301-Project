@@ -6,14 +6,12 @@ function FriendsCard({ dp, Fname, Lname, friend, setFriend1,setFriend2 }) {
     //friend=true
     
     setFriend1()
-    console.log("made as friend")
   }
   function handleFriend2()
   {
     //friend=false
     
     setFriend2()
-    console.log("removed friend")
   }
   return (
     <div className="relative justify-between border-[1px] border-slate-600 rounded-lg hover:bg-blue-400 dark:hover:bg-blue-500 cursor-pointer transition-[background-color] p-4 items-center bg-white dark:bg-slate-800 flex gap-4">

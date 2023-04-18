@@ -17,8 +17,6 @@ const transporter=nodemailer.createTransport({
 
 //send email Link For reset password
 const PasswordR= async(req,res)=>{
-    console.log(req.body)
-
     const{email}=req.body;
     if(!email){
         res.status(401).json({status:401,message:"Enter your email"})
@@ -27,22 +25,13 @@ const PasswordR= async(req,res)=>{
     try {
         const userfind=await User.findOne({EmailId:email});
 
-        // console.log("userfind",userfind);
-        // console.log("true");
-
         //token generate for reset password
         const token=jwt.sign({_id:userfind._id},keysecret,{
             expiresIn:"1d"
         });
-        // console.log("token",token);
-        // console.log("true2");
-        
 
         const setusertoken=await User.findByIdAndUpdate({_id:userfind._id},{verifytoken:token},{new:true});
         
-        // console.log("setusertoken",setusertoken);
-        // console.log("After verifying token");
-
         if(setusertoken){
             const mailOptions={
                 from:"sinhaanishkumar1@gmail.com",

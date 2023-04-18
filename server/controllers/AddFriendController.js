@@ -7,7 +7,6 @@ const cookieParser = require("cookie-parser");
 const addFriends = async (req, res) => {
   const current_uuid = req.cookies.userId;
   const Uuid = req.body.Uid;
-  console.log(Uuid, current_uuid);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       current_uuid,

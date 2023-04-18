@@ -1,7 +1,5 @@
 const User = require("../models/UserModel");
 const interests=async(req,res)=>{
-    console.log(req.body)
-    
     const user_interests=[]
     for(let i=0;i<req.body.cards.length;i++)
     {

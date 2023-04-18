@@ -16,7 +16,6 @@ const explore = async(req, res) => {
     blogs=await cursor.toArray()
     const len=blogs.length
     blogs=blogs.slice(0,5) 
-    console.log("blogs:",blogs)
     const blog_owners=[]
 
     //reduce load time more by storing owner username directly in database
@@ -25,7 +24,6 @@ const explore = async(req, res) => {
       const user=await User.collection.findOne({_id:new ObjectId(blogs[i].Owner)})
       if(user!=null)
       {
-        console.log("blog owner:",user.UserName)
         blog_owners.push(user.UserName)
       }
       else{

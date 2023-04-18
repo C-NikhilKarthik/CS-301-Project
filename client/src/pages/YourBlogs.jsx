@@ -37,7 +37,6 @@ function YourBlogs() {
     setUserName(json.UserName);
 
     // console.log(json);
-    console.log(json.all_blogs)
     for (let i = json.all_blogs.length - 1; i > -1; i--) {
       urlParams.set('email', email);
       urlParams.set('blogId', String(json.all_blogs[i]._id));
@@ -52,6 +51,7 @@ function YourBlogs() {
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           image={"images/bg.jpg"}
+          time={json.all_blogs[i].Time}
           Likes={json.all_blogs[i].Likes}
           text={json.all_blogs[i].Desc}
           Heading={json.all_blogs[i].Heading}
