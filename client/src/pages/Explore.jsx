@@ -60,13 +60,31 @@ function Explore() {
       urlParams.set('email', email);
       urlParams.set('blogId', String(json.all_blogs[i]._id));
       var blog_url = window.location.pathname.replace('/explore', '/slug') + '?' + urlParams.toString();
+      
+      const htmlString = json.all_blogs[i].Content;
+      // console.log(htmlString)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlString, "text/html");
+
+      const images = doc.getElementsByTagName("img");
+      const imageLinks = [];
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].src) {
+          imageLinks.push(images[i].src);
+        }
+      }
+
+      if (imageLinks.length === 0) {
+        imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+      }
+      
       temp_list.push(
         <CARD
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           Likes={json.all_blogs[i].Likes}
           time={json.all_blogs[i].Time}
-          image={"images/bg.jpg"}
+          image={imageLinks[0]}
           text={shuffled_blogs[i].Desc}
           Heading={shuffled_blogs[i].Heading}
           Owner={String(json.all_owners[i])}

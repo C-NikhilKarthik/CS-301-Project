@@ -140,7 +140,7 @@ function EditBlog() {
       const url = window.location.pathname.replace('/edit', '/slug') + '?' + urlParams.toString();
 
       window.alert("POST SUCCESSFULLY UPDATED")
-      window.location.href = url
+      //window.location.href = url
 
     }
   };
