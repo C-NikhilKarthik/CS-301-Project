@@ -77,6 +77,9 @@ app.use('/removeFriends',require('./routes/RemoveFriends'));
 //search query in home page
 app.use('/search_query_home',require('./routes/SearchHome'))
 
+//search query in your blogs page
+app.use('/search_query_yourblogs',require('./routes/SearchYourBlogs'))
+
 //your blogs
 app.use('/your_blogs',require('./routes/YourBlogs'))
 

@@ -46,7 +46,10 @@ function HOME() {
         window.location.pathname.replace("/home", "/slug") +
         "?" +
         urlParams.toString();
-
+        var comment =
+        window.location.pathname.replace("/home", "/slug") +
+        "?" +
+        urlParams.toString() + '#comments';
       // blog_url.searchParams.set("email", `${email}`);
       // blog_url.searchParams.set("blogId", `${String(json.all_blogs[i]._id)}`);
 
@@ -78,6 +81,7 @@ function HOME() {
           Heading={json.all_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
           location={blog_url}
+          comment={comment}
         />
       );
     }
@@ -190,6 +194,10 @@ function HOME() {
         window.location.pathname.replace("/home", "/slug") +
         "?" +
         urlParams.toString();
+      var comment =
+        window.location.pathname.replace("/home", "/slug") +
+        "?" +
+        urlParams.toString() + '#comments';
       const htmlString = json.all_blogs[i].Content;
       // console.log(htmlString)
       const parser = new DOMParser();
@@ -217,6 +225,7 @@ function HOME() {
           Heading={json.all_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
           location={blog_url}
+          comment={comment}
         />
       );
     }

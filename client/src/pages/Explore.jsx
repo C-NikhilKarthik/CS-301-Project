@@ -17,6 +17,7 @@ function Explore() {
   const [profile, setProfile] = useState([]);
   const [numBlogs, setNumBlogs] = useState(0);
   const [tot_numBlogs, setTotNumBlogs] = useState(0);
+  const [originallist, SetOriginal] = useState([]);
 
 
   //   function shuffle(blogs)
@@ -59,13 +60,30 @@ function Explore() {
       urlParams.set('email', email);
       urlParams.set('blogId', String(json.all_blogs[i]._id));
       var blog_url = window.location.pathname.replace('/explore', '/slug') + '?' + urlParams.toString();
+
+      const htmlString = json.all_blogs[i].Content;
+      // console.log(htmlString)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlString, "text/html");
+
+      const images = doc.getElementsByTagName("img");
+      const imageLinks = [];
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].src) {
+          imageLinks.push(images[i].src);
+        }
+      }
+
+      if (imageLinks.length === 0) {
+        imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+      }
       temp_list.push(
         <CARD
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
           Likes={json.all_blogs[i].Likes}
           time={json.all_blogs[i].Time}
-          image={"images/bg.jpg"}
+          image={imageLinks[0]}
           text={shuffled_blogs[i].Desc}
           Heading={shuffled_blogs[i].Heading}
           Owner={String(json.all_owners[i])}
@@ -111,9 +129,27 @@ function Explore() {
         window.location.pathname.replace("/home", "/slug") +
         "?" +
         urlParams.toString();
+
+
+      const htmlString = json.all_blogs[i].Content;
+      // console.log(htmlString)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlString, "text/html");
+
+      const images = doc.getElementsByTagName("img");
+      const imageLinks = [];
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].src) {
+          imageLinks.push(images[i].src);
+        }
+      }
+
+      if (imageLinks.length === 0) {
+        imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+      }
       temp_list.push(
         <CARD
-          image={"images/bg.jpg"}
+          image={imageLinks[0]}
           text={json.all_blogs[i].Desc}
           Heading={json.all_blogs[i].Heading}
           time={json.all_blogs[i].Time}
@@ -131,6 +167,65 @@ function Explore() {
     }
   };
 
+  async function handle_search(Search_query) {
+    console.log(Search_query);
+
+    if (Search_query !== "") {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const email = urlParams.get("email");
+      const response = await fetch("/search_query_home", {
+        method: "POST",
+        body: JSON.stringify({
+          email_login: email,
+          search_query: Search_query,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+
+      const json = await response.json();
+      const temp_list2 = [];
+
+      for (let i = 0; i < json.all_blogs.length; i++) {
+        urlParams.set("email", email);
+        urlParams.set("blogId", String(json.all_blogs[i]._id));
+        var blog_url =
+          window.location.pathname.replace("/home", "/slug") +
+          "?" +
+          urlParams.toString();
+
+        const htmlString = json.all_blogs[i].Content;
+        // console.log(htmlString)
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, "text/html");
+
+        const images = doc.getElementsByTagName("img");
+        const imageLinks = [];
+        for (let i = 0; i < images.length; i++) {
+          if (images[i].src) {
+            imageLinks.push(images[i].src);
+          }
+        }
+
+        if (imageLinks.length === 0) {
+          imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+        }
+        temp_list2.push(
+          <CARD
+            image={imageLinks[0]}
+            text={json.all_blogs[i].Desc}
+            Heading={json.all_blogs[i].Heading}
+            Owner={String(json.all_owners[i])}
+            location={blog_url}
+          />
+        );
+      }
+      Setlist(temp_list2);
+    } else {
+      Setlist(originallist);
+    }
+  }
+
   useEffect(() => {
     generate_blogs();
   }, []);
@@ -142,22 +237,22 @@ function Explore() {
         <Navbar UserName={UserName} home_url={home_url} yourblogs_url={yourblogs_url} />
         <div className="flex h-full px-8 gap-8 z-[5]">
           <div className="md:flex md:flex-col gap-6 hidden rounded-md text-slate-700 dark:text-slate-100 text-lg">
-            <ProfileCard url={profile}/>
+            <ProfileCard url={profile} />
             <a href="/createblog" className="bg-blue-600 w-full px-2 flex justify-center gap-4 items-center rounded-full py-3 text-slate-200">
               <MdAddCircle className="text-xl" />
               <p>Create Blog</p>
             </a>
           </div>
           <div className="relative pb-16 rounded-md mb-8 flex flex-col items-center  gap-6 w-full overflow-y-scroll">
-            <TOPBAR />
+            <TOPBAR handle_search={handle_search} />
             {list}
             <button
-                onClick={get_more_blogs}
-                id="SeeMore_button"
-                className="text-white w-fit bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-xs sm:text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
-              >
-                see more
-              </button>
+              onClick={get_more_blogs}
+              id="SeeMore_button"
+              className="text-white w-fit bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-xs sm:text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 "
+            >
+              see more
+            </button>
           </div>
           <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">
             <p>Notifications</p>

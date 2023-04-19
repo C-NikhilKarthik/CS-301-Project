@@ -9,7 +9,7 @@ import EditorToolbar, {
 import Demo from "../pages/Demo";
 import Navbar from "../Components/Main/Navbar";
 import Tags from "../Components/BlogPage/Tags";
-import FadeLoader from 'react-spinners/FadeLoader'
+import FadeLoader from "react-spinners/FadeLoader";
 
 // function makeResizableDiv() {
 //   const element = document.getElementById("main");
@@ -52,27 +52,27 @@ function CreateBlog() {
   const cards = [
     {
       title: "Technology",
-      Selected: false
+      Selected: false,
     },
     {
       title: "Finance",
-      Selected: false
+      Selected: false,
     },
     {
       title: "Food and Cooking",
-      Selected: false
+      Selected: false,
     },
     {
       title: "Personal Development",
-      Selected: false
+      Selected: false,
     },
     {
       title: "Health and Wellness",
-      Selected: false
+      Selected: false,
     },
     {
       title: "Travel",
-      Selected: false
+      Selected: false,
     },
   ];
 
@@ -80,7 +80,9 @@ function CreateBlog() {
   const recognitionRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
   const [loading, setLoading] = useState(false);
-  const color="#efefef"
+  const [selectedCards, setSelectedCards] = useState([]);
+  const color = "#efefef";
+  console.log(selectedCards,'cards');
 
   const [state, setState] = useState({ value:'' });
   const [message, setMessage] = useState('')
@@ -92,12 +94,18 @@ function CreateBlog() {
     setState({ value });
     // console.log(state.value);
   };
-  const [flag, setFlag] = useState(false)
-  const changeSelected = (index, isselected) => {
-    cards[index].Selected = isselected
-    console.log(cards[index].Selected)
-
-  }
+  const [flag, setFlag] = useState(false);
+  const changeSelected = (index, isselected,card) => {
+    if(isselected)
+    {
+        setSelectedCards([...selectedCards,card.title])
+    }
+    else{
+      setSelectedCards(selectedCards.filter(cardTitle => cardTitle !== card.title));
+    }
+    cards[index].Selected = isselected;
+    console.log(cards[index].Selected);
+  };
   const replaceImage = async () => {
     let count = 0;
     let modified = false; // Flag to indicate if any replacement was made
@@ -115,7 +123,8 @@ function CreateBlog() {
         const baseUrlImage = imageTag.slice(srcIndex, srcEndIndex);
         const cloudinaryUrl = await uploadOnCloudinary(baseUrlImage);
         const replacedImageTag = imageTag.replace(baseUrlImage, cloudinaryUrl);
-        state.value = state.value.slice(0, startIndex) +
+        state.value =
+          state.value.slice(0, startIndex) +
           replacedImageTag +
           state.value.slice(endIndex);
       }
@@ -123,8 +132,6 @@ function CreateBlog() {
     } while (modified && count < state.value.length);
     // console.log(state.value);
   };
-
-
 
   const uploadOnCloudinary = async (pic) => {
     const data = new FormData();
@@ -147,9 +154,36 @@ function CreateBlog() {
   };
 
   useEffect(() => {
-    setTime(new Date().toLocaleTimeString())
-  })
-  
+    // Get the current date and time
+const currentDate = new Date();
+
+// Define an array of month names
+const monthNames = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+// Extract the date components
+const year = currentDate.getFullYear();
+const month = monthNames[currentDate.getMonth()]; // Use monthNames array to get the month name
+const day = currentDate.getDate();
+
+// Extract the time components
+const hours = currentDate.getHours();
+const minutes = currentDate.getMinutes();
+const seconds = currentDate.getSeconds();
+
+// Format the date and time as desired
+const formattedDate = `${day < 10 ? '0' + day : day} ${month} ${year}`; // Update the format for the date
+const formattedTime = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+// Concatenate formattedDate and formattedTime
+const concatenatedDateTime = formattedDate + " " + formattedTime;
+
+// Output the concatenated date and time
+
+    setTime(concatenatedDateTime);
+  });
 
   const submitBlog = async (e) => {
     e.preventDefault();
@@ -163,6 +197,7 @@ function CreateBlog() {
         heading,
         desc,
         state,
+        selectedCards,
       }),
       headers: { "Content-type": "application/json" },
     });
@@ -179,9 +214,21 @@ function CreateBlog() {
       content: (
         <form onSubmit={submitBlog} className="w-full h-fit min-h-[30rem]">
           <div className="dark:text-white text-xl">Heading</div>
-          <input type='text' className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={heading} onChange={(e) => setHeading(e.target.value)}></input>
+          <input
+            type="text"
+            className="p-3 bg-slate-800 rounded mb-5"
+            contentEditable="true"
+            value={heading}
+            onChange={(e) => setHeading(e.target.value)}
+          ></input>
           <div className="dark:text-white text-xl">Description</div>
-          <input type="text" className="p-3 bg-slate-800 rounded mb-5" contentEditable="true" value={desc} onChange={(e) => setDesc(e.target.value)}></input>
+          <input
+            type="text"
+            className="p-3 bg-slate-800 rounded mb-5"
+            contentEditable="true"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          ></input>
           <EditorToolbar />
           <ReactQuill
             theme="snow"
@@ -191,14 +238,27 @@ function CreateBlog() {
             modules={modules}
             formats={formats}
           />
-          {message && (
-            <p className="text-red-500 text-xs">{message}</p>
-          )}
+          {message && <p className="text-red-500 text-xs">{message}</p>}
+          <div className="text-xl mt-10 mb-4 w-full text-white font-semibold">
+            Choose Tags
+          </div>
+          <div className="flex flex-wrap gap-4 p-2 w-full">
+            {cards.map((card, index) => (
+              <Tags
+                key={index}
+                {...card}
+                value={selectedCards}
+                onSelect={(isselected) => changeSelected(index, isselected,card)}
+              />
+            ))}
+          </div>
           <div className="flex justify-end">
-          <button type="submit" className="z-[1] cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
-          {loading ? <FadeLoader color={color}/> : "Submit Blog"}
-          </button>
-          
+            <button
+              type="submit"
+              className="z-[1] cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200"
+            >
+              {loading ? <FadeLoader color={color} /> : "Submit Blog"}
+            </button>
           </div>
         </form>
       ),
@@ -215,7 +275,6 @@ function CreateBlog() {
 
   //speech:
   useEffect(() => {
-
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
@@ -241,7 +300,7 @@ function CreateBlog() {
         }
       }
 
-      console.log("final transcript", finalTranscript)
+      console.log("final transcript", finalTranscript);
       setState({ value: finalTranscript });
     };
 
@@ -252,7 +311,7 @@ function CreateBlog() {
     recognitionRef.current.start();
   };
 
-  const stopRecording = () => {
+  const stopRecording = () => {;
     recognitionRef.current.stop();
   };
 
@@ -266,10 +325,11 @@ function CreateBlog() {
             {tabs.map((tab, index) => (
               <button
                 key={tab.label}
-                className={`${activeTab === index
-                  ? "border-x-[1px] border-t-[1px] text-slate-800 font-semibold dark:text-white border-b-transparent border-[#d1d9de] dark:border-[#31373d] rounded-t bg-[#fefeff] dark:bg-[#0c1116]"
-                  : "border-b border-transparent"
-                  } px-4 py-2 text-sm -mb-[2px] font-medium text-[#646d77] dark:text-gray-500 dark:hover:text-white focus:outline-none `}
+                className={`${
+                  activeTab === index
+                    ? "border-x-[1px] border-t-[1px] text-slate-800 font-semibold dark:text-white border-b-transparent border-[#d1d9de] dark:border-[#31373d] rounded-t bg-[#fefeff] dark:bg-[#0c1116]"
+                    : "border-b border-transparent"
+                } px-4 py-2 text-sm -mb-[2px] font-medium text-[#646d77] dark:text-gray-500 dark:hover:text-white focus:outline-none `}
                 onClick={() => setActiveTab(index)}
               >
                 {tab.label}
@@ -279,27 +339,17 @@ function CreateBlog() {
           <div className="mt-8 p-3">
             <p>{tabs[activeTab].content}</p>
           </div>
-          <button onClick={isRecording ? stopRecording : startRecording} className="z-[1] w-fit m-3 cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
-            {isRecording ? 'Stop recording' : 'Start recording'}
-          </button>
-        </div>
-        <div className="w-full items-end dark:text-slate-300 p-4 bg-[#fefeff] dark:bg-[#0c1116] md:w-2/3 lg:w-4/5 xl:w-3/5 flex flex-col gap-4 rounded-md">
-          <div className="text-xl w-full text-white font-semibold">Choose Tags</div>
-          <div className="flex flex-wrap gap-4 p-2 w-full">
-            {cards.map((card, index) => (
-              <Tags key={index} {...card} onSelect={(isselected) => changeSelected(index, isselected)} />
-            ))}
-          </div>
-          <button type="submit" className="z-[1] w-fit cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200">
-            Submit Tags
+          <button
+            onClick={isRecording ? stopRecording : startRecording}
+            className="z-[1] w-fit m-3 cursor-pointer mt-8 rounded-md font-semibold hover:outline-none hover:bg-blue-500 bg-blue-600 py-3 px-5 text-slate-200"
+          >
+            {isRecording ? "Stop recording" : "Start recording"}
           </button>
         </div>
       </div>
       <Footer />
     </div>
-
   );
-
 }
 
 export default CreateBlog;
