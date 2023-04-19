@@ -64,7 +64,7 @@ function BlogSlug() {
     setExplore_url(url2)
     setYourblogs_url(url3)
     setIsLoading(false)
-    //setTextToRead(json.blog_details.Content)
+    // setTextToRead(json.blog_details.Content)
     // var url = new URL("http://localhost:3000/explore");
     // url.searchParams.set("email", `${email}`);
     // setExplore_url(url);

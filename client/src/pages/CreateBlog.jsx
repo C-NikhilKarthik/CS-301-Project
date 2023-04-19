@@ -89,8 +89,10 @@ function CreateBlog() {
   const [heading, setHeading] = useState('');
   const [desc, setDesc] = useState('');
   const [time,setTime]=useState('');
+  // console.log(time);
   const handleChange = (value) => {
     setState({ value });
+    // console.log(state.value);
   };
   const [flag, setFlag] = useState(false);
   const changeSelected = (index, isselected,card) => {
@@ -152,13 +154,42 @@ function CreateBlog() {
   };
 
   useEffect(() => {
-    setTime(new Date().toLocaleTimeString());
+    // Get the current date and time
+const currentDate = new Date();
+
+// Define an array of month names
+const monthNames = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+// Extract the date components
+const year = currentDate.getFullYear();
+const month = monthNames[currentDate.getMonth()]; // Use monthNames array to get the month name
+const day = currentDate.getDate();
+
+// Extract the time components
+const hours = currentDate.getHours();
+const minutes = currentDate.getMinutes();
+const seconds = currentDate.getSeconds();
+
+// Format the date and time as desired
+const formattedDate = `${day < 10 ? '0' + day : day} ${month} ${year}`; // Update the format for the date
+const formattedTime = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+// Concatenate formattedDate and formattedTime
+const concatenatedDateTime = formattedDate + " " + formattedTime;
+
+// Output the concatenated date and time
+
+    setTime(concatenatedDateTime);
   });
 
   const submitBlog = async (e) => {
     e.preventDefault();
     setLoading(true);
     replaceImage();
+    console.log(heading, desc, state)
     const response = await fetch("/htmlBlog", {
       method: "POST",
       body: JSON.stringify({
