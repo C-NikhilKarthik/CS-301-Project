@@ -11,8 +11,6 @@ const HtmlBlogSchema = new Schema({
     Time:String,
     Heading: String,
     Desc: String,
-    Heading: String,
-    Description: String,
     Content: String,
     Tags:[String],
     Likes: [Schema.Types.ObjectId],

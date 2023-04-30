@@ -5,7 +5,7 @@ import { IoIosShare, IoIosChatbubbles } from "react-icons/io";
 import Cookies from 'js-cookie';
 import SyncLoader from 'react-spinners/SyncLoader'
 
-function CARD({ id, image, time, text, Heading, Likes, Owner, location, yourblog, edit_location }) {
+function CARD({ id, image, time, text, Heading, comment, Likes, Owner, location, yourblog, edit_location }) {
   const [showMenu, setShowMenu] = useState(false);
   const [likeStatus, setLikeStatus] = useState(true);
   const [noLikes, setNolikes] = useState(Likes?.length);
@@ -136,7 +136,7 @@ function CARD({ id, image, time, text, Heading, Likes, Owner, location, yourblog
             />
           </div>
 
-          <div className="text-base sm:ml-4 max-h-[16rem] flex flex-col gap-4 items-end text-justify overflow-hidden">
+          <div className="text-base sm:ml-4 max-h-[16rem] flex flex-col gap-4 items-end justify-start h-full text-justify overflow-hidden">
             <p className="text-xl w-full">{Heading}</p>
             {text}
           </div>
@@ -155,10 +155,10 @@ function CARD({ id, image, time, text, Heading, Likes, Owner, location, yourblog
               <IoIosShare />
               <p className="sm:flex hidden">Share</p>
             </div>
-            <div className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
+            <a href={comment} className="bg-slate-300/70 dark:bg-slate-700 rounded-md p-3 flex items-center gap-3">
               <IoIosChatbubbles />
               <p className="sm:flex hidden">Comment</p>
-            </div>
+            </a>
           </div>
           <a
             type="button"

@@ -16,7 +16,8 @@ function Profile({ bg, Image }) {
         friends: [],
         home: '',
         explore: '',
-        yourblogs: ''
+        yourblogs: '',
+        url: []
     })
 
     const generate_blogs = async (e) => {
@@ -91,18 +92,26 @@ function Profile({ bg, Image }) {
                 />
             );
         }
-        console.log(json4)
+        const urls = [];
+        for (let i = 0; i < json4.urls.length; i++) {
+            urlParams.set('email', json4.urls[i]);
+            const url1 = window.location.pathname.replace('/profile', '/profile') + '?' + urlParams.toString();
+            urls.push(url1);
+        }
+        console.log(json4.friendName);
+
         Setlist(temp_list);
         setData({
             name: json.UserName,
             followers: followers,
             following: json.Friends.length,
             blogs_number: json3.all_blogs.length,
-            friends: json4,
+            friends: json4.friendName,
             loading: false,
             home: url,
             explore: url1,
-            yourblogs: url2
+            yourblogs: url2,
+            url: urls
         });
     }
 
@@ -156,8 +165,8 @@ function Profile({ bg, Image }) {
                         <div className='flex flex-col gap-4'>
                             <div className='flex justify-between bg-slate-800/60 rounded py-3 text-xl text-slate-200 font-semibold px-10'>Friends</div>
                             <div className="w-[32rem] h-full flex flex-col gap-4 overflow-y-scroll pb-4">
-                                {data.friends.map((s) => (
-                                    <FriendsCard Fname={s} />
+                                {data.friends.map((s,index) => (
+                                    <FriendsCard Fname={s} url={data.url[index]} profile={true} />
                                 ))}
                             </div>
                         </div>

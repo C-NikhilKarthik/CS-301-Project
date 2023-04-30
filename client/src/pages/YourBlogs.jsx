@@ -46,11 +46,28 @@ function YourBlogs() {
       urlParams.set('blogId', String(json.all_blogs[i]._id));
       var blog_edit_url = window.location.pathname.replace('/yourblogs', '/edit') + '?' + urlParams.toString();
 
+      const htmlString = json.all_blogs[i].Content;
+      // console.log(htmlString)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlString, "text/html");
+
+      const images = doc.getElementsByTagName("img");
+      const imageLinks = [];
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].src) {
+          imageLinks.push(images[i].src);
+        }
+      }
+
+      if (imageLinks.length === 0) {
+        imageLinks.push("https://wallpaperaccess.com/full/2123375.png");
+      }
+
       temp_list.push(
         <CARD
           key={json.all_blogs[i]._id}
           id={json.all_blogs[i]._id}
-          image={"images/bg.jpg"}
+          image={imageLinks[0]}
           time={json.all_blogs[i].Time}
           Likes={json.all_blogs[i].Likes}
           text={json.all_blogs[i].Desc}
@@ -77,6 +94,49 @@ function YourBlogs() {
     SetOriginal(temp_list);
     setIsLoading(false);
   };
+
+  async function handle_search(Search_query) {
+    console.log(Search_query);
+
+    if (Search_query !== "") {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const email = urlParams.get("email");
+      const response = await fetch("/search_query_yourblogs", {
+        method: "POST",
+        body: JSON.stringify({
+          email_login: email,
+          search_query: Search_query,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+
+      const json = await response.json();
+      const temp_list2 = [];
+
+      for (let i = 0; i < json.all_blogs.length; i++) {
+        urlParams.set("email", email);
+        urlParams.set("blogId", String(json.all_blogs[i]._id));
+        var blog_url =
+          window.location.pathname.replace("/home", "/slug") +
+          "?" +
+          urlParams.toString();
+        temp_list2.push(
+          <CARD
+            image={"images/bg.jpg"}
+            text={json.all_blogs[i].Desc}
+            Heading={json.all_blogs[i].Heading}
+            Owner={String(json.all_owners[i])}
+            location={blog_url}
+          />
+        );
+      }
+      Setlist(temp_list2);
+    } else {
+      Setlist(originallist);
+    }
+  }
+
   useEffect(() => {
     generate_blogs();
   }, []);
@@ -94,7 +154,7 @@ function YourBlogs() {
             </a>
           </div>
           <div className="relative rounded-md flex flex-col items-center gap-6 w-full overflow-x-hidden overflow-y-scroll">
-            <TOPBAR />
+            <TOPBAR handle_search={handle_search}/>
             {list}
           </div>
           <div className="z-[5] hidden xl:flex min-w-[300px] rounded-md dark:text-slate-100 bg-slate-300/60 dark:bg-slate-800/60 backdrop-blur-md p-4">

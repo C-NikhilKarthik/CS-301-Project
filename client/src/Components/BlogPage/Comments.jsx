@@ -57,7 +57,7 @@ const Comments = () => {
   }, [blogId]);
 
   return (
-    <div className="w-full flex rounded-md p-3 gap-2 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-800 flex-col dark:text-slate-200">
+    <div id="comments" className="w-full flex rounded-md p-3 gap-2 bg-slate-300/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-800 flex-col dark:text-slate-200">
       <h1 className="text-3xl font-bold mb-8">Comments</h1>
       {comments.length === 0 ? (
         <p>No comments yet.</p>

@@ -18,13 +18,13 @@ const search =async (req, res) => {
       {
         $and: [
           { Tags: { $regex: new RegExp(search_query,"i") } },
-          { Owner:{$in:user_details.Friends} }
+          { Owner:{$eq:new ObjectId(user_details._id)} }
         ]
       },
       {
         $and: [
           { Heading: { $regex: new RegExp(search_query,"i") } },
-          { Owner: {$in:user_details.Friends} }
+          { Owner:{$eq:new ObjectId(user_details._id)}}
         ]
       }
     ]
