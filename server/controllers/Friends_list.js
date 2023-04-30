@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 
 const Friends = async (req, res) => {
   const friendName = [];
+  const url = [];
   // const myObjectIdString = '6427cb7e3bec49434e2c8b68';
   const userId = req.cookies;
   // const userId = ObjectId.createFromHexString(myObjectIdString);
@@ -16,11 +17,12 @@ const Friends = async (req, res) => {
 
     for (let i = 0; i < friends.length; i++) {
       let user_name = await User.findById(friends[i]);
-      friendName.push(user_name.Fname);
+      friendName.push(user_name.UserName);
+      url.push(user_name.EmailId);
       // console.log(user_name.Fname)
     }
 
-    res.json(friendName);
+    res.json({friendName:friendName,urls:url});
     // console.log(friendName);
     console.log("Friends list sent");
   } catch (error) {

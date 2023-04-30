@@ -30,6 +30,7 @@ function App() {
       <>
             <Route exact path="/" element={<Main />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/signup" element={<SignUp/>}></Route>
           </>
         {isLoggedIn && (
           <>

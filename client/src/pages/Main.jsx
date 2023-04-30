@@ -157,10 +157,6 @@ function Main() {
           />
         </div>
         <div
-          data-aos="zoom-in-left"
-          data-aos-duration="300"
-          data-aos-delay="2500"
-          data-aos-offset="0"
           className="dark:text-slate-200 text-xl pl-10 mt-4 gap-4 flex flex-col"
         >
           <div className="whitespace-nowrap text-3xl font-semibold">
@@ -177,10 +173,6 @@ function Main() {
       </div>
       <div className="bg-slate-100 dark:bg-slate-900 sm:px-20 flex flex-col-reverse p-2 pb-4 justify-between items-center xl:grid lg:grid-cols-2 w-full ">
           <div
-            data-aos="zoom-in-left"
-            data-aos-duration="300"
-            data-aos-delay="2500"
-            data-aos-offset="0"
             className="dark:text-slate-200 text-xl pl-10 mt-4 gap-4 flex flex-col"
           >
             <div className="whitespace-nowrap text-3xl font-semibold">
@@ -193,9 +185,6 @@ function Main() {
             </div>
           </div>
           <div
-            data-aos="zoom-in-up"
-            data-aos-delay="2000"
-            data-aos-duration="600"
             className="relative w-full"
           >
             <div className="w-full dark:text-slate-300 bg-[#fefeff] dark:bg-[#0c1116] dark:bg-opacity-[50%] bg-opacity-[50%] flex flex-col gap-4 rounded-md">
