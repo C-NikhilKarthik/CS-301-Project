@@ -26,6 +26,7 @@ const create_blog = async (req, res) => {
       });
     } else {
       console.log("Data Saved");
+      console.log(result);
       res.status(200).send({
         err: "SUCCESS",
         msg: "Data saved succesfully",
